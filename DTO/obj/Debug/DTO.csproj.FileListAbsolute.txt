@@ -1,0 +1,6 @@
+E:\Project\QuanLyCaFe\DTO\bin\Debug\DTO.dll
+E:\Project\QuanLyCaFe\DTO\bin\Debug\DTO.pdb
+E:\Project\QuanLyCaFe\DTO\obj\Debug\DTO.csproj.AssemblyReference.cache
+E:\Project\QuanLyCaFe\DTO\obj\Debug\DTO.csproj.CoreCompileInputs.cache
+E:\Project\QuanLyCaFe\DTO\obj\Debug\DTO.dll
+E:\Project\QuanLyCaFe\DTO\obj\Debug\DTO.pdb

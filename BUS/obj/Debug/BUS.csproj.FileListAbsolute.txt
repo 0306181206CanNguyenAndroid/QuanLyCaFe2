@@ -1,0 +1,16 @@
+E:\Project\QuanLyCaFe\BUS\obj\Debug\BUS.csproj.AssemblyReference.cache
+E:\Project\QuanLyCaFe\BUS\obj\Debug\BUS.csproj.CoreCompileInputs.cache
+E:\Project\QuanLyCaFe\BUS\bin\Debug\BUS.dll
+E:\Project\QuanLyCaFe\BUS\bin\Debug\BUS.pdb
+E:\Project\QuanLyCaFe\BUS\bin\Debug\DAO.dll
+E:\Project\QuanLyCaFe\BUS\bin\Debug\DTO.dll
+E:\Project\QuanLyCaFe\BUS\bin\Debug\EntityFramework.dll
+E:\Project\QuanLyCaFe\BUS\bin\Debug\EntityFramework.SqlServer.dll
+E:\Project\QuanLyCaFe\BUS\bin\Debug\DAO.pdb
+E:\Project\QuanLyCaFe\BUS\bin\Debug\DAO.dll.config
+E:\Project\QuanLyCaFe\BUS\bin\Debug\DTO.pdb
+E:\Project\QuanLyCaFe\BUS\bin\Debug\EntityFramework.xml
+E:\Project\QuanLyCaFe\BUS\bin\Debug\EntityFramework.SqlServer.xml
+E:\Project\QuanLyCaFe\BUS\obj\Debug\BUS.csproj.CopyComplete
+E:\Project\QuanLyCaFe\BUS\obj\Debug\BUS.dll
+E:\Project\QuanLyCaFe\BUS\obj\Debug\BUS.pdb

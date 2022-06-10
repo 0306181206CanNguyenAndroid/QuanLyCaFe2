@@ -1,0 +1,18 @@
+TS001,Song Vị Nhiệt Đới,25000
+TS002,Song Vị Tươi Mát,25000
+TS003,Trà Sữa Xanh Mát,25000
+TS004,Trà Sữa H&C,17000
+TS005,Trà Sữa Matcha,22000
+TS006,Trà Sữa Phô Mai,27000
+TS007,Trà Sữa Socola,22000
+TS008,Hồng Trà,14000
+TS009,Hồng Trà Hawaii,19000
+TS010,Lục Trà,14000
+TS011,Trà Xanh Sữa Xoài,27000
+TS012,Double Tea Lạnh,21000
+TS013,Double Tea Nóng,19000
+TS014,TS Premium Trân Châu Trắng,31000
+TS015,Matcha Latte Machiato,34000
+TS016,Frappuccino,29000
+TS017,Café Sô-cô-la,30000
+TS018,Sữa Dừa Hawaii,14000

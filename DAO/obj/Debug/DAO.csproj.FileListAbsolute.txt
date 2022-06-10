@@ -1,0 +1,10 @@
+E:\Project\QuanLyCaFe\DAO\obj\Debug\DAO.csproj.AssemblyReference.cache
+E:\Project\QuanLyCaFe\DAO\obj\Debug\DAO.csproj.CoreCompileInputs.cache
+E:\Project\QuanLyCaFe\DAO\bin\Debug\DAO.dll.config
+E:\Project\QuanLyCaFe\DAO\bin\Debug\DAO.dll
+E:\Project\QuanLyCaFe\DAO\bin\Debug\DAO.pdb
+E:\Project\QuanLyCaFe\DAO\bin\Debug\DTO.dll
+E:\Project\QuanLyCaFe\DAO\bin\Debug\DTO.pdb
+E:\Project\QuanLyCaFe\DAO\obj\Debug\DAO.csproj.CopyComplete
+E:\Project\QuanLyCaFe\DAO\obj\Debug\DAO.dll
+E:\Project\QuanLyCaFe\DAO\obj\Debug\DAO.pdb

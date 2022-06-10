@@ -1,0 +1,112 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{72392C34-6819-4582-B25B-F861C872EFDF}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>BUS</RootNamespace>
+    <AssemblyName>BUS</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <Deterministic>true</Deterministic>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Action.cs" />
+    <Compile Include="BusinessObjectBase\PBillBase.cs" />
+    <Compile Include="BusinessObjectBase\PBilldetailBase.cs" />
+    <Compile Include="BusinessObjectBase\PBilllogBase.cs" />
+    <Compile Include="BusinessObjectBase\PCustomerBase.cs" />
+    <Compile Include="BusinessObjectBase\PImportgoodsBase.cs" />
+    <Compile Include="BusinessObjectBase\PImportgoodsdetailBase.cs" />
+    <Compile Include="BusinessObjectBase\PManufacturerBase.cs" />
+    <Compile Include="BusinessObjectBase\PManufacturerlogBase.cs" />
+    <Compile Include="BusinessObjectBase\PProductBase.cs" />
+    <Compile Include="BusinessObjectBase\PProductlogBase.cs" />
+    <Compile Include="BusinessObjectBase\PProducttypeBase.cs" />
+    <Compile Include="BusinessObjectBase\PStockBase.cs" />
+    <Compile Include="BusinessObjectBase\PStocklogBase.cs" />
+    <Compile Include="BusinessObjectBase\SystemAccessrightsBase.cs" />
+    <Compile Include="BusinessObjectBase\SystemAccessrightsgroupBase.cs" />
+    <Compile Include="BusinessObjectBase\SystemAccessrightsgroupdetailBase.cs" />
+    <Compile Include="BusinessObjectBase\SystemDecentralizationBase.cs" />
+    <Compile Include="BusinessObjectBase\SystemPositionBase.cs" />
+    <Compile Include="BusinessObjectBase\SystemPositionlogBase.cs" />
+    <Compile Include="BusinessObjectBase\SystemStaffBase.cs" />
+    <Compile Include="BusinessObjectBase\SystemStafflogBase.cs" />
+    <Compile Include="BusinessObjectBase\SystemUserlogBase.cs" />
+    <Compile Include="BusinessObjectBase\UserBusBase.cs" />
+    <Compile Include="BusinessObject\PBill.cs" />
+    <Compile Include="BusinessObject\PBilldetail.cs" />
+    <Compile Include="BusinessObject\PBilllog.cs" />
+    <Compile Include="BusinessObject\PCustomer.cs" />
+    <Compile Include="BusinessObject\PImportgoods.cs" />
+    <Compile Include="BusinessObject\PImportgoodsdetail.cs" />
+    <Compile Include="BusinessObject\PManufacturer.cs" />
+    <Compile Include="BusinessObject\PManufacturerlog.cs" />
+    <Compile Include="BusinessObject\PProduct.cs" />
+    <Compile Include="BusinessObject\PProductlog.cs" />
+    <Compile Include="BusinessObject\PProducttype.cs" />
+    <Compile Include="BusinessObject\PStock.cs" />
+    <Compile Include="BusinessObject\PStocklog.cs" />
+    <Compile Include="BusinessObject\SystemAccessrights.cs" />
+    <Compile Include="BusinessObject\SystemAccessrightsgroup.cs" />
+    <Compile Include="BusinessObject\SystemAccessrightsgroupdetail.cs" />
+    <Compile Include="BusinessObject\SystemDecentralization.cs" />
+    <Compile Include="BusinessObject\SystemPosition.cs" />
+    <Compile Include="BusinessObject\SystemPositionlog.cs" />
+    <Compile Include="BusinessObject\SystemStaff.cs" />
+    <Compile Include="BusinessObject\SystemStafflog.cs" />
+    <Compile Include="BusinessObject\SystemUserlog.cs" />
+    <Compile Include="BusinessObject\UserBus.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\DAO\DAO.csproj">
+      <Project>{e639c5de-3b29-44d7-9f99-ebe8f5292016}</Project>
+      <Name>DAO</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DTO\DTO.csproj">
+      <Project>{c07d9d01-f9d0-41eb-b063-dee2962a1d2d}</Project>
+      <Name>DTO</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

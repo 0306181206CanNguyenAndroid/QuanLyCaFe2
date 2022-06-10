@@ -1,0 +1,115 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{E639C5DE-3B29-44D7-9F99-EBE8F5292016}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>DAO</RootNamespace>
+    <AssemblyName>DAO</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <Deterministic>true</Deterministic>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="DataLayerBase\PBillDataLayerBase.cs" />
+    <Compile Include="DataLayerBase\PBilldetailDataLayerBase.cs" />
+    <Compile Include="DataLayerBase\PBilllogDataLayerBase.cs" />
+    <Compile Include="DataLayerBase\PCustomerDataLayerBase.cs" />
+    <Compile Include="DataLayerBase\PImportgoodsDataLayerBase.cs" />
+    <Compile Include="DataLayerBase\PImportgoodsdetailDataLayerBase.cs" />
+    <Compile Include="DataLayerBase\PManufacturerDataLayerBase.cs" />
+    <Compile Include="DataLayerBase\PManufacturerlogDataLayerBase.cs" />
+    <Compile Include="DataLayerBase\PProductDataLayerBase.cs" />
+    <Compile Include="DataLayerBase\PProductlogDataLayerBase.cs" />
+    <Compile Include="DataLayerBase\PProducttypeDataLayerBase.cs" />
+    <Compile Include="DataLayerBase\PStockDataLayerBase.cs" />
+    <Compile Include="DataLayerBase\PStocklogDataLayerBase.cs" />
+    <Compile Include="DataLayerBase\SystemAccessrightsDataLayerBase.cs" />
+    <Compile Include="DataLayerBase\SystemAccessrightsgroupDataLayerBase.cs" />
+    <Compile Include="DataLayerBase\SystemAccessrightsgroupdetailDataLayerBase.cs" />
+    <Compile Include="DataLayerBase\SystemDecentralizationDataLayerBase.cs" />
+    <Compile Include="DataLayerBase\SystemPositionDataLayerBase.cs" />
+    <Compile Include="DataLayerBase\SystemPositionlogDataLayerBase.cs" />
+    <Compile Include="DataLayerBase\SystemStaffDataLayerBase.cs" />
+    <Compile Include="DataLayerBase\SystemStafflogDataLayerBase.cs" />
+    <Compile Include="DataLayerBase\SystemUserDataLayerBase.cs" />
+    <Compile Include="DataLayerBase\SystemUserlogDataLayerBase.cs" />
+    <Compile Include="DataLayerBase\UserDataLayerBase.cs" />
+    <Compile Include="DataLayer\PBillDataLayer.cs" />
+    <Compile Include="DataLayer\PBilldetailDataLayer.cs" />
+    <Compile Include="DataLayer\PBilllogDataLayer.cs" />
+    <Compile Include="DataLayer\PCustomerDataLayer.cs" />
+    <Compile Include="DataLayer\PImportgoodsDataLayer.cs" />
+    <Compile Include="DataLayer\PImportgoodsdetailDataLayer.cs" />
+    <Compile Include="DataLayer\PManufacturerDataLayer.cs" />
+    <Compile Include="DataLayer\PManufacturerlogDataLayer.cs" />
+    <Compile Include="DataLayer\PProductDataLayer.cs" />
+    <Compile Include="DataLayer\PProductlogDataLayer.cs" />
+    <Compile Include="DataLayer\PProducttypeDataLayer.cs" />
+    <Compile Include="DataLayer\PStockDataLayer.cs" />
+    <Compile Include="DataLayer\PStocklogDataLayer.cs" />
+    <Compile Include="DataLayer\SystemAccessrightsDataLayer.cs" />
+    <Compile Include="DataLayer\SystemAccessrightsgroupDataLayer.cs" />
+    <Compile Include="DataLayer\SystemAccessrightsgroupdetailDataLayer.cs" />
+    <Compile Include="DataLayer\SystemDecentralizationDataLayer.cs" />
+    <Compile Include="DataLayer\SystemPositionDataLayer.cs" />
+    <Compile Include="DataLayer\SystemPositionlogDataLayer.cs" />
+    <Compile Include="DataLayer\SystemStaffDataLayer.cs" />
+    <Compile Include="DataLayer\SystemStafflogDataLayer.cs" />
+    <Compile Include="DataLayer\SystemUserDataLayer.cs" />
+    <Compile Include="DataLayer\SystemUserlogDataLayer.cs" />
+    <Compile Include="DataLayer\UserDataLayer.cs" />
+    <Compile Include="PathString.cs" />
+    <Compile Include="ProcString.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\DTO\DTO.csproj">
+      <Project>{c07d9d01-f9d0-41eb-b063-dee2962a1d2d}</Project>
+      <Name>DTO</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.Config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

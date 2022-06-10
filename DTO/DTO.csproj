@@ -1,0 +1,97 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{C07D9D01-F9D0-41EB-B063-DEE2962A1D2D}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>DTO</RootNamespace>
+    <AssemblyName>DTO</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <Deterministic>true</Deterministic>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="ModelsBase\PBilldetailModelBase.cs" />
+    <Compile Include="ModelsBase\PBilllogModelBase.cs" />
+    <Compile Include="ModelsBase\PBillModelBase.cs" />
+    <Compile Include="ModelsBase\PCustomerModelBase.cs" />
+    <Compile Include="ModelsBase\PImportgoodsdetailModelBase.cs" />
+    <Compile Include="ModelsBase\PImportgoodsModelBase.cs" />
+    <Compile Include="ModelsBase\PManufacturerlogModelBase.cs" />
+    <Compile Include="ModelsBase\PManufacturerModelBase.cs" />
+    <Compile Include="ModelsBase\PProductlogModelBase.cs" />
+    <Compile Include="ModelsBase\PProductModelBase.cs" />
+    <Compile Include="ModelsBase\PProducttypeModelBase.cs" />
+    <Compile Include="ModelsBase\PStocklogModelBase.cs" />
+    <Compile Include="ModelsBase\PStockModelBase.cs" />
+    <Compile Include="ModelsBase\SystemAccessrightsgroupdetailModelBase.cs" />
+    <Compile Include="ModelsBase\SystemAccessrightsgroupModelBase.cs" />
+    <Compile Include="ModelsBase\SystemAccessrightsModelBase.cs" />
+    <Compile Include="ModelsBase\SystemDecentralizationModelBase.cs" />
+    <Compile Include="ModelsBase\SystemPositionlogModelBase.cs" />
+    <Compile Include="ModelsBase\SystemPositionModelBase.cs" />
+    <Compile Include="ModelsBase\SystemStafflogModelBase.cs" />
+    <Compile Include="ModelsBase\SystemStaffModelBase.cs" />
+    <Compile Include="ModelsBase\SystemUserlogModelBase.cs" />
+    <Compile Include="ModelsBase\UserModelBase.cs" />
+    <Compile Include="Models\PBilldetailModel.cs" />
+    <Compile Include="Models\PBilllogModel.cs" />
+    <Compile Include="Models\PBillModel.cs" />
+    <Compile Include="Models\PCustomerModel.cs" />
+    <Compile Include="Models\PImportgoodsdetailModel.cs" />
+    <Compile Include="Models\PImportgoodsModel.cs" />
+    <Compile Include="Models\PManufacturerlogModel.cs" />
+    <Compile Include="Models\PManufacturerModel.cs" />
+    <Compile Include="Models\PProductlogModel.cs" />
+    <Compile Include="Models\PProductModel.cs" />
+    <Compile Include="Models\PProducttypeModel.cs" />
+    <Compile Include="Models\PStocklogModel.cs" />
+    <Compile Include="Models\PStockModel.cs" />
+    <Compile Include="Models\SystemAccessrightsgroupdetailModel.cs" />
+    <Compile Include="Models\SystemAccessrightsgroupModel.cs" />
+    <Compile Include="Models\SystemAccessrightsModel.cs" />
+    <Compile Include="Models\SystemDecentralizationModel.cs" />
+    <Compile Include="Models\SystemPositionlogModel.cs" />
+    <Compile Include="Models\SystemPositionModel.cs" />
+    <Compile Include="Models\SystemStafflogModel.cs" />
+    <Compile Include="Models\SystemStaffModel.cs" />
+    <Compile Include="Models\SystemUserlogModel.cs" />
+    <Compile Include="Models\UserModel.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="ModelsForm\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>
