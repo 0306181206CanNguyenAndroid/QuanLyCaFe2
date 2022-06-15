@@ -12,7 +12,7 @@ using BUS;
 using DTO.Models;
 using BUS.BusinessObject;
 
-namespace QuanLyCaFe
+namespace QuanLyCafe
 {
     public partial class QuanLyNhanVien : Form
     {

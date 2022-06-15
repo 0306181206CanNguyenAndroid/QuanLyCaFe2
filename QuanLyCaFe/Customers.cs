@@ -11,7 +11,7 @@ using DTO;
 using BUS;
 using DTO.Models;
 
-namespace QuanLySieuThiMini
+namespace QuanLyCafe
 {
     public partial class Customers : Form
     {

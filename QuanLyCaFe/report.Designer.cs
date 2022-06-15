@@ -1,4 +1,4 @@
-﻿namespace QuanLyCaFe
+﻿namespace QuanLyCafe
 {
     partial class report
     {

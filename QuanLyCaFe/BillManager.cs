@@ -13,7 +13,7 @@ using System.IO;
 using DTO.Models;
 using BUS.BusinessObject;
 
-namespace QuanLySieuThiMini
+namespace QuanLyCafe
 {
     public partial class BillManager : Form
     {

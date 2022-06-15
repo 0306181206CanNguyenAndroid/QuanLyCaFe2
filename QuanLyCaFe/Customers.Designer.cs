@@ -1,4 +1,4 @@
-﻿namespace QuanLySieuThiMini
+﻿namespace QuanLyCafe
 {
     partial class Customers
     {

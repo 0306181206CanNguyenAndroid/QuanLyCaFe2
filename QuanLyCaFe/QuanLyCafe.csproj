@@ -7,8 +7,8 @@
     <ProjectGuid>{36831FB7-B842-4810-8A47-61D38B482D68}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>QuanLySieuThiMini</RootNamespace>
-    <AssemblyName>QuanLySieuThiMini</AssemblyName>
+    <RootNamespace>QuanLyCafe</RootNamespace>
+    <AssemblyName>QuanLyCafe</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>

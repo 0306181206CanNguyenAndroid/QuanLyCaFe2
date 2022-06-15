@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace QuanLySieuThiMini.Properties {
+namespace QuanLyCafe.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]

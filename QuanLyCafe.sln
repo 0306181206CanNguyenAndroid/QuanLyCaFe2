@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31410.357
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QuanLySieuThiMini", "QuanLyCaFe\QuanLySieuThiMini.csproj", "{36831FB7-B842-4810-8A47-61D38B482D68}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QuanLyCafe", "QuanLyCaFe\QuanLyCafe.csproj", "{36831FB7-B842-4810-8A47-61D38B482D68}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DAO", "DAO\DAO.csproj", "{E639C5DE-3B29-44D7-9F99-EBE8F5292016}"
 EndProject

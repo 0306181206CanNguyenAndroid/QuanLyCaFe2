@@ -12,7 +12,7 @@ using BUS;
 using BUS.BusinessObject;
 using DTO.Models;
 
-namespace QuanLySieuThiMini
+namespace QuanLyCafe
 {
     public partial class CreateAccount : Form
     {
