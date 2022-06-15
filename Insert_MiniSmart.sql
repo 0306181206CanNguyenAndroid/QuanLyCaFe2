@@ -1,4 +1,4 @@
-﻿use MiniSmart
+﻿use Cafe
 go
 ----- Nha cung cap -----
 insert into [P_Manufacturer]([Name],[Address],[CreatedDate],[ModifiedDate],CreatedUserId,ModifiedUserId,IsDeleted,[Status])

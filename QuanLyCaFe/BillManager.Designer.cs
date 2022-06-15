@@ -289,7 +289,7 @@
             // rd_month
             // 
             this.rd_month.AutoSize = true;
-            this.rd_month.Location = new System.Drawing.Point(227, 148);
+            this.rd_month.Location = new System.Drawing.Point(228, 148);
             this.rd_month.Name = "rd_month";
             this.rd_month.Size = new System.Drawing.Size(102, 21);
             this.rd_month.TabIndex = 23;
@@ -321,10 +321,11 @@
             this.col_ban,
             this.col_TT,
             this.col_nglap});
-            this.datgv_HD.Location = new System.Drawing.Point(12, 176);
+            this.datgv_HD.Location = new System.Drawing.Point(12, 212);
             this.datgv_HD.Name = "datgv_HD";
+            this.datgv_HD.RowHeadersWidth = 51;
             this.datgv_HD.RowTemplate.Height = 24;
-            this.datgv_HD.Size = new System.Drawing.Size(774, 418);
+            this.datgv_HD.Size = new System.Drawing.Size(774, 382);
             this.datgv_HD.TabIndex = 21;
             this.datgv_HD.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.datgv_HD_CellClick_1);
             // 
@@ -333,6 +334,7 @@
             this.col_mahd.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
             this.col_mahd.DataPropertyName = "maHD";
             this.col_mahd.HeaderText = "Mã hóa đơn";
+            this.col_mahd.MinimumWidth = 6;
             this.col_mahd.Name = "col_mahd";
             this.col_mahd.ReadOnly = true;
             this.col_mahd.Width = 112;
@@ -342,6 +344,7 @@
             this.col_makh.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
             this.col_makh.DataPropertyName = "maKH";
             this.col_makh.HeaderText = "Khách hàng";
+            this.col_makh.MinimumWidth = 6;
             this.col_makh.Name = "col_makh";
             this.col_makh.Width = 104;
             // 
@@ -350,6 +353,7 @@
             this.col_nv.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
             this.col_nv.DataPropertyName = "maNV";
             this.col_nv.HeaderText = "Nhân viên lập";
+            this.col_nv.MinimumWidth = 6;
             this.col_nv.Name = "col_nv";
             this.col_nv.Width = 80;
             // 
@@ -358,6 +362,7 @@
             this.col_ban.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
             this.col_ban.DataPropertyName = "maBan";
             this.col_ban.HeaderText = "Số bàn";
+            this.col_ban.MinimumWidth = 6;
             this.col_ban.Name = "col_ban";
             this.col_ban.Width = 80;
             // 
@@ -366,6 +371,7 @@
             this.col_TT.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
             this.col_TT.DataPropertyName = "tongThanhToan";
             this.col_TT.HeaderText = "Tổng tiền";
+            this.col_TT.MinimumWidth = 6;
             this.col_TT.Name = "col_TT";
             this.col_TT.Width = 90;
             // 
@@ -374,6 +380,7 @@
             this.col_nglap.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.col_nglap.DataPropertyName = "ngayLap";
             this.col_nglap.HeaderText = "Ngày lập";
+            this.col_nglap.MinimumWidth = 6;
             this.col_nglap.Name = "col_nglap";
             // 
             // label1
@@ -442,7 +449,7 @@
             this.Dtpk_Find_nglap.Size = new System.Drawing.Size(122, 22);
             this.Dtpk_Find_nglap.TabIndex = 0;
             // 
-            // QuanLyHoaDon
+            // BillManager
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -456,7 +463,7 @@
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.groupBox1);
-            this.Name = "QuanLyHoaDon";
+            this.Name = "BillManager";
             this.Text = "QuanLyHoaDon";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.QuanLyHoaDon_FormClosing);
             this.groupBox1.ResumeLayout(false);
