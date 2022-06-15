@@ -14,3 +14,19 @@ E:\Project\QuanLyCaFe\BUS\bin\Debug\EntityFramework.SqlServer.xml
 E:\Project\QuanLyCaFe\BUS\obj\Debug\BUS.csproj.CopyComplete
 E:\Project\QuanLyCaFe\BUS\obj\Debug\BUS.dll
 E:\Project\QuanLyCaFe\BUS\obj\Debug\BUS.pdb
+C:\Users\This PC\OneDrive\Máy tính\QuanLyCaFe\BUS\bin\Debug\BUS.dll
+C:\Users\This PC\OneDrive\Máy tính\QuanLyCaFe\BUS\bin\Debug\BUS.pdb
+C:\Users\This PC\OneDrive\Máy tính\QuanLyCaFe\BUS\bin\Debug\DAO.dll
+C:\Users\This PC\OneDrive\Máy tính\QuanLyCaFe\BUS\bin\Debug\DTO.dll
+C:\Users\This PC\OneDrive\Máy tính\QuanLyCaFe\BUS\bin\Debug\EntityFramework.dll
+C:\Users\This PC\OneDrive\Máy tính\QuanLyCaFe\BUS\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\This PC\OneDrive\Máy tính\QuanLyCaFe\BUS\bin\Debug\DAO.pdb
+C:\Users\This PC\OneDrive\Máy tính\QuanLyCaFe\BUS\bin\Debug\DAO.dll.config
+C:\Users\This PC\OneDrive\Máy tính\QuanLyCaFe\BUS\bin\Debug\DTO.pdb
+C:\Users\This PC\OneDrive\Máy tính\QuanLyCaFe\BUS\bin\Debug\EntityFramework.xml
+C:\Users\This PC\OneDrive\Máy tính\QuanLyCaFe\BUS\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\This PC\OneDrive\Máy tính\QuanLyCaFe\BUS\obj\Debug\BUS.csproj.AssemblyReference.cache
+C:\Users\This PC\OneDrive\Máy tính\QuanLyCaFe\BUS\obj\Debug\BUS.csproj.CoreCompileInputs.cache
+C:\Users\This PC\OneDrive\Máy tính\QuanLyCaFe\BUS\obj\Debug\BUS.csproj.CopyComplete
+C:\Users\This PC\OneDrive\Máy tính\QuanLyCaFe\BUS\obj\Debug\BUS.dll
+C:\Users\This PC\OneDrive\Máy tính\QuanLyCaFe\BUS\obj\Debug\BUS.pdb

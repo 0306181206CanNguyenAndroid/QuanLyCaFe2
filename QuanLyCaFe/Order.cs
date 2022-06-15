@@ -13,7 +13,7 @@ using BUS.BusinessObject;
 using DTO;
 using DTO.Models;
 
-namespace QuanLyCaFe
+namespace QuanLyCafe
 {    
     public partial class Order : Form
     {

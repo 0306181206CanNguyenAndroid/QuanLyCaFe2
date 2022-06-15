@@ -8,3 +8,13 @@ E:\Project\QuanLyCaFe\DAO\bin\Debug\DTO.pdb
 E:\Project\QuanLyCaFe\DAO\obj\Debug\DAO.csproj.CopyComplete
 E:\Project\QuanLyCaFe\DAO\obj\Debug\DAO.dll
 E:\Project\QuanLyCaFe\DAO\obj\Debug\DAO.pdb
+C:\Users\This PC\OneDrive\Máy tính\QuanLyCaFe\DAO\bin\Debug\DAO.dll.config
+C:\Users\This PC\OneDrive\Máy tính\QuanLyCaFe\DAO\bin\Debug\DAO.dll
+C:\Users\This PC\OneDrive\Máy tính\QuanLyCaFe\DAO\bin\Debug\DAO.pdb
+C:\Users\This PC\OneDrive\Máy tính\QuanLyCaFe\DAO\bin\Debug\DTO.dll
+C:\Users\This PC\OneDrive\Máy tính\QuanLyCaFe\DAO\bin\Debug\DTO.pdb
+C:\Users\This PC\OneDrive\Máy tính\QuanLyCaFe\DAO\obj\Debug\DAO.csproj.AssemblyReference.cache
+C:\Users\This PC\OneDrive\Máy tính\QuanLyCaFe\DAO\obj\Debug\DAO.csproj.CoreCompileInputs.cache
+C:\Users\This PC\OneDrive\Máy tính\QuanLyCaFe\DAO\obj\Debug\DAO.csproj.CopyComplete
+C:\Users\This PC\OneDrive\Máy tính\QuanLyCaFe\DAO\obj\Debug\DAO.dll
+C:\Users\This PC\OneDrive\Máy tính\QuanLyCaFe\DAO\obj\Debug\DAO.pdb

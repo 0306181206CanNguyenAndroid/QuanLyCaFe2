@@ -4,3 +4,9 @@ E:\Project\QuanLyCaFe\DTO\obj\Debug\DTO.csproj.AssemblyReference.cache
 E:\Project\QuanLyCaFe\DTO\obj\Debug\DTO.csproj.CoreCompileInputs.cache
 E:\Project\QuanLyCaFe\DTO\obj\Debug\DTO.dll
 E:\Project\QuanLyCaFe\DTO\obj\Debug\DTO.pdb
+C:\Users\This PC\OneDrive\Máy tính\QuanLyCaFe\DTO\bin\Debug\DTO.dll
+C:\Users\This PC\OneDrive\Máy tính\QuanLyCaFe\DTO\bin\Debug\DTO.pdb
+C:\Users\This PC\OneDrive\Máy tính\QuanLyCaFe\DTO\obj\Debug\DTO.csproj.AssemblyReference.cache
+C:\Users\This PC\OneDrive\Máy tính\QuanLyCaFe\DTO\obj\Debug\DTO.csproj.CoreCompileInputs.cache
+C:\Users\This PC\OneDrive\Máy tính\QuanLyCaFe\DTO\obj\Debug\DTO.dll
+C:\Users\This PC\OneDrive\Máy tính\QuanLyCaFe\DTO\obj\Debug\DTO.pdb
