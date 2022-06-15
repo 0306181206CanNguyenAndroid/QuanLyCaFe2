@@ -24,6 +24,11 @@ namespace QuanLyCafe
             TKDN = tkdn;
             this.IsMdiContainer = true;
         }
+        public Home()
+        {
+            InitializeComponent();
+            this.IsMdiContainer = true;
+        }
 
         private bool CheckExistForm(string name)
         {
@@ -85,9 +90,10 @@ namespace QuanLyCafe
 
             //if (!CheckExistForm("QuanLyHoaDon"))
             //{
-            //    QuanLyHoaDon qlhd = new QuanLyHoaDon(TKDN);
-            //    qlhd.MdiParent = this;
-            //    qlhd.Show();
+            //   BillManager qlhd = BillManager(TKDN);
+            BillManager qlhd = new BillManager();
+            //qlhd.MdiParent = this;
+                qlhd.Show();
             //}
             //else
             //    ActiveChildForm("QuanLyHoaDon");            

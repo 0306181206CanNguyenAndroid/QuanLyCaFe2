@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace QuanLySieuThiMini.HardCodeClass.Vi
+namespace QuanLyCafe.HardCodeClass.Vi
 {
     public static class Message_Vi
     {

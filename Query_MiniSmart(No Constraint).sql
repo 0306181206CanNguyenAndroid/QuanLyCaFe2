@@ -1,4 +1,4 @@
-use MiniSmart
+use Cafe
 go
 Create table P_Manufacturer
 (
