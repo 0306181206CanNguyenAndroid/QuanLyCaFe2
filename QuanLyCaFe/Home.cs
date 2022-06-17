@@ -54,49 +54,74 @@ namespace QuanLyCafe
             }
         }
 
-        private void đăngXuấtToolStripMenuItem_Click(object sender, EventArgs e)
+
+        #region Event Admin
+        #endregion
+
+        #region Event Manager
+
+        private void StaffManage_Click(object sender, EventArgs e)
         {
-            this.Close();
+
         }
 
-        private void thôngTinCáNhânToolStripMenuItem_Click(object sender, EventArgs e)
+        private void ManuManage_Click(object sender, EventArgs e)
         {
-            //NhanVienBUS nvBUS = new NhanVienBUS();
-            //NhanVienDTO nv = nvBUS.LayNV(TKDN.maTK);
-            //ThongTinCaNhan myAccount = new ThongTinCaNhan(TKDN,nv);
-            //myAccount.ShowDialog();
+
         }
 
-        //Phần này sửa//
-        private void adminToolStripMenuItem_Click(object sender, EventArgs e)
+        private void ProductMange_Click(object sender, EventArgs e)
         {
-            //if(TKDN.Quyen== "Administrator")
-            //{
-            //    if (!CheckExistForm("fAdmin"))
-            //    {
-            //        fAdmin ad = new fAdmin();
-            //        ad.MdiParent = this;
-            //        ad.Show();
-            //    }
-            //    else
-            //        ActiveChildForm("fAdmin");
-            //}
-            //else
-            //    constans.TB_TK_HanCheChucNang();
+
         }
 
-        private void quảnLýDanhSáchBillsToolStripMenuItem_Click(object sender, EventArgs e)
+        private void CustomerManage_Click(object sender, EventArgs e)
+        {
+            Customers customerform = new Customers();
+            customerform.Show();
+        }
+        private void AccountManage_Click(object sender, EventArgs e)
         {
 
+        }
+
+        #endregion
+
+        #region Event Staff
+
+        private void OrderManage_Click(object sender, EventArgs e)
+        {
             //if (!CheckExistForm("QuanLyHoaDon"))
             //{
             //   BillManager qlhd = BillManager(TKDN);
             BillManager qlhd = new BillManager();
             //qlhd.MdiParent = this;
-                qlhd.Show();
+            qlhd.Show();
             //}
             //else
-            //    ActiveChildForm("QuanLyHoaDon");            
+            //    ActiveChildForm("QuanLyHoaDon");   
+        }
+
+        private void CreateOrder_Click(object sender, EventArgs e)
+        {
+            //Order bill = new Order(nvBUS.LayNV(TKDN.maTK));
+            //bill.ShowDialog();
+            //foreach (Form fr in this.MdiChildren)
+            //{
+            //    if (fr.Name == "fAdmin" || fr.Name == "QuanLyHoaDon")
+            //    {
+            //        bill.actionBills += Bill_actionBills;
+            //    }                
+            //}
+        }
+
+        #endregion
+
+        #region Event System
+
+        private void btnLogOut_Click(object sender, EventArgs e)
+        {
+
         }
 
         private void TrangChu_FormClosed(object sender, FormClosedEventArgs e)
@@ -109,7 +134,7 @@ namespace QuanLyCafe
         }
 
         private void quảnLýKháchHàngToolStripMenuItem_Click(object sender, EventArgs e)
-        {            
+        {
             //if (!CheckExistForm("Customers"))
             //{
             //    Customers kh = new Customers();
@@ -118,7 +143,7 @@ namespace QuanLyCafe
             //}
             //else
             //    ActiveChildForm("Customers");
-            
+
         }
 
         private void quảnLýNhânViênToolStripMenuItem_Click(object sender, EventArgs e)
@@ -136,21 +161,6 @@ namespace QuanLyCafe
             //}
             //else
             //    ActiveChildForm("QuanLyNhanVien");
-        }
-
-        private void lậpHóaĐơnToolStripMenuItem_Click(object sender, EventArgs e)
-        {            
-            //Order bill = new Order(nvBUS.LayNV(TKDN.maTK));
-            //bill.ShowDialog();
-            //foreach (Form fr in this.MdiChildren)
-            //{
-            //    if (fr.Name == "fAdmin" || fr.Name == "QuanLyHoaDon")
-            //    {
-            //        bill.actionBills += Bill_actionBills;
-            //    }                
-            //}
-            
-            
         }
 
         private void Bill_actionBills(object sender, ActionBillsSuccessEventArgs e)
@@ -252,7 +262,6 @@ namespace QuanLyCafe
             else
                 e.Cancel = true;
         }
-
-        
+        #endregion
     }
 }

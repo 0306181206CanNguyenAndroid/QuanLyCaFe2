@@ -31,15 +31,15 @@
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.adminToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.thôngTinTàiKhoảnToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.thôngTinCáNhânToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.đăngXuấtToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.quảnLýToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.quảnLýNhàCungCấpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.quảnLýKháchHàngToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.quảnLýNhânViênToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.quảnLýHóaĐơnToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.lậpHóaĐơnToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.quảnLýDanhSáchBillsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.itemAdmin_AccountManage = new System.Windows.Forms.ToolStripMenuItem();
+            this.itemAdmin_CustomerManage = new System.Windows.Forms.ToolStripMenuItem();
+            this.itemAdmin_StaffManage = new System.Windows.Forms.ToolStripMenuItem();
+            this.itemAdmin_ManuManage = new System.Windows.Forms.ToolStripMenuItem();
+            this.itemTab_ProductManage = new System.Windows.Forms.ToolStripMenuItem();
+            this.ItemTab_StockManage = new System.Windows.Forms.ToolStripMenuItem();
+            this.itemStab_OrderStab = new System.Windows.Forms.ToolStripMenuItem();
+            this.itemChild_Order = new System.Windows.Forms.ToolStripMenuItem();
+            this.itemChild_OrderManage = new System.Windows.Forms.ToolStripMenuItem();
             this.báoCaoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.btnLogOut = new System.Windows.Forms.Button();
             this.btnUserInfo = new System.Windows.Forms.Button();
@@ -56,9 +56,9 @@
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.adminToolStripMenuItem,
             this.thôngTinTàiKhoảnToolStripMenuItem,
-            this.quảnLýKháchHàngToolStripMenuItem,
-            this.quảnLýNhânViênToolStripMenuItem,
-            this.quảnLýHóaĐơnToolStripMenuItem,
+            this.itemTab_ProductManage,
+            this.ItemTab_StockManage,
+            this.itemStab_OrderStab,
             this.báoCaoToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
@@ -74,15 +74,14 @@
             this.adminToolStripMenuItem.Size = new System.Drawing.Size(103, 27);
             this.adminToolStripMenuItem.Tag = "1";
             this.adminToolStripMenuItem.Text = "Trang chủ";
-            this.adminToolStripMenuItem.Click += new System.EventHandler(this.adminToolStripMenuItem_Click);
             // 
             // thôngTinTàiKhoảnToolStripMenuItem
             // 
             this.thôngTinTàiKhoảnToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.thôngTinCáNhânToolStripMenuItem,
-            this.đăngXuấtToolStripMenuItem,
-            this.quảnLýToolStripMenuItem,
-            this.quảnLýNhàCungCấpToolStripMenuItem});
+            this.itemAdmin_AccountManage,
+            this.itemAdmin_CustomerManage,
+            this.itemAdmin_StaffManage,
+            this.itemAdmin_ManuManage});
             this.thôngTinTàiKhoảnToolStripMenuItem.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
             this.thôngTinTàiKhoảnToolStripMenuItem.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.thôngTinTàiKhoảnToolStripMenuItem.Name = "thôngTinTàiKhoảnToolStripMenuItem";
@@ -90,78 +89,80 @@
             this.thôngTinTàiKhoảnToolStripMenuItem.Tag = "2";
             this.thôngTinTàiKhoảnToolStripMenuItem.Text = "Hệ thống";
             // 
-            // thôngTinCáNhânToolStripMenuItem
+            // itemAdmin_AccountManage
             // 
-            this.thôngTinCáNhânToolStripMenuItem.Name = "thôngTinCáNhânToolStripMenuItem";
-            this.thôngTinCáNhânToolStripMenuItem.Size = new System.Drawing.Size(266, 28);
-            this.thôngTinCáNhânToolStripMenuItem.Text = "Quản lý tài khoản";
-            this.thôngTinCáNhânToolStripMenuItem.Click += new System.EventHandler(this.thôngTinCáNhânToolStripMenuItem_Click);
+            this.itemAdmin_AccountManage.Name = "itemAdmin_AccountManage";
+            this.itemAdmin_AccountManage.Size = new System.Drawing.Size(266, 28);
+            this.itemAdmin_AccountManage.Text = "Quản lý tài khoản";
+            this.itemAdmin_AccountManage.Click += new System.EventHandler(this.AccountManage_Click);
             // 
-            // đăngXuấtToolStripMenuItem
+            // itemAdmin_CustomerManage
             // 
-            this.đăngXuấtToolStripMenuItem.Name = "đăngXuấtToolStripMenuItem";
-            this.đăngXuấtToolStripMenuItem.Size = new System.Drawing.Size(266, 28);
-            this.đăngXuấtToolStripMenuItem.Text = "Quản lý khách hàng";
-            this.đăngXuấtToolStripMenuItem.Click += new System.EventHandler(this.đăngXuấtToolStripMenuItem_Click);
+            this.itemAdmin_CustomerManage.Name = "itemAdmin_CustomerManage";
+            this.itemAdmin_CustomerManage.Size = new System.Drawing.Size(266, 28);
+            this.itemAdmin_CustomerManage.Text = "Quản lý khách hàng";
+            this.itemAdmin_CustomerManage.Click += new System.EventHandler(this.CustomerManage_Click);
             // 
-            // quảnLýToolStripMenuItem
+            // itemAdmin_StaffManage
             // 
-            this.quảnLýToolStripMenuItem.Name = "quảnLýToolStripMenuItem";
-            this.quảnLýToolStripMenuItem.Size = new System.Drawing.Size(266, 28);
-            this.quảnLýToolStripMenuItem.Text = "Quản lý nhân viên";
+            this.itemAdmin_StaffManage.Name = "itemAdmin_StaffManage";
+            this.itemAdmin_StaffManage.Size = new System.Drawing.Size(266, 28);
+            this.itemAdmin_StaffManage.Text = "Quản lý nhân viên";
+            this.itemAdmin_StaffManage.Click += new System.EventHandler(this.StaffManage_Click);
             // 
-            // quảnLýNhàCungCấpToolStripMenuItem
+            // itemAdmin_ManuManage
             // 
-            this.quảnLýNhàCungCấpToolStripMenuItem.Name = "quảnLýNhàCungCấpToolStripMenuItem";
-            this.quảnLýNhàCungCấpToolStripMenuItem.Size = new System.Drawing.Size(266, 28);
-            this.quảnLýNhàCungCấpToolStripMenuItem.Text = "Quản lý nhà cung cấp";
+            this.itemAdmin_ManuManage.Name = "itemAdmin_ManuManage";
+            this.itemAdmin_ManuManage.Size = new System.Drawing.Size(266, 28);
+            this.itemAdmin_ManuManage.Text = "Quản lý nhà cung cấp";
+            this.itemAdmin_ManuManage.Click += new System.EventHandler(this.ManuManage_Click);
             // 
-            // quảnLýKháchHàngToolStripMenuItem
+            // itemTab_ProductManage
             // 
-            this.quảnLýKháchHàngToolStripMenuItem.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
-            this.quảnLýKháchHàngToolStripMenuItem.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.quảnLýKháchHàngToolStripMenuItem.Name = "quảnLýKháchHàngToolStripMenuItem";
-            this.quảnLýKháchHàngToolStripMenuItem.Size = new System.Drawing.Size(167, 27);
-            this.quảnLýKháchHàngToolStripMenuItem.Tag = "3";
-            this.quảnLýKháchHàngToolStripMenuItem.Text = "Quản lý sản phẩm";
-            this.quảnLýKháchHàngToolStripMenuItem.TextAlign = System.Drawing.ContentAlignment.TopLeft;
-            this.quảnLýKháchHàngToolStripMenuItem.Click += new System.EventHandler(this.quảnLýKháchHàngToolStripMenuItem_Click);
+            this.itemTab_ProductManage.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
+            this.itemTab_ProductManage.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.itemTab_ProductManage.Name = "itemTab_ProductManage";
+            this.itemTab_ProductManage.Size = new System.Drawing.Size(167, 27);
+            this.itemTab_ProductManage.Tag = "3";
+            this.itemTab_ProductManage.Text = "Quản lý sản phẩm";
+            this.itemTab_ProductManage.TextAlign = System.Drawing.ContentAlignment.TopLeft;
+            this.itemTab_ProductManage.Click += new System.EventHandler(this.ProductMange_Click);
             // 
-            // quảnLýNhânViênToolStripMenuItem
+            // ItemTab_StockManage
             // 
-            this.quảnLýNhânViênToolStripMenuItem.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
-            this.quảnLýNhânViênToolStripMenuItem.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.quảnLýNhânViênToolStripMenuItem.Name = "quảnLýNhânViênToolStripMenuItem";
-            this.quảnLýNhânViênToolStripMenuItem.Size = new System.Drawing.Size(175, 27);
-            this.quảnLýNhânViênToolStripMenuItem.Tag = "4";
-            this.quảnLýNhânViênToolStripMenuItem.Text = "Quản lý nhập hàng";
-            this.quảnLýNhânViênToolStripMenuItem.Click += new System.EventHandler(this.quảnLýNhânViênToolStripMenuItem_Click);
+            this.ItemTab_StockManage.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
+            this.ItemTab_StockManage.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.ItemTab_StockManage.Name = "ItemTab_StockManage";
+            this.ItemTab_StockManage.Size = new System.Drawing.Size(175, 27);
+            this.ItemTab_StockManage.Tag = "4";
+            this.ItemTab_StockManage.Text = "Quản lý nhập hàng";
+            this.ItemTab_StockManage.Click += new System.EventHandler(this.quảnLýNhânViênToolStripMenuItem_Click);
             // 
-            // quảnLýHóaĐơnToolStripMenuItem
+            // itemStab_OrderStab
             // 
-            this.quảnLýHóaĐơnToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.lậpHóaĐơnToolStripMenuItem,
-            this.quảnLýDanhSáchBillsToolStripMenuItem});
-            this.quảnLýHóaĐơnToolStripMenuItem.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
-            this.quảnLýHóaĐơnToolStripMenuItem.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.quảnLýHóaĐơnToolStripMenuItem.Name = "quảnLýHóaĐơnToolStripMenuItem";
-            this.quảnLýHóaĐơnToolStripMenuItem.Size = new System.Drawing.Size(156, 27);
-            this.quảnLýHóaĐơnToolStripMenuItem.Tag = "5";
-            this.quảnLýHóaĐơnToolStripMenuItem.Text = "Quản lý hóa đơn";
+            this.itemStab_OrderStab.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.itemChild_Order,
+            this.itemChild_OrderManage});
+            this.itemStab_OrderStab.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
+            this.itemStab_OrderStab.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.itemStab_OrderStab.Name = "itemStab_OrderStab";
+            this.itemStab_OrderStab.Size = new System.Drawing.Size(156, 27);
+            this.itemStab_OrderStab.Tag = "5";
+            this.itemStab_OrderStab.Text = "Quản lý hóa đơn";
             // 
-            // lậpHóaĐơnToolStripMenuItem
+            // itemChild_Order
             // 
-            this.lậpHóaĐơnToolStripMenuItem.Name = "lậpHóaĐơnToolStripMenuItem";
-            this.lậpHóaĐơnToolStripMenuItem.Size = new System.Drawing.Size(246, 28);
-            this.lậpHóaĐơnToolStripMenuItem.Text = "Lập hóa đơn";
-            this.lậpHóaĐơnToolStripMenuItem.Click += new System.EventHandler(this.lậpHóaĐơnToolStripMenuItem_Click);
+            this.itemChild_Order.Name = "itemChild_Order";
+            this.itemChild_Order.Size = new System.Drawing.Size(246, 28);
+            this.itemChild_Order.Text = "Lập hóa đơn";
+            this.itemChild_Order.Click += new System.EventHandler(this.CreateOrder_Click);
             // 
-            // quảnLýDanhSáchBillsToolStripMenuItem
+            // itemChild_OrderManage
             // 
-            this.quảnLýDanhSáchBillsToolStripMenuItem.Name = "quảnLýDanhSáchBillsToolStripMenuItem";
-            this.quảnLýDanhSáchBillsToolStripMenuItem.Size = new System.Drawing.Size(246, 28);
-            this.quảnLýDanhSáchBillsToolStripMenuItem.Text = "Danh sách hóa đơn";
-            this.quảnLýDanhSáchBillsToolStripMenuItem.Click += new System.EventHandler(this.quảnLýDanhSáchBillsToolStripMenuItem_Click);
+            this.itemChild_OrderManage.Name = "itemChild_OrderManage";
+            this.itemChild_OrderManage.Size = new System.Drawing.Size(246, 28);
+            this.itemChild_OrderManage.Text = "Danh sách hóa đơn";
+            this.itemChild_OrderManage.Click += new System.EventHandler(this.OrderManage_Click);
             // 
             // báoCaoToolStripMenuItem
             // 
@@ -180,6 +181,7 @@
             this.btnLogOut.TabIndex = 8;
             this.btnLogOut.Text = "Đăng xuất";
             this.btnLogOut.UseVisualStyleBackColor = true;
+            this.btnLogOut.Click += new System.EventHandler(this.btnLogOut_Click);
             // 
             // btnUserInfo
             // 
@@ -255,20 +257,20 @@
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripMenuItem adminToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem thôngTinTàiKhoảnToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem thôngTinCáNhânToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem đăngXuấtToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem quảnLýHóaĐơnToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem lậpHóaĐơnToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem quảnLýDanhSáchBillsToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem quảnLýKháchHàngToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem quảnLýNhânViênToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem itemAdmin_AccountManage;
+        private System.Windows.Forms.ToolStripMenuItem itemAdmin_CustomerManage;
+        private System.Windows.Forms.ToolStripMenuItem itemStab_OrderStab;
+        private System.Windows.Forms.ToolStripMenuItem itemChild_Order;
+        private System.Windows.Forms.ToolStripMenuItem itemChild_OrderManage;
+        private System.Windows.Forms.ToolStripMenuItem itemTab_ProductManage;
+        private System.Windows.Forms.ToolStripMenuItem ItemTab_StockManage;
         private System.Windows.Forms.ToolStripMenuItem báoCaoToolStripMenuItem;
         private System.Windows.Forms.Button btnLogOut;
         private System.Windows.Forms.Button btnUserInfo;
         private System.Windows.Forms.FlowLayoutPanel flpHomeBtn;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.ToolStripMenuItem quảnLýToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem quảnLýNhàCungCấpToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem itemAdmin_StaffManage;
+        private System.Windows.Forms.ToolStripMenuItem itemAdmin_ManuManage;
         private System.Windows.Forms.Panel panel1;
     }
 }
