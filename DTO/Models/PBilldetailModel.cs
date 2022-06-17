@@ -12,6 +12,9 @@ namespace DTO.Models
      /// additional PBilldetail Model code in this class.
      /// </summary>
      public class PBilldetailModel : PBilldetailModelBase
-     { 
-     } 
+     {
+        public string StaffName;
+        public string CustomerName;
+        public string TableCode;
+    } 
 } 

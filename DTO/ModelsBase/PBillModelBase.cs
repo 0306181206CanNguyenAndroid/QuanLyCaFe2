@@ -40,12 +40,17 @@ namespace DTO.ModelsBase
          /// <summary> 
          /// Gets or Sets CreatedUserId 
          /// </summary> 
-         public int? CreatedUserId { get; set; } 
+         public int? CreatedUserId { get; set; }
 
-         /// <summary> 
-         /// Gets or Sets ModifiedUserId 
-         /// </summary> 
-         public int? ModifiedUserId { get; set; } 
+        /// <summary> 
+        /// Gets or Sets CustomerId
+        /// </summary> 
+        public int? CustomerId { get; set; }
+
+        /// <summary> 
+        /// Gets or Sets ModifiedUserId 
+        /// </summary> 
+        public int? ModifiedUserId { get; set; } 
 
          /// <summary> 
          /// Gets or Sets IsDeleted 

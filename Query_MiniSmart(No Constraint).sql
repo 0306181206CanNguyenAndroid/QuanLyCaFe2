@@ -1,5 +1,19 @@
 use Cafe
 go
+create table [P_Table]
+(
+	[Id] int not null IDENTITY(1,1),
+	[Code] varchar(10) null,
+	[Description] nvarchar(30) null,
+	[Type] int null,
+	[CreatedDate] DateTime null,
+	[ModifiedDate] DateTime null,
+	[CreatedUserId] int null,
+	[ModifiedUserId] int null,
+	[IsDeleted] bit,
+	[Status] int null,
+	constraint pk_Table primary key(Id)
+)
 Create table P_Manufacturer
 (
 	[Id] int not null IDENTITY(1,1),
@@ -295,6 +309,7 @@ Create table P_Bill
 	[CreatedUserId] int null,
 	[ModifiedUserId] int null,
 	[IsDeleted] bit,
+	[CustomerId] int null,
 	[BillDetailId] int null,
 	[Status] int null,
 	constraint pk_Bill primary key(Id),
@@ -315,6 +330,7 @@ Create table P_BillDetail
 (
 	[Id] int not null IDENTITY(1,1),
 	[BillId] int null,
+	[TableId] int null,
 	[ProductId] int null,
 	[Quantity] int null,
 	[UnitPrice] decimal(18,0) null,

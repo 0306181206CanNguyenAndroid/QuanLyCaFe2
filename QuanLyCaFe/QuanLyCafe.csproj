@@ -169,16 +169,6 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\BUS\BUS.csproj">
-      <Project>{72392c34-6819-4582-b25b-f861c872efdf}</Project>
-      <Name>BUS</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\DTO\DTO.csproj">
-      <Project>{c07d9d01-f9d0-41eb-b063-dee2962a1d2d}</Project>
-      <Name>DTO</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <None Include="Resources\bann.jpg" />
   </ItemGroup>
   <ItemGroup>
@@ -293,6 +283,16 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\martket.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\BUS\BUS.csproj">
+      <Project>{72392c34-6819-4582-b25b-f861c872efdf}</Project>
+      <Name>BUS</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DTO\DTO.csproj">
+      <Project>{c07d9d01-f9d0-41eb-b063-dee2962a1d2d}</Project>
+      <Name>DTO</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

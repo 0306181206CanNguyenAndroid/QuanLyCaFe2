@@ -16,11 +16,11 @@ namespace QuanLyCafe
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new fLogin());
+            //Application.Run(new fLogin());
             //Application.Run(new Order());
             //Application.Run(new Customers());
             //Application.Run(new QuanLyHoaDon());
-            //Application.Run(new fAdmin());
+            Application.Run(new Home());
         }
     }
 }
