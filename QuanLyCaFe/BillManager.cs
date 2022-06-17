@@ -21,42 +21,11 @@ namespace QuanLyCafe
         //Các cài đặt mặt định của form
 
         //Khai báo các class lấy dl cho form
-        PBill OrderBUS = new PBill();
-        //AccountBUS tkBUS = new AccountBUS();        
-        //NhanVienBUS nvBUS = new NhanVienBUS();
-        //BanBUS banBUS = new BanBUS();
+        //PBill OrderBUS = new PBill();
+        List<PBillModel> listOrder = null;
 
         ////Khai báo biến lưu trữ tạm cho form
-        //List<HoaDonDTO> dshd = new List<HoaDonDTO>();
-        //NhanVienDTO NV = new NhanVienDTO();
         BindingSource bs = new BindingSource();
-
-        #region Load
-
-        private void Setting()
-        {
-            datgv_HD.AutoGenerateColumns = false;
-            tb_mahd.ReadOnly = true;
-            tb_ngayLap.ReadOnly = true;
-            tb_sdt.ReadOnly = true;
-            tb_tenkh.ReadOnly = true;
-            tb_TT.ReadOnly = true;
-            rd_today.Checked = true;
-        }
-
-
-        public void ActionReset(int req)
-        {
-            if (req == 1)
-            {
-                Load_Source();
-                rd_year.Checked = true;
-            }
-            if (req == 2)
-            {
-
-            }
-        }
 
         public BillManager(UserModel tkdn)
         {
@@ -77,6 +46,36 @@ namespace QuanLyCafe
 
         }
 
+        #region Load
+
+        private void Setting()
+        {
+            datgv_listOrder.AutoGenerateColumns = false;
+            datgv_listOrder.AllowUserToAddRows = false;
+            //tb_mahd.ReadOnly = true;
+            //tb_ngayLap.ReadOnly = true;
+            //tb_sdt.ReadOnly = true;
+            //tb_tenkh.ReadOnly = true;
+            //tb_TT.ReadOnly = true;
+            rd_today.Checked = true;
+        }
+
+
+        public void ActionReset(int req)
+        {
+            if (req == 1)
+            {
+                Load_Source();
+                rd_year.Checked = true;
+            }
+            if (req == 2)
+            {
+
+            }
+        }
+
+        
+
         private void ResetDS()
         {
             int loai = 0;
@@ -92,20 +91,42 @@ namespace QuanLyCafe
 
         private void Reset()
         {
-            tb_mahd.Text = "";
-            tb_ngayLap.Text = DateTime.Now + "";
-            tb_sdt.Text = "";
-            tb_tenkh.Text = "";
-            tb_nvl.Text = "";
-            tb_TT.Text = "";
-            ckb_khv.Checked = true;
+            //tb_mahd.Text = "";
+            //tb_ngayLap.Text = DateTime.Now + "";
+            //tb_sdt.Text = "";
+            //tb_tenkh.Text = "";
+            //tb_nvl.Text = "";
+            //tb_TT.Text = "";
+            //ckb_khv.Checked = true;
         }
 
         private void Load_Form()
         {
-            //tkql = tkBUS.LayTK("tk_03");
-            //NV = nvBUS.LayNV(tkql.maTK);
-            //Load_DSHD(DateTime.Now,3);            
+            //PBillModel b = PBill.SelectByPrimaryKey(1);
+            listOrder = PBill.SelectSkipAndTakeDynamicWhere(null, null, null, null, null, null, false, null, null,null, 1, 0, "Id desc");
+            if (listOrder != null)
+            {
+                foreach (PBillModel bill in listOrder)
+                {
+                    //PBilldetailModel billDetail = PBilldetail.SelectByPrimaryKey(bill.BillDetailId.Value);
+                    if (bill.CustomerId != null)
+                    {
+                        PCustomerModel customer = PCustomer.SelectByPrimaryKey(bill.CustomerId.Value);
+                        if (customer != null)
+                        {
+                            bill.CustomerName = customer.Name;
+                            bill.CustomerId = customer.Id;
+                        }                            
+                    }
+                    SystemStaffModel staff = SystemStaff.SelectByPrimaryKey(bill.CreatedUserId.Value);
+
+                    bill.StaffName = staff.LastName;
+                }
+            }
+            else
+                listOrder = new List<PBillModel>();
+            bs.DataSource = listOrder.ToList();
+            datgv_listOrder.DataSource = bs;
         }
 
         private void Load_Source()

@@ -26,13 +26,13 @@ namespace DAO.DataLayerBase
          public static SystemStaffModel SelectByPrimaryKey(int id)
          {
               SystemStaffModel objSystemStaff = null;
-              string storedProcName = "[dbo].[SystemStaff_SelectByPrimaryKey]";
+              //string storedProcName = "[dbo].[SystemStaff_SelectByPrimaryKey]";
 
               using (SqlConnection connection = new SqlConnection(PathString.ConnectionString))
               {
                   connection.Open();
 
-                  using (SqlCommand command = new SqlCommand(storedProcName, connection))
+                  using (SqlCommand command = new SqlCommand(ProcString.procNameStaff_SelectByPrimaryKey, connection))
                   {
                       command.CommandType = CommandType.StoredProcedure;
 

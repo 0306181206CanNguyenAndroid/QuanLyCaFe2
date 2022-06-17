@@ -78,6 +78,7 @@
     <Compile Include="Models\PProducttypeModel.cs" />
     <Compile Include="Models\PStocklogModel.cs" />
     <Compile Include="Models\PStockModel.cs" />
+    <Compile Include="Models\P_BillDetailModel.cs" />
     <Compile Include="Models\SystemAccessrightsgroupdetailModel.cs" />
     <Compile Include="Models\SystemAccessrightsgroupModel.cs" />
     <Compile Include="Models\SystemAccessrightsModel.cs" />

@@ -13,8 +13,8 @@ namespace DAO
         public static string procNameBill_SelectByPrimaryKey = "[dbo].[PBill_SelectByPrimaryKey]";
         public static string procNameBill_GetRecordCount = "[dbo].[PBill_GetRecordCount]";
         public static string procNameBill_GetRecordCountDynamicWhere = "[dbo].[PBill_GetRecordCountWhereDynamic]";
-        public static string procNameBill_SelectShared = "[dbo].[PBill_SelectSkipAndTake]";
-        public static string procNameBill_SelectSkipAndTake = "[dbo].[PBill_SelectSkipAndTakeWhereDynamic]";
+        //public static string procNameBill_SelectShared = "[dbo].[PBill_SelectShared]";
+        public static string procNameBill_SelectSkipAndTake = "[dbo].[PBill_SelectSkipAndTake]";
         public static string procNameBill_SelectSkipAndTakeDynamicWhere = "[dbo].[PBill_SelectSkipAndTakeWhereDynamic]";
         public static string procNameBill_SelectTotal = "[dbo].[PBill_SelectTotals]";
         public static string procNameBill_SelectAll = "[dbo].[PBill_SelectAll]";
@@ -31,7 +31,7 @@ namespace DAO
         public static string procNameBillDetail_SelectByPrimaryKey = "[dbo].[PBilldetail_SelectByPrimaryKey]";
         public static string procNameBillDetail_GetRecordCount = "[dbo].[PBilldetail_GetRecordCount]";
         public static string procNameBillDetail_GetRecordCountDynamicWhere = "[dbo].[PBilldetail_GetRecordCountWhereDynamic]";
-        public static string procNameBillDetail_SelectShared = "[dbo].[PBilldetail_SelectSkipAndTake]";
+        //public static string procNameBillDetail_SelectShared = "[dbo].[PBilldetail_SelectShared]";
         public static string procNameBillDetail_SelectSkipAndTake = "[dbo].[PBilldetail_SelectSkipAndTake]";
         public static string procNameBillDetail_SelectSkipAndTakeDynamicWhere = "[dbo].[PBilldetail_SelectSkipAndTakeWhereDynamic]";
         public static string procNameBillDetail_SelectTotal = "[dbo].[PBilldetail_SelectTotals]";
@@ -218,7 +218,7 @@ namespace DAO
 
         #region S_Staffs
 
-        public static string procNameStaff_SelectByPrimaryKey = "[dbo].[PBill_SelectByPrimaryKey]";
+        public static string procNameStaff_SelectByPrimaryKey = "[dbo].[S_Staffs_SelectByPrimaryKey]";
 
         #endregion
 
