@@ -10,20 +10,29 @@ using System.Windows.Forms;
 using DTO;
 using BUS;
 using DTO.Models;
+using BUS.BusinessObject;
 
 namespace QuanLyCafe
 {
     public partial class Customers : Form
     {
+        public UserModel user;
+
+        List<PCustomerModel> listCustomer = null;
+        BindingSource bs = new BindingSource();
+
         public Customers()
         {
             InitializeComponent();
-            dtgv_ttkh.AutoGenerateColumns = false;
+            dtgv_listCustomer.AutoGenerateColumns = false;
             Load_Form();
         }
-        //KhachHangBUS customerBUS = new KhachHangBUS();
-        //BindingSource bs = new BindingSource();
-        //List<KhachHangDTO> dskh = new List<KhachHangDTO>();
+        public Customers(UserModel user)
+        {
+
+        }
+
+        #region Load
 
         private void Load_Form()
         {
@@ -31,11 +40,23 @@ namespace QuanLyCafe
         }
 
         private void Load_DSKH()
-        {            
-            //dskh = customerBUS.LayDskh();
-            //bs.DataSource = dskh.ToList();
-            //dtgv_ttkh.DataSource = bs;
+        {
+            listCustomer = PCustomer.SelectSkipAndTakeDynamicWhere(null, null, null, null, null, null, null, null, null, null, null, false, null, 10, 0, "Id desc");
+            if (listCustomer != null)
+            {
+
+            }
+            else
+                listCustomer = new List<PCustomerModel>();
+
+            bs.DataSource = listCustomer.ToList();
+            dtgv_listCustomer.DataSource = bs;
+
         }
+
+        #endregion
+
+        #region Event
 
         private void dtgv_ttkh_CellClick(object sender, DataGridViewCellEventArgs e)
         {
@@ -110,6 +131,10 @@ namespace QuanLyCafe
             //    Load_Form();
             //}
         }
+        #endregion
+
+
+        #region Event system
 
         private void btn_exit_Click(object sender, EventArgs e)
         {
@@ -125,5 +150,9 @@ namespace QuanLyCafe
             else
                 e.Cancel = true;
         }
+
+        #endregion
+
+       
     }
 }

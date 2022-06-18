@@ -110,6 +110,102 @@ as
 		select * from [dbo].P_Customer
 		where [Id] = @id and ISNULL([IsDeleted],0)=0
 	end
+	go
+
+create proc [dbo].[PCustomer_GetRecordCountWhereDynamic](
+@id int = null,
+@name nvarchar(50) = null,
+@code varchar(50) = null,
+@birth datetime = null,
+@address nvarchar(200) = null,
+@phone varchar(20) = null,
+@email varchar(50) = null,
+@createdDate datetime = null,
+@modifiedDate datetime = null,
+@createdUserId int = null,
+@modifiedUserId int = null,
+@isDeleted bit = null,
+@status int = null
+)
+as
+begin
+	SET NOCOUNT On;
+	select COUNT(*) from [dbo].P_Customer
+	where(@id IS null or [Id] = @id) and
+	(@name is null or [Name] = @name) and
+	(@code is null or [Code] = @code) and
+	(@birth is null or [Birth] = @birth) and
+	(@address is null or [Address] = @address) and
+	(@phone is null or [Phone] = @phone) and
+	(@email is null or [Email] = @email) and
+	(@createdDate is null or [CreatedDate] = @createdDate) and
+	(@modifiedDate is null or [ModifiedDate] = @modifiedDate) and
+	(@createdUserId is null or [CreatedUserId] = @createdUserId) and
+	(@modifiedUserId is null or [ModifiedUserId] = @modifiedUserId) and
+	(@isDeleted is null or ISNULL([IsDeleted],0) = @isDeleted) and
+	(@status is null or ISNULL([Status],0) = @status)
+end
+go
+
+create proc [dbo].[PCustomer_SelectSkipAndTakeWhereDynamic](
+@id int = null,
+@name nvarchar(50) = null,
+@code varchar(50) = null,
+@birth datetime = null,
+@address nvarchar(200) = null,
+@phone varchar(20) = null,
+@email varchar(50) = null,
+@createdDate datetime = null,
+@modifiedDate datetime = null,
+@createdUserId int = null,
+@modifiedUserId int = null,
+@isDeleted bit = null,
+@status int = null,
+@sort varchar(50) = null,
+@numberOfRows int,
+@start int
+)
+as
+begin
+	SET NOCOUNT On;
+	select * from [dbo].P_Customer
+	where(@id IS null or [Id] = @id) and
+	(@name is null or [Name] = @name) and
+	(@code is null or [Code] = @code) and
+	(@birth is null or [Birth] = @birth) and
+	(@address is null or [Address] = @address) and
+	(@phone is null or [Phone] = @phone) and
+	(@email is null or [Email] = @email) and
+	(@createdDate is null or [CreatedDate] = @createdDate) and
+	(@modifiedDate is null or [ModifiedDate] = @modifiedDate) and
+	(@createdUserId is null or [CreatedUserId] = @createdUserId) and
+	(@modifiedUserId is null or [ModifiedUserId] = @modifiedUserId) and
+	(@isDeleted is null or ISNULL([IsDeleted],0) = @isDeleted) and
+	(@status is null or ISNULL([Status],0) = @status)
+	order by 
+	case 
+		when @sort is null or @sort = 'Id' then [Id]
+		when @sort = 'Id desc' then [Id] end desc,
+		case when @sort = 'Name' then [Name]
+		when @sort = 'Name desc' then [Name] end desc,
+		case when @sort = 'Code' then [Code]
+		when @sort = 'Code desc' then [Code] end desc,
+		case when @sort = 'Address' then [Address] end,
+		case when @sort = 'Email' then [Email] end,
+		case when @sort = 'CreatedDate' then [CreatedDate]
+		when @sort = 'ModifiedDate' then [ModifiedDate]
+		when @sort = 'CreatedUserId' then [CreatedUserId]
+		when @sort = 'CreatedUserId desc' then [CreatedUserId] end desc,
+		case when @sort = 'ModifiedUserId' then [ModifiedUserId]
+		when @sort = 'ModifiedUserId desc' then [ModifiedUserId] end desc,
+		case when @sort = 'IsDeleted' then [IsDeleted]
+		when @sort = 'Status' then [Status]
+	end
+	offset     @start ROWS       -- skip s rows
+	FETCH NEXT @numberOfRows ROWS ONLY; -- take n rows
+end
+go
+
 --end Customer
 
 --Proc Staff
@@ -144,6 +240,7 @@ as
 
 	end
 go
+
 
 create proc SystemUser_Update (@id int,@userName varchar(50) = null,
 @pass varchar(100) = null,

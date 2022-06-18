@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.dtgv_ttkh = new System.Windows.Forms.DataGridView();
+            this.dtgv_listCustomer = new System.Windows.Forms.DataGridView();
             this.col_sdt = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.col_kh = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.col_Point = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -47,33 +47,35 @@
             this.tb_sdt = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            ((System.ComponentModel.ISupportInitialize)(this.dtgv_ttkh)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dtgv_listCustomer)).BeginInit();
             this.groupbox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
-            // dtgv_ttkh
+            // dtgv_listCustomer
             // 
-            this.dtgv_ttkh.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.dtgv_ttkh.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dtgv_ttkh.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.dtgv_listCustomer.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dtgv_listCustomer.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dtgv_listCustomer.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.col_sdt,
             this.col_kh,
             this.col_Point});
-            this.dtgv_ttkh.Location = new System.Drawing.Point(439, 61);
-            this.dtgv_ttkh.Name = "dtgv_ttkh";
-            this.dtgv_ttkh.ReadOnly = true;
-            this.dtgv_ttkh.RowTemplate.Height = 24;
-            this.dtgv_ttkh.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dtgv_ttkh.Size = new System.Drawing.Size(775, 470);
-            this.dtgv_ttkh.TabIndex = 0;
-            this.dtgv_ttkh.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dtgv_ttkh_CellClick);
+            this.dtgv_listCustomer.Location = new System.Drawing.Point(439, 61);
+            this.dtgv_listCustomer.Name = "dtgv_listCustomer";
+            this.dtgv_listCustomer.ReadOnly = true;
+            this.dtgv_listCustomer.RowHeadersWidth = 51;
+            this.dtgv_listCustomer.RowTemplate.Height = 24;
+            this.dtgv_listCustomer.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dtgv_listCustomer.Size = new System.Drawing.Size(775, 470);
+            this.dtgv_listCustomer.TabIndex = 0;
+            this.dtgv_listCustomer.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dtgv_ttkh_CellClick);
             // 
             // col_sdt
             // 
             this.col_sdt.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.col_sdt.DataPropertyName = "sdt";
             this.col_sdt.HeaderText = "Số điện thoại";
+            this.col_sdt.MinimumWidth = 6;
             this.col_sdt.Name = "col_sdt";
             this.col_sdt.ReadOnly = true;
             // 
@@ -82,6 +84,7 @@
             this.col_kh.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.col_kh.DataPropertyName = "TenKH";
             this.col_kh.HeaderText = "Tên khách hàng";
+            this.col_kh.MinimumWidth = 6;
             this.col_kh.Name = "col_kh";
             this.col_kh.ReadOnly = true;
             // 
@@ -89,6 +92,7 @@
             // 
             this.col_Point.DataPropertyName = "point";
             this.col_Point.HeaderText = "Điểm ưu đãi";
+            this.col_Point.MinimumWidth = 6;
             this.col_Point.Name = "col_Point";
             this.col_Point.ReadOnly = true;
             // 
@@ -260,12 +264,12 @@
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.groupbox1);
-            this.Controls.Add(this.dtgv_ttkh);
+            this.Controls.Add(this.dtgv_listCustomer);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Name = "Customers";
             this.Text = "Quản lý khách hàng";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Customers_FormClosing);
-            ((System.ComponentModel.ISupportInitialize)(this.dtgv_ttkh)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dtgv_listCustomer)).EndInit();
             this.groupbox1.ResumeLayout(false);
             this.groupbox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
@@ -276,7 +280,7 @@
 
         #endregion
 
-        private System.Windows.Forms.DataGridView dtgv_ttkh;
+        private System.Windows.Forms.DataGridView dtgv_listCustomer;
         private System.Windows.Forms.GroupBox groupbox1;
         private System.Windows.Forms.Button btn_exit;
         private System.Windows.Forms.Button btn_del;
