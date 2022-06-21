@@ -14,6 +14,7 @@ create table [P_Table]
 	[Status] int null,
 	constraint pk_Table primary key(Id)
 )
+
 Create table P_Manufacturer
 (
 	[Id] int not null IDENTITY(1,1),
@@ -65,6 +66,9 @@ Create table P_Product
 	[ModifiedUserId] int null,
 	[IsDeleted] bit,
 	[Status] int null,
+	[Discount] int null ,
+	[ProductCode] varchar(20) null,
+	[Price] decimal(18,0) null ,
 	constraint pk_Product primary key(Id),
 )
 
@@ -312,6 +316,7 @@ Create table P_Bill
 	[CustomerId] int null,
 	[BillDetailId] int null,
 	[Status] int null,
+	[DeliveryAddress] nvarchar(50) null,
 	constraint pk_Bill primary key(Id),
 )
  
@@ -339,6 +344,8 @@ Create table P_BillDetail
 	[ModifiedUserId] int null,
 	[IsDeleted] bit,
 	[Status] int null,
+	[Discount] int null,
+	[DiscountPrice] decimal(18,0) null,
 	constraint pk_BillDetail primary key(Id),
 )
 
