@@ -218,7 +218,8 @@ as
 	end
 --end Staff
 
-create proc SystemUser_Insert (@userName varchar(50) = null,
+create proc SystemUser_Insert 
+(@userName varchar(50) = null,
 @pass varchar(100) = null,
 @name nvarchar(100) = null,
 @image nvarchar(200) = null,
@@ -237,7 +238,7 @@ as
 	values (@userName,@pass,@name,@image,@accessRightsGroup,@createdDate,@modifiedDate,@createdUserId,@modifiedUserId,@isDeleted,@status)
 	set @id = SCOPE_IDENTITY()
 	return @id
-
+	
 	end
 go
 
@@ -356,3 +357,12 @@ as
 	end
 go
 
+
+CREATE PROC proc_logins(
+@user nvarchar(50)=null,
+@pass nvarchar(50)=null
+)
+as 
+begin
+	select * from dbo.[System_User] where UserName =@user and Pass=@pass
+end

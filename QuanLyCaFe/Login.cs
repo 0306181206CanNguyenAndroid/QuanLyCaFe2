@@ -9,39 +9,22 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using BUS;
 using BUS.BusinessObject;
+using BUS.BusinessObjectBase;
 using DTO;
 using DTO.Models;
+using DTO.ModelsBase;
 
 namespace QuanLyCafe
 {
     public partial class fLogin : Form
     {
+        UserModel taikhoan = new UserModel();
+        UserBus tkBus = new UserBus();
         public fLogin()
         {
             InitializeComponent();
         }
-        private void button1_Click(object sender, EventArgs e)
-        {
-            string usn = txtUserName.Text;
-            string Pass = txtPass.Text;
-           
-            int kqkt = UserBus.check_Account(usn, Pass);
-
-            if (kqkt == 1)
-            {
-                Home t = new Home(UserBus.SelectWithUserAndPass(usn, Pass));
-                t.logout += T_logout;
-                this.Hide();
-                t.ShowDialog();
-            }
-            else
-            {
-                constans.TB_Login(kqkt);
-            }
-            
-            //this.Show();
-
-        }
+       
 
         private void T_logout(object sender, Action_LogoutSuccessEventArgs e)
         {
@@ -57,7 +40,7 @@ namespace QuanLyCafe
         private void fLogin_Load(object sender, EventArgs e)
         {
             //textBoxten.Text = "Admin123";
-            txtPass.Text = "123@abc";
+            //txtPass.Text = "123@abc";
             
             
         }
@@ -75,5 +58,30 @@ namespace QuanLyCafe
         {
 
         }
+
+        private void btnDangnhap_Click(object sender, EventArgs e)
+        {
+            taikhoan.UserName = txtUserName.Text;
+            taikhoan.Pass = txtPass.Text;
+
+            string getUser = tkBus.CheckLogin(taikhoan);
+            switch (getUser)
+            {
+                case "requeid_taikhoan":
+                    MessageBox.Show("Tài khoản không được trống");
+                    return;
+                case "requeid_pass":
+                    MessageBox.Show("Mật khẩu không được trống");
+                    return;
+                case "Tài khoản hoặc mật khẩu không chính xác":
+                    MessageBox.Show("Tài khoản hoặc mật khẩu không chính xác");
+                    return;
+            }
+            this.Hide();
+            QuanLyNhanVien Qlnv = new QuanLyNhanVien();
+            Qlnv.ShowDialog();
+        }
+
+        
     }
 }

@@ -1,5 +1,6 @@
 ﻿using DAO.DataLayer;
 using DTO.Models;
+using DTO.ModelsBase;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,6 +11,7 @@ namespace BUS.BusinessObjectBase
 {
     public class UserBusBase
     {
+        UserDataLayer ktkq = new UserDataLayer();
         public UserBusBase() { }
 
         public static List<UserModel> SelectAll()
@@ -30,6 +32,20 @@ namespace BUS.BusinessObjectBase
         public static UserModel SelectWithUserAndPass(string UserName, string pass)
         {
             return UserDataLayer.SelectWithUserAndPass(UserName, pass);
+        }
+
+        public string CheckLogin(UserModel taikhoan)
+        {
+            if (taikhoan.UserName == "")
+            {
+                return "requeid_taikhoan";
+            }
+            if (taikhoan.Pass == "")
+            {
+                return "requeid_pass";
+            }
+            string info = ktkq.CheckLogin(taikhoan);
+            return info;
         }
     }
 }

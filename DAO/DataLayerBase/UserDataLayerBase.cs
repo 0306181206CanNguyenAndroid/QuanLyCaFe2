@@ -7,7 +7,7 @@ using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
-
+using DTO.ModelsBase;
 namespace DAO.DataLayerBase
 {
     public class UserDataLayerBase
@@ -259,7 +259,7 @@ namespace DAO.DataLayerBase
             }
             catch (Exception ex)
             {
-                //return new UserModel { Id = 0 };
+                return new UserModel { Id = 0 };
             }
 
             return user;
@@ -695,6 +695,35 @@ namespace DAO.DataLayerBase
             else
                 user.ModifiedUserId = null;
 
+            return user;
+        }
+
+        public static string CheckLoginDTO(UserModel taikhoan)
+        {
+            string user = null;
+            //connect tới dữ liệu
+            SqlConnection conn = new SqlConnection(PathString.ConnectionString);
+            conn.Open();
+            SqlCommand command = new SqlCommand("proc_logins", conn);
+            command.CommandType = CommandType.StoredProcedure;
+            command.Parameters.AddWithValue("@user", taikhoan.UserName);
+            command.Parameters.AddWithValue("@pass", taikhoan.Pass);
+            command.Connection = conn;
+            SqlDataReader reader = command.ExecuteReader();
+            if (reader.HasRows)
+            {
+                while (reader.Read())
+                {
+                    user = reader.GetString(1);
+                    return user;
+                }
+                reader.Close(); 
+                conn.Close();
+            }
+            else
+            {
+                return"Tài khoản hoặc mật khẩu không chính xác";
+            }
             return user;
         }
     }
