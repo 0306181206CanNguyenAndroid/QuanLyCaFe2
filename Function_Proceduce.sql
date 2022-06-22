@@ -364,6 +364,7 @@ as
 	@code varchar(50) = null,
 	@birth datetime = null,
 	@address nvarchar(200) = null,
+	@point int = null,
 	@phone varchar(20) = null,
 	@email varchar(50) = null,
 	@createdDate datetime = null,
@@ -380,6 +381,7 @@ as
 		where(@id IS null or [Id] = @id) and
 		(@name is null or [Name] = @name) and
 		(@code is null or [Code] = @code) and
+		(@point is null or [Point] = @point) and
 		(@birth is null or [Birth] = @birth) and
 		(@address is null or [Address] = @address) and
 		(@phone is null or [Phone] = @phone) and
@@ -397,6 +399,7 @@ as
 	@id int = null,
 	@name nvarchar(50) = null,
 	@code varchar(50) = null,
+	@point int = null,
 	@birth datetime = null,
 	@address nvarchar(200) = null,
 	@phone varchar(20) = null,
@@ -418,6 +421,7 @@ as
 		where(@id IS null or [Id] = @id) and
 		(@name is null or [Name] = @name) and
 		(@code is null or [Code] = @code) and
+		(@point is null or [Point] = @point) and
 		(@birth is null or [Birth] = @birth) and
 		(@address is null or [Address] = @address) and
 		(@phone is null or [Phone] = @phone) and
@@ -455,6 +459,7 @@ as
 	create proc [dbo].[PCustomer_Insert](
 		@name nvarchar(50) = null,
 		@code varchar(50) = null,
+		@point int = null,
 		@birth Datetime = null,
 		@address nvarchar(200) = null,
 		@phone varchar(20) = null,
@@ -470,8 +475,8 @@ as
 	begin
 		SET NOCOUNT ON;
 		declare @id int;
-		Insert into [dbo].[P_Customer]([Name],[Code],[Birth],[Address],[Phone],[Email],[CreatedDate],[ModifiedDate],[CreatedUserId],[ModifiedUserId],[IsDeleted],[Status]) 
-		Values(@name,@code,@birth,@address,@phone,@email,@createdDate,@modifiedDate,@createdUserId,@modifiedUserId,@isDeleted,@status)
+		Insert into [dbo].[P_Customer]([Name],[Code], [Point],[Birth],[Address],[Phone],[Email],[CreatedDate],[ModifiedDate],[CreatedUserId],[ModifiedUserId],[IsDeleted],[Status]) 
+		Values(@name,@code,@point,@birth,@address,@phone,@email,@createdDate,@modifiedDate,@createdUserId,@modifiedUserId,@isDeleted,@status)
 		set @id = SCOPE_IDENTITY()
 		return @id
 	end
@@ -481,6 +486,7 @@ as
 		@id int,
 		@name nvarchar(50) = null,
 		@code varchar(50) = null,
+		@point int = null,
 		@birth Datetime = null,
 		@address nvarchar(200) = null,
 		@phone varchar(20) = null,
@@ -498,6 +504,7 @@ as
 		Update [dbo].[P_Customer]
 		set [Name] = @name,
 		[Code]=@code,
+		[Point] = @point,
 		[Birth]=@birth,
 		[Address]=@address,
 		[Phone]=@phone,
@@ -519,6 +526,15 @@ as
 		SET NOCOUNT ON;
 		Delete from [dbo].[P_Customer]		
 		Where [Id] = @id
+	end
+	go
+
+	create proc [dbo].[PCustomer_InBill](@id int)
+	as
+	begin 
+	set NOCount on;
+		select count(*) from [dbo].[P_Bill]
+		where ISNULL([IsDeleted],0) = 0 and [CustomerId] = @id
 	end
 	go
 

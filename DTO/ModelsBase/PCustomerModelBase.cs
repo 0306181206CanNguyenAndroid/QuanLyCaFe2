@@ -15,12 +15,17 @@ namespace DTO.ModelsBase
          /// <summary> 
          /// Gets or Sets Id 
          /// </summary> 
-         public int Id { get; set; } 
+         public int Id { get; set; }
 
-         /// <summary> 
-         /// Gets or Sets Name 
-         /// </summary> 
-         public string Name { get; set; } 
+        /// <summary> 
+        /// Gets or Sets Point
+        /// </summary> 
+        public int? Point { get; set; }
+
+        /// <summary> 
+        /// Gets or Sets Name 
+        /// </summary> 
+        public string Name { get; set; } 
 
          /// <summary> 
          /// Gets or Sets Code 

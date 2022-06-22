@@ -100,7 +100,7 @@ namespace DAO.DataLayerBase
          /// <summary>
          /// Gets the total number of records in the PCustomer table based on search parameters
          /// </summary>
-         public static int GetRecordCountDynamicWhere(int? id, string name, string code, DateTime? birth, string address, string phone, string email, DateTime? createdDate, DateTime? modifiedDate, int? createdUserId, int? modifiedUserId, bool? isDeleted, int? status)
+         public static int GetRecordCountDynamicWhere(int? id, string name, string code, int? point, DateTime? birth, string address, string phone, string email, DateTime? createdDate, DateTime? modifiedDate, int? createdUserId, int? modifiedUserId, bool? isDeleted, int? status)
          {
               int recordCount = 0;
               string storedProcName = "[dbo].[PCustomer_GetRecordCountWhereDynamic]";
@@ -114,7 +114,7 @@ namespace DAO.DataLayerBase
                       command.CommandType = CommandType.StoredProcedure;
 
                       // search parameters
-                      AddSearchCommandParamsShared(command, id, name, code, birth, address, phone, email, createdDate, modifiedDate, createdUserId, modifiedUserId, isDeleted, status);
+                      AddSearchCommandParamsShared(command, id, name, code, point, birth, address, phone, email, createdDate, modifiedDate, createdUserId, modifiedUserId, isDeleted, status);
 
                       using (SqlDataAdapter da = new SqlDataAdapter(command))
                       {
@@ -146,7 +146,7 @@ namespace DAO.DataLayerBase
          /// <summary>
          /// Selects PCustomer records sorted by the sortByExpression and returns records from the startRowIndex with rows (# of records) based on search parameters
          /// </summary>
-         public static List<PCustomerModel> SelectSkipAndTakeDynamicWhere(int? id, string name, string code, DateTime? birth, string address, string phone, string email, DateTime? createdDate, DateTime? modifiedDate, int? createdUserId, int? modifiedUserId, bool? isDeleted, int? status, string sortByExpression, int startRowIndex, int rows)
+         public static List<PCustomerModel> SelectSkipAndTakeDynamicWhere(int? id, string name, string code, int? point, DateTime? birth, string address, string phone, string email, DateTime? createdDate, DateTime? modifiedDate, int? createdUserId, int? modifiedUserId, bool? isDeleted, int? status, string sortByExpression, int startRowIndex, int rows)
          {
             List<PCustomerModel> objPCustomerCol = null;
               string storedProcName = "[dbo].[PCustomer_SelectSkipAndTakeWhereDynamic]";
@@ -162,10 +162,10 @@ namespace DAO.DataLayerBase
                       // select, skip, take, sort parameters
                       command.Parameters.AddWithValue("@start", startRowIndex);
                       command.Parameters.AddWithValue("@numberOfRows", rows);
-                      command.Parameters.AddWithValue("@sortByExpression", sortByExpression);
+                      command.Parameters.AddWithValue("@sort", sortByExpression);
 
                       // search parameters
-                      AddSearchCommandParamsShared(command, id, name, code, birth, address, phone, email, createdDate, modifiedDate, createdUserId, modifiedUserId, isDeleted, status);
+                      AddSearchCommandParamsShared(command, id, name, code,point, birth, address, phone, email, createdDate, modifiedDate, createdUserId, modifiedUserId, isDeleted, status);
 
                       using (SqlDataAdapter da = new SqlDataAdapter(command))
                       {
@@ -203,7 +203,7 @@ namespace DAO.DataLayerBase
          /// <summary>
          /// Selects records based on the passed filters as a collection (List) of PCustomer.
          /// </summary>
-         public static List<PCustomerModel> SelectAllDynamicWhere(int? id, string name, string code, DateTime? birth, string address, string phone, string email, DateTime? createdDate, DateTime? modifiedDate, int? createdUserId, int? modifiedUserId, bool? isDeleted, int? status)
+         public static List<PCustomerModel> SelectAllDynamicWhere(int? id, string name, string code, int? point, DateTime? birth, string address, string phone, string email, DateTime? createdDate, DateTime? modifiedDate, int? createdUserId, int? modifiedUserId, bool? isDeleted, int? status)
          {
             List<PCustomerModel> objPCustomerCol = null;
               string storedProcName = "[dbo].[PCustomer_SelectAllWhereDynamic]";
@@ -217,7 +217,7 @@ namespace DAO.DataLayerBase
                       command.CommandType = CommandType.StoredProcedure;
 
                       // search parameters
-                      AddSearchCommandParamsShared(command, id, name, code, birth, address, phone, email, createdDate, modifiedDate, createdUserId, modifiedUserId, isDeleted, status);
+                      AddSearchCommandParamsShared(command, id, name, code,point, birth, address, phone, email, createdDate, modifiedDate, createdUserId, modifiedUserId, isDeleted, status);
 
                       using (SqlDataAdapter da = new SqlDataAdapter(command))
                       {
@@ -309,7 +309,7 @@ namespace DAO.DataLayerBase
                       {
                           command.Parameters.AddWithValue("@start", startRowIndex.Value);
                           command.Parameters.AddWithValue("@numberOfRows", rows.Value);
-                          command.Parameters.AddWithValue("@sortByExpression", sortByExpression);
+                          command.Parameters.AddWithValue("@sort", sortByExpression);
                       }
 
                       using (SqlDataAdapter da = new SqlDataAdapter(command))
@@ -361,6 +361,7 @@ namespace DAO.DataLayerBase
 
               object name = objPCustomer.Name;
               object code = objPCustomer.Code;
+              object point = objPCustomer.Point;
               object birth = objPCustomer.Birth;
               object address = objPCustomer.Address;
               object phone = objPCustomer.Phone;
@@ -401,6 +402,9 @@ namespace DAO.DataLayerBase
               if (objPCustomer.ModifiedUserId == null)
                   modifiedUserId = System.DBNull.Value;
 
+            if (objPCustomer.Point == null)
+                point = System.DBNull.Value;
+
               if (objPCustomer.Status == null)
                   status = System.DBNull.Value;
 
@@ -421,6 +425,7 @@ namespace DAO.DataLayerBase
 
                       command.Parameters.AddWithValue("@name", name);
                       command.Parameters.AddWithValue("@code", code);
+                      command.Parameters.AddWithValue("@point", point);
                       command.Parameters.AddWithValue("@birth", birth);
                       command.Parameters.AddWithValue("@address", address);
                       command.Parameters.AddWithValue("@phone", phone);
@@ -432,10 +437,11 @@ namespace DAO.DataLayerBase
                       command.Parameters.AddWithValue("@isDeleted", objPCustomer.IsDeleted);
                       command.Parameters.AddWithValue("@status", status);
 
-                      if (isUpdate)
-                          command.ExecuteNonQuery();
-                      else
-                          newlyCreatedId = (int)command.ExecuteScalar();
+                    if (isUpdate)
+                        command.ExecuteNonQuery();
+                    else
+                        command.ExecuteScalar();
+                        newlyCreatedId = 1;
                   }
               }
 
@@ -469,7 +475,7 @@ namespace DAO.DataLayerBase
          /// <summary>
          /// Adds search parameters to the Command object
          /// </summary>
-         private static void AddSearchCommandParamsShared(SqlCommand command, int? id, string name, string code, DateTime? birth, string address, string phone, string email, DateTime? createdDate, DateTime? modifiedDate, int? createdUserId, int? modifiedUserId, bool? isDeleted, int? status)
+         private static void AddSearchCommandParamsShared(SqlCommand command, int? id, string name, string code,int? point, DateTime? birth, string address, string phone, string email, DateTime? createdDate, DateTime? modifiedDate, int? createdUserId, int? modifiedUserId, bool? isDeleted, int? status)
          {
               if(id != null)
                   command.Parameters.AddWithValue("@id", id);
@@ -486,7 +492,12 @@ namespace DAO.DataLayerBase
               else
                   command.Parameters.AddWithValue("@code", System.DBNull.Value);
 
-              if(birth != null)
+            if (point != null)
+                command.Parameters.AddWithValue("@point", point);
+            else
+                command.Parameters.AddWithValue("@point", System.DBNull.Value);
+
+            if (birth != null)
                   command.Parameters.AddWithValue("@birth", birth);
               else
                   command.Parameters.AddWithValue("@birth", System.DBNull.Value);
@@ -557,7 +568,12 @@ namespace DAO.DataLayerBase
              else
                  objPCustomer.Code = null;
 
-             if (dr["Birth"] != System.DBNull.Value)
+            if (dr["Point"] != System.DBNull.Value)
+                objPCustomer.Point = (int)dr["Point"];
+            else
+                objPCustomer.Point = null;
+
+            if (dr["Birth"] != System.DBNull.Value)
                  objPCustomer.Birth = (DateTime)dr["Birth"];
              else
                  objPCustomer.Birth = null;
