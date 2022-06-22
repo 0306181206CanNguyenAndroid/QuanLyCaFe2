@@ -135,10 +135,48 @@ namespace DAO.DataLayerBase
               return recordCount;
          }
 
-         /// <summary>
-         /// Selects PBill records sorted by the sortByExpression and returns records from the startRowIndex with rows (# of rows)
-         /// </summary>
-         public static List<PBillModel> SelectSkipAndTake(string sortByExpression, int startRowIndex, int rows)
+        public static int CustomerInBill(int customerId)
+        {
+            int recordCount = 0;
+            string storedProcName = ProcString.procNameBill_InBill;
+
+            using (SqlConnection connection = new SqlConnection(PathString.ConnectionString))
+            {
+                connection.Open();
+
+                using (SqlCommand command = new SqlCommand(storedProcName, connection))
+                {
+                    command.CommandType = CommandType.StoredProcedure;
+
+
+                    // search parameters
+                    command.Parameters.AddWithValue("@id", customerId);
+
+                    using (SqlDataAdapter da = new SqlDataAdapter(command))
+                    {
+                        DataTable dt = new DataTable();
+                        da.Fill(dt);
+
+                        if (dt != null)
+                        {
+                            if (dt.Rows.Count > 0)
+                            {
+                                recordCount = (int)dt.Rows[0]["count"];
+                            }
+                        }
+                        else
+                            return 0;
+                    }
+                }
+            }
+
+            return recordCount;
+        }
+
+        /// <summary>
+        /// Selects PBill records sorted by the sortByExpression and returns records from the startRowIndex with rows (# of rows)
+        /// </summary>
+        public static List<PBillModel> SelectSkipAndTake(string sortByExpression, int startRowIndex, int rows)
          {
              return SelectShared(ProcString.procNameBill_SelectSkipAndTake, null, null, true, null, sortByExpression, startRowIndex, rows);
          }

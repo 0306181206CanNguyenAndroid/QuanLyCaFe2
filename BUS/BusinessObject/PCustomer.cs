@@ -18,6 +18,18 @@ namespace BUS.BusinessObject
          // constructor 
          public PCustomer() 
          { 
-         } 
+         }
+         public static int InsertOrUpdate(bool type,PCustomerModel kh)
+        {
+            if(type)
+            {
+                return PCustomer.Insert(kh);
+            }
+            else
+            {
+                Update(kh);
+            }
+            return 0;
+        }
      } 
 } 

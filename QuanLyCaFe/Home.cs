@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using BUS;
+using BUS.BusinessObject;
 using DTO;
 using DTO.Models;
 
@@ -77,7 +78,9 @@ namespace QuanLyCafe
 
         private void CustomerManage_Click(object sender, EventArgs e)
         {
-            Customers customerform = new Customers();
+            TKDN = UserBus.SelectByPrimaryKey(1);
+            Customers customerform = new Customers(TKDN);
+            customerform.MdiParent = this;
             customerform.Show();
         }
         private void AccountManage_Click(object sender, EventArgs e)

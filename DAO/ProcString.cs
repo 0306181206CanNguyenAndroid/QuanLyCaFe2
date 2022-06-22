@@ -12,6 +12,7 @@ namespace DAO
 
         public static string procNameBill_SelectByPrimaryKey = "[dbo].[PBill_SelectByPrimaryKey]";
         public static string procNameBill_GetRecordCount = "[dbo].[PBill_GetRecordCount]";
+        public static string procNameBill_InBill = "[dbo].[PCustomer_InBill]";
         public static string procNameBill_GetRecordCountDynamicWhere = "[dbo].[PBill_GetRecordCountWhereDynamic]";
         //public static string procNameBill_SelectShared = "[dbo].[PBill_SelectShared]";
         public static string procNameBill_SelectSkipAndTake = "[dbo].[PBill_SelectSkipAndTake]";

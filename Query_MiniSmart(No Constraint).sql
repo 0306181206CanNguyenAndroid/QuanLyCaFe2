@@ -295,6 +295,7 @@ Create table P_Customer
 	[Address] nvarchar(200) null,
 	[Phone] varchar(20) null,
 	[Email] varchar(50) null,
+	[Point] int null,
 	[CreatedDate] DateTime null,
 	[ModifiedDate] DateTime null,
 	[CreatedUserId] int null,

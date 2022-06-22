@@ -18,6 +18,13 @@ namespace BUS.BusinessObject
          // constructor 
          public PBill() 
          { 
-         } 
+         }
+
+        public static bool checkExistCustomer(int Id)
+        {
+            if(PBillDataLayer.CustomerInBill(Id)>0)
+                return true;
+            return false;
+        }
      } 
 } 
