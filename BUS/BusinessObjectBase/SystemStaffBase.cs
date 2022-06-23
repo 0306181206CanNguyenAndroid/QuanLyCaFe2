@@ -5,6 +5,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Data;
+using DTO.ModelsBase;
 
 namespace BUS.BusinessObjectBase
 {
@@ -22,9 +24,18 @@ namespace BUS.BusinessObjectBase
          {
          }
 
-         /// <summary>
-         /// Selects a record by primary key(s)
-         /// </summary>
+        /// <summary>
+        /// Selects a record by primary key(s)
+        /// </summary>
+        SystemStaffDataLayer ssd = new SystemStaffDataLayer();
+        public DataTable LayDSNV()
+        {
+            return ssd.LayDSNV();
+        }
+        public static void ThemNhanVien(SystemStaffModel nhanvien)
+        {
+             SystemStaffDataLayer.ThemNV(nhanvien);
+        }
          public static SystemStaffModel SelectByPrimaryKey(int id)
          {
              return SystemStaffDataLayer.SelectByPrimaryKey(id);

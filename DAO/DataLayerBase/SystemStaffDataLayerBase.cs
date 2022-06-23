@@ -6,6 +6,7 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using DTO.ModelsBase;
 
 namespace DAO.DataLayerBase
 {
@@ -653,5 +654,44 @@ namespace DAO.DataLayerBase
 
              return objSystemStaff;
          }
-     }
+
+        public DataTable LayDSNV()
+        {
+            string sql = @"select NV.Id,NV.FirstName as N'Ho',NV.FullName as N'Tên',NV.Birth as N'Ngay Sinh',NV.Address as N'Dia chi',NV.Phone as N'SÐT',CV.Name as N'Chuc vu'
+                           from dbo.[System_Staff] as NV ,dbo.[System_Position] as CV
+                           where NV.PositionId=CV.Id";
+            SqlConnection conn = new SqlConnection(PathString.ConnectionString);
+            conn.Open();
+            SqlCommand cmd = new SqlCommand(sql, conn);
+            SqlDataAdapter da = new SqlDataAdapter(cmd);
+            DataTable dt = new DataTable();
+            da.Fill(dt);
+            conn.Close();
+            return dt;
+        }
+
+       public  static void ThemNV(SystemStaffModel nhanvien)
+        {
+            SqlConnection conn = new SqlConnection(PathString.ConnectionString);
+            SqlCommand cmd = new SqlCommand("S_Them_Nhanvien", conn);
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Parameters.Add("@Id", SqlDbType.Int).Value = nhanvien.Id;
+            cmd.Parameters.Add("@FirstName", SqlDbType.NVarChar).Value = nhanvien.FirstName;
+            cmd.Parameters.Add("@LastName", SqlDbType.NVarChar).Value = nhanvien.LastName;
+            cmd.Parameters.Add("@FullName", SqlDbType.NVarChar).Value = nhanvien.FullName;
+            cmd.Parameters.Add("@Birth", SqlDbType.DateTime).Value = nhanvien.Birth;
+            cmd.Parameters.Add("@Address", SqlDbType.NVarChar).Value = nhanvien.Address;
+            cmd.Parameters.Add("@Image", SqlDbType.NVarChar).Value = nhanvien.Image;
+            cmd.Parameters.Add("@Phone", SqlDbType.VarChar).Value = nhanvien.Address;
+            cmd.Parameters.Add("@Email", SqlDbType.VarChar).Value = nhanvien.Email;
+            cmd.Parameters.Add("@CreatedDate", SqlDbType.DateTime).Value = nhanvien.CreatedDate;
+            cmd.Parameters.Add("@ModifiedDate", SqlDbType.DateTime).Value = nhanvien.ModifiedDate;
+            cmd.Parameters.Add("@CreatedUserId", SqlDbType.Int).Value = nhanvien.CreatedUserId;
+            cmd.Parameters.Add("@ModifiedUserId", SqlDbType.Int).Value = nhanvien.ModifiedUserId;
+            cmd.Parameters.Add("@PositionId", SqlDbType.Int).Value = nhanvien.PositionId;
+            cmd.Parameters.Add("@IsDeleted", SqlDbType.Bit).Value = nhanvien.IsDeleted;
+            cmd.Parameters.Add("@Status", SqlDbType.Int).Value = nhanvien.Status;
+        }
+
+    }
 }
