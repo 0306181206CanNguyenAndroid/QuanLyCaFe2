@@ -65,7 +65,22 @@ namespace DTO.ModelsBase
          /// <summary> 
          /// Gets or Sets Status 
          /// </summary> 
-         public int? Status { get; set; } 
+         public int? Status { get; set; }
 
-     }
+        /// <summary> 
+        /// Gets or Sets Discount
+        /// </summary> 
+        public int? Discount { get; set; }
+
+        /// <summary> 
+        /// Gets or Sets Status 
+        /// </summary> 
+        public decimal? Price { get; set; }
+
+        /// <summary> 
+        /// Gets or Sets Status 
+        /// </summary> 
+        public string ProductCode { get; set; }
+
+    }
 }

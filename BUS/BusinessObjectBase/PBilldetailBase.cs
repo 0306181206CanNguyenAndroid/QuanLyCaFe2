@@ -38,12 +38,12 @@ namespace BUS.BusinessObjectBase
              return PBilldetailDataLayer.GetRecordCount();
          }
 
-         /// <summary>
-         /// Gets the total number of records in the PBilldetail table based on search parameters
-         /// </summary>
-         public static int GetRecordCountDynamicWhere(int? id, int? billId, int? productId, int? quantity, decimal? unitPrice, DateTime? createdDate, DateTime? modifiedDate, int? modifiedUserId, bool? isDeleted, int? status)
+        /// <summary>
+        /// Gets the total number of records in the PBilldetail table based on search parameters
+        /// </summary>
+        public static int GetRecordCountDynamicWhere(int? id, int? billId, int? productId, int? quantity, decimal? unitPrice, DateTime? createdDate, DateTime? modifiedDate, int? modifiedUserId, int? createdUserId, bool? isDeleted, int? status, int? discount)
          {
-             return PBilldetailDataLayer.GetRecordCountDynamicWhere(id, billId, productId, quantity, unitPrice, createdDate, modifiedDate, modifiedUserId, isDeleted, status);
+             return PBilldetailDataLayer.GetRecordCountDynamicWhere(id, billId, productId, quantity, unitPrice, createdDate, modifiedDate, modifiedUserId,createdUserId, isDeleted, status,discount);
          }
 
          /// <summary>
@@ -69,20 +69,20 @@ namespace BUS.BusinessObjectBase
          /// <summary>
          /// Selects records as a collection (List) of PBilldetail sorted by the sortByExpression and returns the rows (# of records) starting from the startRowIndex, based on the search parameters
          /// </summary>
-         public static List<PBilldetailModel> SelectSkipAndTakeDynamicWhere(int? id, int? billId, int? productId, int? quantity, decimal? unitPrice, DateTime? createdDate, DateTime? modifiedDate, int? modifiedUserId, bool? isDeleted, int? status, int rows, int startRowIndex, out int totalRowCount, string sortByExpression)
+         public static List<PBilldetailModel> SelectSkipAndTakeDynamicWhere(int? id, int? billId, int? productId, int? quantity, decimal? unitPrice, DateTime? createdDate, DateTime? modifiedDate, int? modifiedUserId, int? createdUserId, bool? isDeleted, int? status, int? discount, int rows, int startRowIndex, out int totalRowCount, string sortByExpression)
          {
-             totalRowCount = GetRecordCountDynamicWhere(id, billId, productId, quantity, unitPrice, createdDate, modifiedDate, modifiedUserId, isDeleted, status);
+             totalRowCount = GetRecordCountDynamicWhere(id, billId, productId, quantity, unitPrice, createdDate, modifiedDate, modifiedUserId, createdUserId, isDeleted, status, discount);
              sortByExpression = GetSortExpression(sortByExpression);
-             return PBilldetailDataLayer.SelectSkipAndTakeDynamicWhere(id, billId, productId, quantity, unitPrice, createdDate, modifiedDate, modifiedUserId, isDeleted, status, sortByExpression, startRowIndex, rows);
+             return PBilldetailDataLayer.SelectSkipAndTakeDynamicWhere(id, billId, productId, quantity, unitPrice, createdDate, modifiedDate, modifiedUserId, createdUserId, isDeleted, status, discount, sortByExpression, startRowIndex, rows);
          }
 
          /// <summary>
          /// Selects records as a collection (List) of PBilldetail sorted by the sortByExpression starting from the startRowIndex, based on the search parameters
          /// </summary>
-         public static List<PBilldetailModel> SelectSkipAndTakeDynamicWhere(int? id, int? billId, int? productId, int? quantity, decimal? unitPrice, DateTime? createdDate, DateTime? modifiedDate, int? modifiedUserId, bool? isDeleted, int? status, int rows, int startRowIndex, string sortByExpression)
+         public static List<PBilldetailModel> SelectSkipAndTakeDynamicWhere(int? id, int? billId, int? productId, int? quantity, decimal? unitPrice, DateTime? createdDate, DateTime? modifiedDate, int? modifiedUserId, int? createdUserId, bool? isDeleted, int? status, int? discount, int rows, int startRowIndex, string sortByExpression)
          {
              sortByExpression = GetSortExpression(sortByExpression);
-             return PBilldetailDataLayer.SelectSkipAndTakeDynamicWhere(id, billId, productId, quantity, unitPrice, createdDate, modifiedDate, modifiedUserId, isDeleted, status, sortByExpression, startRowIndex, rows);
+             return PBilldetailDataLayer.SelectSkipAndTakeDynamicWhere(id, billId, productId, quantity, unitPrice, createdDate, modifiedDate, modifiedUserId, createdUserId, isDeleted, status, discount, sortByExpression, startRowIndex, rows);
          }
 
          /// <summary>
@@ -113,17 +113,17 @@ namespace BUS.BusinessObjectBase
          /// <summary>
          /// Selects records based on the passed filters as a collection (List) of PBilldetail.
          /// </summary>
-         public static List<PBilldetailModel> SelectAllDynamicWhere(int? id, int? billId, int? productId, int? quantity, decimal? unitPrice, DateTime? createdDate, DateTime? modifiedDate, int? modifiedUserId, bool? isDeleted, int? status)
+         public static List<PBilldetailModel> SelectAllDynamicWhere(int? id, int? billId, int? productId, int? quantity, decimal? unitPrice, DateTime? createdDate, DateTime? modifiedDate, int? modifiedUserId, int? createdUserId, bool? isDeleted, int? status, int? discount)
          {
-             return PBilldetailDataLayer.SelectAllDynamicWhere(id, billId, productId, quantity, unitPrice, createdDate, modifiedDate, modifiedUserId, isDeleted, status);
+            return PBilldetailDataLayer.SelectAllDynamicWhere(id, billId, productId, quantity, unitPrice, createdDate, modifiedDate, modifiedUserId, createdUserId, isDeleted, status, discount);
          }
 
          /// <summary>
          /// Selects records based on the passed filters as a collection (List) of PBilldetail sorted by the sort expression.
          /// </summary>
-         public static List<PBilldetailModel> SelectAllDynamicWhere(int? id, int? billId, int? productId, int? quantity, decimal? unitPrice, DateTime? createdDate, DateTime? modifiedDate, int? modifiedUserId, bool? isDeleted, int? status, string sortExpression)
+         public static List<PBilldetailModel> SelectAllDynamicWhere(int? id, int? billId, int? productId, int? quantity, decimal? unitPrice, DateTime? createdDate, DateTime? modifiedDate, int? modifiedUserId, int? createdUserId, bool? isDeleted, int? status, int? discount, string sortExpression)
          {
-            List<PBilldetailModel> objPBilldetailCol = PBilldetailDataLayer.SelectAllDynamicWhere(id, billId, productId, quantity, unitPrice, createdDate, modifiedDate, modifiedUserId, isDeleted, status);
+            List<PBilldetailModel> objPBilldetailCol = PBilldetailDataLayer.SelectAllDynamicWhere(id, billId, productId, quantity, unitPrice, createdDate, modifiedDate, modifiedUserId, createdUserId, isDeleted, status, discount);
              return SortByExpression(objPBilldetailCol, sortExpression);
          }
 
@@ -198,9 +198,9 @@ namespace BUS.BusinessObjectBase
          /// <summary>
          /// Inserts a record
          /// </summary>
-         public int Insert()
+         public static int Insert(PBilldetailModel b)
          {
-            PBilldetailModel objPBilldetail = (PBilldetailModel)this;
+            PBilldetailModel objPBilldetail = b;
              return PBilldetailDataLayer.Insert(objPBilldetail);
          }
 

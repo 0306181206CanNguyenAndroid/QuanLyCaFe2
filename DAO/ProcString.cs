@@ -159,13 +159,25 @@ namespace DAO
 
         #region P_Products
 
-        public static string procNameProduct_SelectByPrimaryKey = "[dbo].[PBill_SelectByPrimaryKey]";
+        public static string procNameProduct_SelectByPrimaryKey = "[dbo].[Product_SelectByPrimaryKey]";
+        public static string procNameProduct_GetRecordCount = "[dbo].[Product_GetRecordCount]";
+        public static string procNameProduct_GetRecordCountDynamicWhere = "[dbo].[Product_GetRecordCountWhereDynamic]";
+        public static string procNameProduct_SelectSkipAndTake = "[dbo].[Product_SelectSkipAndTake]";
+        public static string procNameProduct_SelectSkipAndTakeDynamicWhere = "[dbo].[Product_SelectSkipAndTakeWhereDynamic]";
+        public static string procNameProduct_SelectTotal = "[dbo].[Product_SelectTotals]";
+        public static string procNameProduct_SelectAll = "[dbo].[Product_SelectAll]";
+        public static string procNameProduct_SelectAllWhereDynamic = "[dbo].[Product_SelectAllWhereDynamic]";
+        public static string procNameProduct_SelectDropDownListData = "[dbo].[Product_SelectDropDownListData]";
+        public static string procNameProduct_Insert = "[dbo].[Product_Insert]";
+        public static string procNameProduct_Update = "[dbo].[Product_Update]";
+        public static string procProduct_Delete = "[dbo].[Product_Delete]";
 
         #endregion
 
         #region P_ProductTypes
 
-        public static string procNameProductType_SelectByPrimaryKey = "[dbo].[PBill_SelectByPrimaryKey]";
+        public static string procNameProductType_SelectByPrimaryKey = "[dbo].[ProductType_SelectByPrimaryKey]";
+        public static string procNameProductType_SelectDropDownListData = "[dbo].[ProductType_SelectDropDownListData]";
 
         #endregion
 
@@ -220,6 +232,7 @@ namespace DAO
         #region S_Staffs
 
         public static string procNameStaff_SelectByPrimaryKey = "[dbo].[S_Staffs_SelectByPrimaryKey]";
+        public static string procNameStaff_SelectByUserId = "[dbo].[SystemStaff_SelectByUserId]";
 
         #endregion
 
@@ -231,7 +244,19 @@ namespace DAO
 
         #region S_Users
 
-        public static string procNameUser_SelectByPrimaryKey = "[dbo].[PBill_SelectByPrimaryKey]";
+        public static string procNameUser_SelectByPrimaryKey = "[dbo].[User_SelectByPrimaryKey]";
+        public static string procNameUser_GetRecordCount = "[dbo].[User_GetRecordCount]";
+        public static string procNameUser_GetRecordCountDynamicWhere = "[dbo].[User_GetRecordCountWhereDynamic]";
+        public static string procNameUser_SelectSkipAndTake = "[dbo].[User_SelectSkipAndTake]";
+        public static string procNameUser_SelectSkipAndTakeDynamicWhere = "[dbo].[User_SelectSkipAndTakeWhereDynamic]";
+        public static string procNameUser_SelectTotal = "[dbo].[User_SelectTotals]";
+        public static string procNameUser_SelectAll = "[dbo].[User_SelectAll]";
+        public static string procNameUser_SelectAllWhereDynamic = "[dbo].[User_SelectAllWhereDynamic]";
+        public static string procNameUser_SelectDropDownListData = "[dbo].[User_SelectDropDownListData]";
+        public static string procNameUser_Insert = "[dbo].[SystemUser_Insert]";
+        public static string procNameUser_Update = "[dbo].[SystemUser_Update]";
+        public static string procNameUser_Delete = "[dbo].[SystemUser_Delete]";
+        public static string procNameUser_SelectWithUserNameAndPass = "[dbo].[User_SelectWithUsernameAndPass]";
 
         #endregion
 
