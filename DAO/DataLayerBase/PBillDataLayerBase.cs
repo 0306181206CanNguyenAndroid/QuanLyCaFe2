@@ -58,10 +58,45 @@ namespace DAO.DataLayerBase
               return objPBill;
          }
 
-         /// <summary>
-         /// Gets the total number of records in the PBill table
-         /// </summary>
-         public static int GetRecordCount()
+        public static PBillModel SelectByCode(string code)
+        {
+            PBillModel objPBill = null;
+            string storedProcName = "[dbo].[PBill_SelectByCode]";
+
+            using (SqlConnection connection = new SqlConnection(PathString.ConnectionString))
+            {
+                connection.Open();
+
+                using (SqlCommand command = new SqlCommand(storedProcName, connection))
+                {
+                    command.CommandType = CommandType.StoredProcedure;
+
+                    // parameters
+                    command.Parameters.AddWithValue("@code", code);
+
+                    using (SqlDataAdapter da = new SqlDataAdapter(command))
+                    {
+                        DataTable dt = new DataTable();
+                        da.Fill(dt);
+
+                        if (dt != null)
+                        {
+                            if (dt.Rows.Count > 0)
+                            {
+                                objPBill = CreatePBillFromDataRowShared(dt.Rows[0]);
+                            }
+                        }
+                    }
+                }
+            }
+
+            return objPBill;
+        }
+
+        /// <summary>
+        /// Gets the total number of records in the PBill table
+        /// </summary>
+        public static int GetRecordCount()
          {
              return GetRecordCountShared(ProcString.procNameBill_GetRecordCount, null, null, true, null);
          }
@@ -87,7 +122,7 @@ namespace DAO.DataLayerBase
                           {
                               if (dt.Rows.Count > 0)
                               {
-                                  recordCount = (int)dt.Rows[0]["RecordCount"];
+                                  recordCount = (int)dt.Rows[0]["count"];
                               }
                           }
                       }
@@ -100,7 +135,7 @@ namespace DAO.DataLayerBase
          /// <summary>
          /// Gets the total number of records in the PBill table based on search parameters
          /// </summary>
-         public static int GetRecordCountDynamicWhere(int? id, decimal? totalPrice, DateTime? createdDate, DateTime? modifiedDate, int? createdUserId, int? modifiedUserId, bool? isDeleted, int? billDetailId, int? status, int? customerId)
+         public static int GetRecordCountDynamicWhere(int? id, decimal? totalPrice, DateTime? createdDate, DateTime? modifiedDate, int? createdUserId, int? modifiedUserId, bool? isDeleted, int? status, int? customerId, string deliveryAddress)
          {
               int recordCount = 0;
               string storedProcName = ProcString.procNameBill_GetRecordCountDynamicWhere;
@@ -114,7 +149,7 @@ namespace DAO.DataLayerBase
                       command.CommandType = CommandType.StoredProcedure;
 
                       // search parameters
-                      AddSearchCommandParamsShared(command, id, totalPrice, createdDate, modifiedDate, createdUserId, modifiedUserId, isDeleted, billDetailId, status, customerId);
+                      AddSearchCommandParamsShared(command, id, totalPrice, createdDate, modifiedDate, createdUserId, modifiedUserId, isDeleted, status, customerId, deliveryAddress);
 
                       using (SqlDataAdapter da = new SqlDataAdapter(command))
                       {
@@ -125,7 +160,7 @@ namespace DAO.DataLayerBase
                           {
                               if (dt.Rows.Count > 0)
                               {
-                                  recordCount = (int)dt.Rows[0]["RecordCount"];
+                                  recordCount = (int)dt.Rows[0]["count"];
                               }
                           }
                       }
@@ -184,7 +219,7 @@ namespace DAO.DataLayerBase
          /// <summary>
          /// Selects PBill records sorted by the sortByExpression and returns records from the startRowIndex with rows (# of records) based on search parameters
          /// </summary>
-         public static List<PBillModel> SelectSkipAndTakeDynamicWhere(int? id, decimal? totalPrice, DateTime? createdDate, DateTime? modifiedDate, int? createdUserId, int? modifiedUserId, bool? isDeleted, int? billDetailId, int? status, int? customerId, string sortByExpression, int startRowIndex, int rows)
+         public static List<PBillModel> SelectSkipAndTakeDynamicWhere(int? id, decimal? totalPrice, DateTime? createdDate, DateTime? modifiedDate, int? createdUserId, int? modifiedUserId, bool? isDeleted, int? status, int? customerId, string deliveryAddress, string sortByExpression, int startRowIndex, int rows)
          {
             List<PBillModel> objPBillCol = null;
               string storedProcName = ProcString.procNameBill_SelectSkipAndTakeDynamicWhere;
@@ -203,7 +238,7 @@ namespace DAO.DataLayerBase
                       command.Parameters.AddWithValue("@sort", sortByExpression);
 
                       // search parameters
-                      AddSearchCommandParamsShared(command, id, totalPrice, createdDate, modifiedDate, createdUserId, modifiedUserId, isDeleted, billDetailId, status, customerId);
+                      AddSearchCommandParamsShared(command, id, totalPrice, createdDate, modifiedDate, createdUserId, modifiedUserId, isDeleted, status, customerId, deliveryAddress);
 
                       using (SqlDataAdapter da = new SqlDataAdapter(command))
                       {
@@ -255,8 +290,8 @@ namespace DAO.DataLayerBase
                           {
                               if (dt.Rows.Count > 0)
                               {
-                                  if(dt.Rows[0]["TotalPriceTotal"] != DBNull.Value)
-                                       objPBill.TotalPriceTotal = (decimal)dt.Rows[0]["TotalPriceTotal"];
+                                  if(dt.Rows[0]["TotalPrice"] != DBNull.Value)
+                                       objPBill.TotalPrice = (decimal)dt.Rows[0]["TotalPrice"];
                               }
                           }
                       }
@@ -277,7 +312,7 @@ namespace DAO.DataLayerBase
          /// <summary>
          /// Selects records based on the passed filters as a collection (List) of PBill.
          /// </summary>
-         public static List<PBillModel> SelectAllDynamicWhere(int? id, decimal? totalPrice, DateTime? createdDate, DateTime? modifiedDate, int? createdUserId, int? modifiedUserId, bool? isDeleted, int? billDetailId, int? status, int? customerId)
+         public static List<PBillModel> SelectAllDynamicWhere(int? id, decimal? totalPrice, DateTime? createdDate, DateTime? modifiedDate, int? createdUserId, int? modifiedUserId, bool? isDeleted, int? status, int? customerId, string deliveryAddress)
          {
             List<PBillModel> objPBillCol = null;
               string storedProcName = ProcString.procNameBillDetail_SelectAllWhereDynamic;
@@ -291,7 +326,7 @@ namespace DAO.DataLayerBase
                       command.CommandType = CommandType.StoredProcedure;
 
                     // search parameters
-                    AddSearchCommandParamsShared(command, id, totalPrice, createdDate, modifiedDate, createdUserId, modifiedUserId, isDeleted, billDetailId, status, customerId);
+                    AddSearchCommandParamsShared(command, id, totalPrice, createdDate, modifiedDate, createdUserId, modifiedUserId, isDeleted, status, customerId, deliveryAddress);
 
                       using (SqlDataAdapter da = new SqlDataAdapter(command))
                       {
@@ -438,7 +473,7 @@ namespace DAO.DataLayerBase
               object modifiedDate = objPBill.ModifiedDate;
               object createdUserId = objPBill.CreatedUserId;
               object modifiedUserId = objPBill.ModifiedUserId;
-              object billDetailId = objPBill.BillDetailId;
+              object deliveryAddress = objPBill.DeliveryAddress;
               object customerId = objPBill.CustomerId;
               object status = objPBill.Status;
 
@@ -457,8 +492,8 @@ namespace DAO.DataLayerBase
               if (objPBill.ModifiedUserId == null)
                   modifiedUserId = System.DBNull.Value;
 
-              if (objPBill.BillDetailId == null)
-                  billDetailId = System.DBNull.Value;
+              if (objPBill.DeliveryAddress == null)
+                deliveryAddress = System.DBNull.Value;
 
             if (objPBill.CustomerId == null)
                 customerId = System.DBNull.Value;
@@ -480,21 +515,29 @@ namespace DAO.DataLayerBase
                           // for update only
                           command.Parameters.AddWithValue("@id", objPBill.Id);
                       }
+                    else
+                    {
+                        command.Parameters.AddWithValue("@code", objPBill.Code);
+                    }
 
-                      command.Parameters.AddWithValue("@totalPrice", totalPrice);
+                    command.Parameters.AddWithValue("@totalPrice", totalPrice);
                       command.Parameters.AddWithValue("@createdDate", createdDate);
                       command.Parameters.AddWithValue("@modifiedDate", modifiedDate);
                       command.Parameters.AddWithValue("@createdUserId", createdUserId);
                       command.Parameters.AddWithValue("@customerId", customerId);
                       command.Parameters.AddWithValue("@modifiedUserId", modifiedUserId);
                       command.Parameters.AddWithValue("@isDeleted", objPBill.IsDeleted);
-                      command.Parameters.AddWithValue("@billDetailId", billDetailId);
+                      command.Parameters.AddWithValue("@deliveryAddress", deliveryAddress);
                       command.Parameters.AddWithValue("@status", status);
 
                       if (isUpdate)
                           command.ExecuteNonQuery();
-                      else
-                          newlyCreatedId = (int)command.ExecuteScalar();
+                    else
+                    {
+                        command.ExecuteScalar();
+                        newlyCreatedId = 1;
+                    }
+                          
                   }
               }
 
@@ -528,7 +571,7 @@ namespace DAO.DataLayerBase
          /// <summary>
          /// Adds search parameters to the Command object
          /// </summary>
-         private static void AddSearchCommandParamsShared(SqlCommand command, int? id, decimal? totalPrice, DateTime? createdDate, DateTime? modifiedDate, int? createdUserId, int? modifiedUserId, bool? isDeleted, int? billDetailId, int? status, int? customerId)
+         private static void AddSearchCommandParamsShared(SqlCommand command, int? id, decimal? totalPrice, DateTime? createdDate, DateTime? modifiedDate, int? createdUserId, int? modifiedUserId, bool? isDeleted, int? status, int? customerId, string deliveryAddress)
          {
               if(id != null)
                   command.Parameters.AddWithValue("@id", id);
@@ -570,10 +613,10 @@ namespace DAO.DataLayerBase
               else
                   command.Parameters.AddWithValue("@isDeleted", System.DBNull.Value);
 
-              if(billDetailId != null)
-                  command.Parameters.AddWithValue("@billDetailId", billDetailId);
+              if(deliveryAddress != null)
+                  command.Parameters.AddWithValue("@deliveryAddress", deliveryAddress);
               else
-                  command.Parameters.AddWithValue("@billDetailId", System.DBNull.Value);
+                  command.Parameters.AddWithValue("@deliveryAddress", System.DBNull.Value);
 
               if(status != null)
                   command.Parameters.AddWithValue("@status", status);
@@ -590,6 +633,8 @@ namespace DAO.DataLayerBase
              PBillModel objPBill = new PBillModel();
 
              objPBill.Id = (int)dr["Id"];
+
+             objPBill.Code = dr["Code"].ToString();
 
              if (dr["TotalPrice"] != System.DBNull.Value)
                  objPBill.TotalPrice = (decimal)dr["TotalPrice"];
@@ -625,10 +670,10 @@ namespace DAO.DataLayerBase
              else
                  objPBill.IsDeleted = false;
 
-             if (dr["BillDetailId"] != System.DBNull.Value)
-                 objPBill.BillDetailId = (int)dr["BillDetailId"];
+             if (dr["DeliveryAddress"] != System.DBNull.Value)
+                 objPBill.DeliveryAddress = dr["DeliveryAddress"].ToString();
              else
-                 objPBill.BillDetailId = null;
+                 objPBill.DeliveryAddress = null;
 
              if (dr["Status"] != System.DBNull.Value)
                  objPBill.Status = (int)dr["Status"];

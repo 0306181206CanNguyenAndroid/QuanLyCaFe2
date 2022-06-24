@@ -38,11 +38,6 @@ namespace DTO.ModelsBase
          public decimal? UnitPrice { get; set; } 
 
          /// <summary> 
-         /// Gets or Sets UnitPriceTotal
-         /// </summary> 
-         public decimal UnitPriceTotal { get; set; } 
-
-         /// <summary> 
          /// Gets or Sets CreatedDate 
          /// </summary> 
          public DateTime? CreatedDate { get; set; } 
@@ -50,12 +45,17 @@ namespace DTO.ModelsBase
          /// <summary> 
          /// Gets or Sets ModifiedDate 
          /// </summary> 
-         public DateTime? ModifiedDate { get; set; } 
+         public DateTime? ModifiedDate { get; set; }
 
-         /// <summary> 
-         /// Gets or Sets ModifiedUserId 
-         /// </summary> 
-         public int? ModifiedUserId { get; set; } 
+        /// <summary> 
+        /// Gets or Sets ModifiedUserId 
+        /// </summary> 
+        public int? CreatedUserId { get; set; }
+
+        /// <summary> 
+        /// Gets or Sets ModifiedUserId 
+        /// </summary> 
+        public int? ModifiedUserId { get; set; } 
 
          /// <summary> 
          /// Gets or Sets IsDeleted 
@@ -65,7 +65,12 @@ namespace DTO.ModelsBase
          /// <summary> 
          /// Gets or Sets Status 
          /// </summary> 
-         public int? Status { get; set; } 
+         public int? Status { get; set; }
 
-     }
+        /// <summary> 
+        /// Gets or Sets Discount
+        /// </summary> 
+        public int? Discount { get; set; }
+
+    }
 }

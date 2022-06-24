@@ -13,8 +13,11 @@ namespace DTO.Models
      /// </summary>
      public class PBilldetailModel : PBilldetailModelBase
      {
-        public string StaffName;
-        public string CustomerName;
-        public string TableCode;
+        public string StaffName { get; set; }
+        public string CustomerName { get; set; }
+        public string TableCode { get; set; }
+        public decimal UnitPriceTotal { get; set; }
+        public decimal DiscountPrice { get; set; }
+        public int? DiscountProduct { get; set; }
     } 
 } 

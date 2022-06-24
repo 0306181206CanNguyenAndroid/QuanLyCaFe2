@@ -57,7 +57,7 @@ Create table P_Product
 (
 	[Id] int not null IDENTITY(1,1),
 	[Name] nvarchar(100) null,
-	[Description] nvarchar(500) null,
+	[Description] nvarchar(100) null,
 	[ManuId] int null,
 	[ProductTypeId] int null, 
 	[CreatedDate] DateTime null,
@@ -68,7 +68,7 @@ Create table P_Product
 	[Status] int null,
 	[Discount] int null ,
 	[ProductCode] varchar(20) null,
-	[Price] decimal(18,0) null ,
+	[Price] decimal(18,0) null,
 	constraint pk_Product primary key(Id),
 )
 
@@ -315,7 +315,6 @@ Create table P_Bill
 	[ModifiedUserId] int null,
 	[IsDeleted] bit,
 	[CustomerId] int null,
-	[BillDetailId] int null,
 	[Status] int null,
 	[DeliveryAddress] nvarchar(50) null,
 	constraint pk_Bill primary key(Id),
@@ -343,10 +342,10 @@ Create table P_BillDetail
 	[CreatedDate] DateTime null,
 	[ModifiedDate] DateTime null,
 	[ModifiedUserId] int null,
+	[CreatedUserId] int null,
 	[IsDeleted] bit,
 	[Status] int null,
 	[Discount] int null,
-	[DiscountPrice] decimal(18,0) null,
 	constraint pk_BillDetail primary key(Id),
 )
 

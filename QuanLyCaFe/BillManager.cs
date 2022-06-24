@@ -103,7 +103,7 @@ namespace QuanLyCafe
         private void Load_Form()
         {
             //PBillModel b = PBill.SelectByPrimaryKey(1);
-            listOrder = PBill.SelectSkipAndTakeDynamicWhere(null, null, null, null, null, null, false, null, null,null, 1, 0, "Id desc");
+            listOrder = PBill.SelectSkipAndTakeDynamicWhere(null, null, null, null, null, null, false, null, null,null, 10, 0, "Id desc");
             if (listOrder != null)
             {
                 foreach (PBillModel bill in listOrder)

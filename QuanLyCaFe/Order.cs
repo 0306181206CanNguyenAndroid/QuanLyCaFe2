@@ -18,45 +18,72 @@ namespace QuanLyCafe
     public partial class Order : Form
     {
         public event FireEventForActionBillsSuccess actionBills = null;
-        //private NhanVienDTO NV_LapHD = null;
-        //private HoaDonDTO HD = null;
 
-        ////Các lớp xử lí
-        //SanPhamBUS sanPhamBUS = new SanPhamBUS();
-        //HoaDonBUS hoaDonBUS = new HoaDonBUS();
-        //BanBUS banBUS = new BanBUS();
-        //KhachHangBUS khachHangBUS = new KhachHangBUS();
-        //NhanVienBUS nhanVienBUS = new NhanVienBUS();
-        List<PProductModel> dsChon = new List<PProductModel>();
-        //NhanVienDTO nv_lap = new NhanVienDTO();
+        public UserModel user { get; set; }
+        PBillModel bill = new PBillModel();
+        SystemStaffModel staff = null;
+        List<PProductModel> listOrder = new List<PProductModel>();
+        BindingSource bs = new BindingSource();
 
         public Order()
         {
             InitializeComponent();
-            cb_LoaiSP.Text = "Trà Sữa";
-            Cb_Sanpham_Load("ts");
-            dataGridView1.AutoGenerateColumns = false;
-            //HD = hd;
-            //NV_LapHD = nv;
-            //FormOther_Load(HD);
+            Cb_Product_Load(1);
+            dtgv_listOrder.AutoGenerateColumns = false;
         }
 
-        public Order(SystemStaffModel nv)
+        public Order(UserModel user)
         {
             InitializeComponent();
-            cb_LoaiSP.Text = "Trà Sữa";
-            Cb_Sanpham_Load("ts");
-            dataGridView1.AutoGenerateColumns = false;
-            //NV_LapHD = nv;
+            this.user = user;
+            staff = SystemStaff.SelectByUserId(user.Id);
+            tb_Staff.Text = staff == null ? user.Name : staff.FullName;
+            Cb_ProductType_Load();
+            var productTypeId =((PProducttypeModel)cb_ProductType.SelectedItem).Id;
+            Cb_Product_Load(productTypeId);
+            dtgv_listOrder.AutoGenerateColumns = false;
+            this.user = user;
             FormOther_Load();
         }
 
-        BindingSource bs = new BindingSource();
+        #region Load
+
+        private void Cb_Product_Load(int productTypeId)
+        {
+            List<PProductModel> lsp = PProduct.SelectAllDynamicWhere(null, null, null, null, productTypeId, null, null, null, null, null, null, null, null, null);
+            if (lsp != null)
+            {
+                cb_product.DataSource = lsp.ToList();
+                cb_product.DisplayMember = "Name";
+                cb_product.ValueMember = "Id";
+                cb_product.SelectedValue = lsp[0].Id;
+                ReadProductPrice(lsp[0].Price, lsp[0].Discount);
+            }
+            else 
+            { 
+                cb_product.DataSource = new List<PProductModel>();
+                tb_Price.Text = "0.0";
+            }
+        }
+
+        private void Cb_ProductType_Load()
+        {
+            List<PProducttypeModel> lsp = PProducttype.SelectPProducttypeDropDownListData();
+            if (lsp != null)
+            {
+                cb_ProductType.DataSource = lsp.ToList();
+                cb_ProductType.DisplayMember = "Name";
+                cb_ProductType.ValueMember = "Id";
+                cb_ProductType.SelectedValue = lsp[0].Id;
+            }
+            else cb_ProductType.DataSource = new List<PProducttypeModel>();
+        }
+
         private void taoSource()
         {
-            dsChon.Clear();
-            bs.DataSource = dsChon.ToList();
-            dataGridView1.DataSource = bs;
+            //listOrder.Clear();
+            bs.DataSource = listOrder.ToList();
+            dtgv_listOrder.DataSource = bs;
         }
 
         private void FormOther_Load()
@@ -65,11 +92,11 @@ namespace QuanLyCafe
             btn_del.Enabled = false;
 
             //nrud_Sales.Value = HD.khachHang.point / 10;
-            TongTienLoad();
+            SetTotalPrice();
             Load_Ban(1);
             Load_NV();
             Load_KH();
-            tb_mahd.Text = generated_Mahd();
+            //tb_BillCode.Text = generated_B();
             taoSource();
         }
 
@@ -99,140 +126,9 @@ namespace QuanLyCafe
             //}
         }
 
-        private string convert_maloai(string tenloai)
+        private void dtgv_Load()
         {
-            switch (tenloai)
-            {
-                case "Trà Sữa": return "TS";
-                case "Cooktail": return "ctl";
-                case "Thức ăn nhanh": return "Food";
-                case "Sinh Tố": return "ST";
-                case "Nước Ngọt": return "NN";
-                case "Cà Phê": return "CF";
-                default: return "Tea";
-            }
-        }
-
-        private string convert_tensp(string masp)
-        {
-            string[] sp = masp.Split('_');
-
-            switch (sp[0])
-            {
-                case "ts": return "Trà Sữa";
-                case "ctl": return "Cooktail";
-                case "food": return "Thức ăn nhanh";
-                case "st": return "Sinh Tố";
-                case "nn": return "Nước Ngọt";
-                case "cf": return "Cà Phê";
-                default: return "Tea";
-            }
-        }
-
-        private void cb_LoaiSP_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            string loaisp = cb_LoaiSP.SelectedItem.ToString();
-            Cb_Sanpham_Load(convert_maloai(loaisp));
-        }
-
-        private void Cb_Sanpham_Load(string masp)
-        {
-            //List<SanPhamDTO> lsp = sanPhamBUS.Load_SP(masp);
-            //if (lsp != null)
-            //{
-            //    cb_Sanpham.DataSource = lsp;
-            //    cb_Sanpham.DisplayMember = "tensp";
-            //    cb_Sanpham.ValueMember = "masp";
-            //    var sp = cb_Sanpham.SelectedValue;
-            //    foreach (SanPhamDTO s in lsp)
-            //    {
-            //        if (s.masp == sp.ToString())
-            //        {
-            //            tb_Gia.Text = s.dongia + "";
-            //        }
-            //    }
-            //}
-        }
-
-        private void btn_Them_Click(object sender, EventArgs e)
-        {
-            //string maspSelected = cb_Sanpham.SelectedValue.ToString();
-            //SanPhamDTO sp = sanPhamBUS.LaySP(maspSelected);
-            //sp.giaBan = sp.dongia;
-            //sp.slmua = (int)nbud_solgmua.Value;
-            //bool fl = false;
-            //foreach (SanPhamDTO a in dsChon)
-            //{
-            //    if (sp.masp == a.masp)
-            //    {
-            //        fl = true;
-            //        a.slmua = a.slmua + sp.slmua;
-            //        break;
-            //    }
-            //}
-            //if (fl == false)
-            //{
-            //    dsChon.Add(sp);
-            //}
-            taoSource();
-            TongTienLoad();
-        }
-
-        private void btn_Loaibo_Click(object sender, EventArgs e)
-        {
-
-            if (dataGridView1.SelectedCells.Count > 0)
-            {
-                string tensp = dataGridView1.SelectedCells[0].OwningRow.Cells["col_sp"].Value.ToString();
-                //foreach (SanPhamDTO sp in dsChon)
-                //{
-                //    if (sp.tensp == tensp)
-                //    {
-                //        dsChon.Remove(sp); break;
-                //    }
-                //}
-                taoSource();
-                TongTienLoad();
-            }
-        }
-
-        private void TongTienLoad()
-        {
-            int tong = 0, sales = (int)nrud_Sales.Value;
-            if (dsChon.Count() > 0)
-            {
-                //foreach (SanPhamDTO sp in dsChon)
-                //{
-                //    tong += sp.giaBan * sp.slmua;
-                //    sp.Sales = sales;
-                //}
-                //tb_TT.Text = "" + (tong - (tong * sales / 100));
-
-            }
-            else
-                tb_TT.Text = "0";
-        }
-
-        private void cb_Sanpham_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            //string masp = cb_Sanpham.SelectedValue.ToString();
-            //SanPhamDTO sp = sanPhamBUS.LaySP(masp);
-            //if (sp != null)
-            //    tb_Gia.Text = sp.dongia.ToString();
-            //else
-            //    tb_Gia.Text = "";
-        }
-
-        private string generated_Mahd()
-        {
-            //int sohd = hoaDonBUS.laySoLgHD();
-            //if (sohd < 10)
-            //    return "hd000" + sohd;
-            //if (sohd < 100)
-            //    return "hd00" + sohd;
-            //if (sohd < 1000)
-            //    return "hd0" + sohd;
-            return "hd";
+            dtgv_listOrder.AutoGenerateColumns = false;
         }
 
         private void Load_Ban(int kind)
@@ -244,71 +140,6 @@ namespace QuanLyCafe
 
         private void Load_NV()
         {
-            //if (HD == null)
-            //{
-            //    tb_nv.Text = NV_LapHD.maNV;
-            //    //tb_nv.Text = "nv_02";
-            //}
-            //else
-            //{
-            //    tb_nv.Text = HD.maNV;
-            //}
-
-
-        }
-
-        private void cb_Ban_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void dtgv_Load()
-        {
-            dataGridView1.AutoGenerateColumns = false;
-        }
-
-        private void bt_create_Click(object sender, EventArgs e)
-        {
-            //if (dsChon.Count() > 0)
-            //{
-            //    HoaDonDTO hoaDon = new HoaDonDTO();
-            //    hoaDon.dssp = new List<SanPhamDTO>(dsChon);
-            //    hoaDon.maHD = tb_mahd.Text;
-            //    hoaDon.ngayLap = DateTime.Now;
-            //    hoaDon.soban = new BanDTO();
-            //    hoaDon.soban.masoban = cb_Ban.SelectedValue.ToString();
-            //    hoaDon.nv_LapHD = new NhanVienDTO();
-            //    hoaDon.nv_LapHD.maNV = NV_LapHD.maNV;
-            //    hoaDon.tongThanhToan = Convert.ToInt32(tb_TT.Text);
-            //    if (ckB_kh.Checked == false)
-            //    {
-            //        hoaDon.khachHang = null;
-            //    }
-            //    else
-            //    {
-            //        hoaDon.khachHang = new KhachHangDTO();
-            //        KhachHangDTO khtt = khachHangBUS.layKH(cb_sdtKHV.SelectedValue.ToString());
-            //        hoaDon.khachHang.maKH = khtt.maKH;
-            //        hoaDon.khachHang.tenKH = khtt.tenKH;
-            //        hoaDon.khachHang.sdt = khtt.sdt;
-            //        hoaDon.khachHang.point = khtt.point;
-            //        hoaDon.khachHang.xoaKH = 1;
-            //    }
-            //    bool kq = hoaDonBUS.themHD(hoaDon);
-            //    constans.TB_ThanhToan(kq);
-            //    if (kq == true)
-            //    {
-            //        if (actionBills != null)
-            //        {
-            //            actionBills(this, new ActionBillsSuccessEventArgs { });
-            //        }
-            //        dsChon.Clear();
-            //        FormOther_Load();
-            //    }
-
-
-
-            //}
         }
 
         private void Load_KH()
@@ -318,47 +149,224 @@ namespace QuanLyCafe
             //cb_sdtKHV.ValueMember = "maKH";
         }
 
-        private void ckB_kh_CheckedChanged(object sender, EventArgs e)
+        #endregion
+
+        #region Event
+
+        #region Admin
+        #endregion
+
+        #region Manage
+        #endregion
+
+        #region Staff
+
+        
+
+        
+
+        private void cb_LoaiSP_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (ckB_kh.Checked == true)
+            var productTypeId = ((PProducttypeModel)cb_ProductType.SelectedItem).Id;
+            Cb_Product_Load(productTypeId);
+        }
+
+
+
+        private void btn_Them_Click(object sender, EventArgs e)
+        {
+            
+            PProductModel productSelect = (PProductModel)cb_product.SelectedItem;
+            if (productSelect == null)
+                return;
+            decimal realPrice = Convert.ToDecimal(tb_Price.Text);
+            int quantity = (int)nbud_quantity.Value;
+            bool fl = false;
+            foreach (PProductModel a in listOrder)
             {
-                nrud_Sales.Enabled = true;
-                Load_KH();
+                if (productSelect.Id == a.Id)
+                {
+                    fl = true;
+                    a.Quantity = a.Quantity + quantity;
+                    break;
+                }
+            }
+            if (fl == false)
+            {
+                PProductModel sp = new PProductModel();
+                sp.Id = productSelect.Id;
+                sp.Name = productSelect.Name;
+                sp.ProductTypeId = productSelect.ProductTypeId;
+                sp.RealPrice = realPrice;
+                sp.Quantity = quantity;
+                sp.Price = productSelect.Price;
+                sp.Discount = productSelect.Discount;
+                listOrder.Add(sp);
+            }
+            taoSource();
+            SetTotalPrice();
+        }
+
+        private void btn_Loaibo_Click(object sender, EventArgs e)
+        {
+
+            if (dtgv_listOrder.SelectedCells.Count > 0)
+            {
+                string id = dtgv_listOrder.SelectedCells[0].OwningRow.Cells["Id"].Value.ToString();
+                var Id = Convert.ToInt32(id);
+                foreach (PProductModel sp in listOrder)
+                {
+                    if (sp.Id == Id)
+                    {
+                        listOrder.Remove(sp);
+                        break;
+                    }
+                }
+                taoSource();
+                SetTotalPrice();
+            }
+        }
+
+        private void SetTotalPrice()
+        {
+            decimal total = 0, sales = (int)nrud_Sales.Value;
+            if (listOrder.Count() > 0)
+            {
+                foreach (PProductModel sp in listOrder)
+                {
+                    total += sp.RealPrice * sp.Quantity;
+                }
+                tb_TotalPrice.Text = "" + (total / 100 * (100 - sales));
+
             }
             else
+                tb_TotalPrice.Text = "0";
+        }
+
+        private void cb_Sanpham_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            var sp = (PProductModel)cb_product.SelectedItem;
+            ReadProductPrice(sp.Price, sp.Discount);
+        }
+
+        private void cb_Ban_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+
+
+        private void bt_create_Click(object sender, EventArgs e)
+        {
+            if (listOrder.Count() > 0)
             {
-                cb_sdtKHV.DataSource = null;
-                nrud_Sales.Enabled = false;
-                nrud_Sales.Value = 0;
+                PBillModel hoaDon = new PBillModel();
+                hoaDon.listBillDetail = GetBillDetailFromListProduct(listOrder);
+                hoaDon.CreatedDate = DateTime.Now;
+                //hoaDon.soban = new BanDTO();
+                hoaDon.CustomerId = null;
+                hoaDon.CreatedUserId = user.Id;
+                hoaDon.IsDeleted = false;
+                hoaDon.TotalPrice = Convert.ToDecimal(tb_TotalPrice.Text);
+                hoaDon.Status = 0;
+                //hoaDon.TableCode;
+                //hoaDon.DiscountVip
+                hoaDon.DeliveryAddress = "";
+
+                int kq = PBill.InsertBill(hoaDon);
+                //if (ckb_OrderFrom.Checked == false)
+                //{
+                    
+                //}
+                //else
+                //{
+                    
+                //}
+                //bool kq = hoaDonBUS.themHD(hoaDon);
+                //constans.TB_ThanhToan(kq);
+                if (kq == 1)
+                {
+                    if (actionBills != null)
+                    {
+                        actionBills(this, new ActionBillsSuccessEventArgs { });
+                    }
+                    listOrder.Clear();
+                    FormOther_Load();
+                }
+
+
+
             }
+        }
+
+        private List<PBilldetailModel> GetBillDetailFromListProduct(List<PProductModel> l)
+        {
+            List<PBilldetailModel> listBillDetail = new List<PBilldetailModel>();
+            if(l != null && l.Count > 0)
+            {
+                foreach(PProductModel sp in l)
+                {
+                    PBilldetailModel billDetail = new PBilldetailModel();
+                    billDetail.IsDeleted = false;
+                    billDetail.ProductId = sp.Id;
+                    billDetail.Quantity = sp.Quantity;
+                    billDetail.DiscountProduct = sp.Discount;
+                    billDetail.DiscountPrice = sp.RealPrice * sp.Quantity;
+                    billDetail.CreatedDate = DateTime.Now;
+                    billDetail.ModifiedDate = DateTime.Now;
+                    billDetail.CreatedUserId = user.Id;
+                    billDetail.UnitPrice = sp.Price;
+                    billDetail.Status = 0;
+                    listBillDetail.Add(billDetail);
+                }
+            }
+
+            return listBillDetail;
+        }
+
+        private void ckB_kh_CheckedChanged(object sender, EventArgs e)
+        {
+            //if (ckB_kh.Checked == true)
+            //{
+            //    nrud_Sales.Enabled = true;
+            //    Load_KH();
+            //}
+            //else
+            //{
+            //    cb_sdtKHV.DataSource = null;
+            //    nrud_Sales.Enabled = false;
+            //    nrud_Sales.Value = 0;
+            //}
         }
 
         private void nrud_Sales_ValueChanged(object sender, EventArgs e)
         {
-            TongTienLoad();
+            SetTotalPrice();
         }
 
-        private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
+
+        private void dtgv_listOrder_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (dataGridView1.SelectedCells.Count > 0
-                && dataGridView1.SelectedCells[0].RowIndex < dsChon.Count())
+            if (dtgv_listOrder.SelectedCells.Count > 0
+                && dtgv_listOrder.SelectedCells[0].RowIndex < listOrder.Count())
             {
-                string tensp = dataGridView1.SelectedCells[0].OwningRow.Cells["col_sp"].Value.ToString();
-                if (tensp != null && tensp != "")
+                string id = dtgv_listOrder.SelectedCells[0].OwningRow.Cells["Id"].Value.ToString();
+                if (id != null && id != "")
                 {
-                    //foreach (SanPhamDTO sp in dsChon)
-                    //{
-                    //    if (sp.tensp == tensp)
-                    //    {
-                    //        cb_LoaiSP.Text = convert_tensp(sp.masp);
-                    //        cb_Sanpham.Text = sp.masp;
-                    //        tb_Gia.Text = sp.dongia + "";
-                    //        nbud_solgmua.Value = sp.slmua;
-                    //        break;
-                    //    }
-                    //}
+                    var Id = Convert.ToInt32(id);
+                    foreach (PProductModel sp in listOrder)
+                    {
+                        if (sp.Id == Id)
+                        {
+                            cb_ProductType.SelectedValue = sp.ProductTypeId.Value;
+                            cb_product.SelectedValue = sp.Id;
+                            tb_Price.Text = sp.Price + "";
+                            nbud_quantity.Value = sp.Quantity;
+                            break;
+                        }
+                    }
                     taoSource();
-                    TongTienLoad();
+                    //SetTotalPrice();
                 }
 
             }
@@ -403,6 +411,50 @@ namespace QuanLyCafe
             //        FormOther_Load();
             //    }
             //}
+        }
+
+        #endregion
+
+        #endregion
+        private void ReadProductPrice(decimal? price, int? discount)
+        {
+            decimal realprice = price == null ? 0 : (price.Value - (price.Value * (discount == null ? 0 : discount.Value)) / 100);
+            tb_Price.Text = realprice + "";
+        }
+
+        private string convert_maloai(string tenloai)
+        {
+            switch (tenloai)
+            {
+                case "Trà Sữa": return "TS";
+                case "Cooktail": return "ctl";
+                case "Thức ăn nhanh": return "Food";
+                case "Sinh Tố": return "ST";
+                case "Nước Ngọt": return "NN";
+                case "Cà Phê": return "CF";
+                default: return "Tea";
+            }
+        }
+
+        private string convert_tensp(string masp)
+        {
+            string[] sp = masp.Split('_');
+
+            switch (sp[0])
+            {
+                case "ts": return "Trà Sữa";
+                case "ctl": return "Cooktail";
+                case "food": return "Thức ăn nhanh";
+                case "st": return "Sinh Tố";
+                case "nn": return "Nước Ngọt";
+                case "cf": return "Cà Phê";
+                default: return "Tea";
+            }
+        }
+
+        private void Order_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

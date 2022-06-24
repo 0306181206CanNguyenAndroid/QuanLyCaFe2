@@ -13,5 +13,7 @@ namespace DTO.Models
      /// </summary>
      public class PProductModel : PProductModelBase
      { 
-     } 
+        public int Quantity { get; set; }
+        public decimal RealPrice { get; set; }
+    } 
 } 

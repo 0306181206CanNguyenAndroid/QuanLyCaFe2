@@ -26,7 +26,7 @@ namespace DAO.DataLayerBase
          public static PProductModel SelectByPrimaryKey(int id)
          {
               PProductModel objPProduct = null;
-              string storedProcName = "[dbo].[PProduct_SelectByPrimaryKey]";
+              string storedProcName = ProcString.procNameProduct_SelectByPrimaryKey;
 
               using (SqlConnection connection = new SqlConnection(PathString.ConnectionString))
               {
@@ -63,7 +63,7 @@ namespace DAO.DataLayerBase
          /// </summary>
          public static int GetRecordCount()
          {
-             return GetRecordCountShared("[dbo].[PProduct_GetRecordCount]", null, null, true, null);
+             return GetRecordCountShared(ProcString.procNameProduct_GetRecordCount, null, null, true, null);
          }
 
          public static int GetRecordCountShared(string storedProcName = null, string param = null, object paramValue = null, bool isUseStoredProc = true, string dynamicSqlScript = null)
@@ -87,7 +87,7 @@ namespace DAO.DataLayerBase
                           {
                               if (dt.Rows.Count > 0)
                               {
-                                  recordCount = (int)dt.Rows[0]["RecordCount"];
+                                  recordCount = (int)dt.Rows[0]["count"];
                               }
                           }
                       }
@@ -100,10 +100,10 @@ namespace DAO.DataLayerBase
          /// <summary>
          /// Gets the total number of records in the PProduct table based on search parameters
          /// </summary>
-         public static int GetRecordCountDynamicWhere(int? id, string name, string description, int? manuId, int? productTypeId, DateTime? createdDate, DateTime? modifiedDate, int? createdUserId, int? modifiedUserId, bool? isDeleted, int? status)
+         public static int GetRecordCountDynamicWhere(int? id, string name, string description, int? manuId, int? productTypeId, DateTime? createdDate, DateTime? modifiedDate, int? createdUserId, int? modifiedUserId, bool? isDeleted, int? status, string productCode, int? discount, decimal? price)
          {
               int recordCount = 0;
-              string storedProcName = "[dbo].[PProduct_GetRecordCountWhereDynamic]";
+              string storedProcName = ProcString.procNameProduct_GetRecordCountDynamicWhere;
 
               using (SqlConnection connection = new SqlConnection(PathString.ConnectionString))
               {
@@ -113,9 +113,8 @@ namespace DAO.DataLayerBase
                   {
                       command.CommandType = CommandType.StoredProcedure;
 
-                      // search parameters
-                      AddSearchCommandParamsShared(command, id, name, description, manuId, productTypeId, createdDate, modifiedDate, createdUserId, modifiedUserId, isDeleted, status);
-
+                    // search parameters
+                    AddSearchCommandParamsShared(command, id, name, description, manuId, productTypeId, createdDate, modifiedDate, createdUserId, modifiedUserId, isDeleted, status, productCode, discount, price);
                       using (SqlDataAdapter da = new SqlDataAdapter(command))
                       {
                           DataTable dt = new DataTable();
@@ -125,7 +124,7 @@ namespace DAO.DataLayerBase
                           {
                               if (dt.Rows.Count > 0)
                               {
-                                  recordCount = (int)dt.Rows[0]["RecordCount"];
+                                  recordCount = (int)dt.Rows[0]["count"];
                               }
                           }
                       }
@@ -140,16 +139,16 @@ namespace DAO.DataLayerBase
          /// </summary>
          public static List<PProductModel> SelectSkipAndTake(string sortByExpression, int startRowIndex, int rows)
          {
-             return SelectShared("[dbo].[PProduct_SelectSkipAndTake]", null, null, true, null, sortByExpression, startRowIndex, rows);
+             return SelectShared(ProcString.procNameProduct_SelectSkipAndTake, null, null, true, null, sortByExpression, startRowIndex, rows);
          }
 
          /// <summary>
          /// Selects PProduct records sorted by the sortByExpression and returns records from the startRowIndex with rows (# of records) based on search parameters
          /// </summary>
-         public static List<PProductModel> SelectSkipAndTakeDynamicWhere(int? id, string name, string description, int? manuId, int? productTypeId, DateTime? createdDate, DateTime? modifiedDate, int? createdUserId, int? modifiedUserId, bool? isDeleted, int? status, string sortByExpression, int startRowIndex, int rows)
+         public static List<PProductModel> SelectSkipAndTakeDynamicWhere(int? id, string name, string description, int? manuId, int? productTypeId, DateTime? createdDate, DateTime? modifiedDate, int? createdUserId, int? modifiedUserId, bool? isDeleted, int? status, string productCode, int? discount, decimal? price, string sortByExpression, int startRowIndex, int rows)
          {
             List<PProductModel> objPProductCol = null;
-              string storedProcName = "[dbo].[PProduct_SelectSkipAndTakeWhereDynamic]";
+              string storedProcName = ProcString.procNameProduct_SelectSkipAndTakeDynamicWhere;
 
               using (SqlConnection connection = new SqlConnection(PathString.ConnectionString))
               {
@@ -162,10 +161,10 @@ namespace DAO.DataLayerBase
                       // select, skip, take, sort parameters
                       command.Parameters.AddWithValue("@start", startRowIndex);
                       command.Parameters.AddWithValue("@numberOfRows", rows);
-                      command.Parameters.AddWithValue("@sortByExpression", sortByExpression);
+                      command.Parameters.AddWithValue("@sort", sortByExpression);
 
                       // search parameters
-                      AddSearchCommandParamsShared(command, id, name, description, manuId, productTypeId, createdDate, modifiedDate, createdUserId, modifiedUserId, isDeleted, status);
+                      AddSearchCommandParamsShared(command, id, name, description, manuId, productTypeId, createdDate, modifiedDate, createdUserId, modifiedUserId, isDeleted, status, productCode, discount, price);
 
                       using (SqlDataAdapter da = new SqlDataAdapter(command))
                       {
@@ -197,16 +196,16 @@ namespace DAO.DataLayerBase
          /// </summary>
          public static List<PProductModel> SelectAll()
          {
-             return SelectShared("[dbo].[PProduct_SelectAll]", String.Empty, null);
+             return SelectShared(ProcString.procNameProduct_SelectAll, String.Empty, null);
          }
 
          /// <summary>
          /// Selects records based on the passed filters as a collection (List) of PProduct.
          /// </summary>
-         public static List<PProductModel> SelectAllDynamicWhere(int? id, string name, string description, int? manuId, int? productTypeId, DateTime? createdDate, DateTime? modifiedDate, int? createdUserId, int? modifiedUserId, bool? isDeleted, int? status)
+         public static List<PProductModel> SelectAllDynamicWhere(int? id, string name, string description, int? manuId, int? productTypeId, DateTime? createdDate, DateTime? modifiedDate, int? createdUserId, int? modifiedUserId, bool? isDeleted, int? status, string productCode, int? discount, decimal? price)
          {
             List<PProductModel> objPProductCol = null;
-              string storedProcName = "[dbo].[PProduct_SelectAllWhereDynamic]";
+              string storedProcName = ProcString.procNameProduct_SelectAllWhereDynamic;
 
               using (SqlConnection connection = new SqlConnection(PathString.ConnectionString))
               {
@@ -217,7 +216,7 @@ namespace DAO.DataLayerBase
                       command.CommandType = CommandType.StoredProcedure;
 
                       // search parameters
-                      AddSearchCommandParamsShared(command, id, name, description, manuId, productTypeId, createdDate, modifiedDate, createdUserId, modifiedUserId, isDeleted, status);
+                      AddSearchCommandParamsShared(command, id, name, description, manuId, productTypeId, createdDate, modifiedDate, createdUserId, modifiedUserId, isDeleted, status, productCode, discount, price);
 
                       using (SqlDataAdapter da = new SqlDataAdapter(command))
                       {
@@ -250,7 +249,7 @@ namespace DAO.DataLayerBase
          public static List<PProductModel> SelectPProductDropDownListData()
          {
             List<PProductModel> objPProductCol = null;
-              string storedProcName = "[dbo].[PProduct_SelectDropDownListData]";
+              string storedProcName = ProcString.procNameProductType_SelectDropDownListData;
 
               using (SqlConnection connection = new SqlConnection(PathString.ConnectionString))
               {
@@ -309,7 +308,7 @@ namespace DAO.DataLayerBase
                       {
                           command.Parameters.AddWithValue("@start", startRowIndex.Value);
                           command.Parameters.AddWithValue("@numberOfRows", rows.Value);
-                          command.Parameters.AddWithValue("@sortByExpression", sortByExpression);
+                          command.Parameters.AddWithValue("@sort", sortByExpression);
                       }
 
                       using (SqlDataAdapter da = new SqlDataAdapter(command))
@@ -342,7 +341,7 @@ namespace DAO.DataLayerBase
          /// </summary>
          public static int Insert(PProductModel objPProduct)
          {
-             string storedProcName = "[dbo].[PProduct_Insert]";
+             string storedProcName = ProcString.procNameProduct_Insert;
              return InsertUpdate(objPProduct, false, storedProcName);
          }
 
@@ -351,7 +350,7 @@ namespace DAO.DataLayerBase
          /// </summary>
          public static void Update(PProductModel objPProduct)
          {
-             string storedProcName = "[dbo].[PProduct_Update]";
+             string storedProcName = ProcString.procNameProduct_Update;
              InsertUpdate(objPProduct, true, storedProcName);
          }
 
@@ -362,12 +361,15 @@ namespace DAO.DataLayerBase
               object name = objPProduct.Name;
               object description = objPProduct.Description;
               object manuId = objPProduct.ManuId;
+              object productCode = objPProduct.ProductCode;
               object productTypeId = objPProduct.ProductTypeId;
               object createdDate = objPProduct.CreatedDate;
               object modifiedDate = objPProduct.ModifiedDate;
               object createdUserId = objPProduct.CreatedUserId;
               object modifiedUserId = objPProduct.ModifiedUserId;
               object status = objPProduct.Status;
+              object discount = objPProduct.Discount;
+              object price = objPProduct.Price;
 
               if (String.IsNullOrEmpty(objPProduct.Name))
                   name = System.DBNull.Value;
@@ -378,7 +380,10 @@ namespace DAO.DataLayerBase
               if (objPProduct.ManuId == null)
                   manuId = System.DBNull.Value;
 
-              if (objPProduct.ProductTypeId == null)
+            if (objPProduct.ProductCode == null)
+                productCode = System.DBNull.Value;
+
+            if (objPProduct.ProductTypeId == null)
                   productTypeId = System.DBNull.Value;
 
               if (objPProduct.CreatedDate == null)
@@ -396,7 +401,13 @@ namespace DAO.DataLayerBase
               if (objPProduct.Status == null)
                   status = System.DBNull.Value;
 
-              using (SqlConnection connection = new SqlConnection(PathString.ConnectionString))
+            if (objPProduct.Price == null)
+                price = System.DBNull.Value;
+
+            if (objPProduct.Discount == null)
+                discount = System.DBNull.Value;
+
+            using (SqlConnection connection = new SqlConnection(PathString.ConnectionString))
               {
                   connection.Open();
 
@@ -421,6 +432,9 @@ namespace DAO.DataLayerBase
                       command.Parameters.AddWithValue("@modifiedUserId", modifiedUserId);
                       command.Parameters.AddWithValue("@isDeleted", objPProduct.IsDeleted);
                       command.Parameters.AddWithValue("@status", status);
+                      command.Parameters.AddWithValue("@discount", discount);
+                      command.Parameters.AddWithValue("@price", price);
+                      command.Parameters.AddWithValue("@productCode", productCode);
 
                       if (isUpdate)
                           command.ExecuteNonQuery();
@@ -437,7 +451,7 @@ namespace DAO.DataLayerBase
          /// </summary>
          public static void Delete(int id)
          {
-              string storedProcName = "[dbo].[PProduct_Delete]";
+              string storedProcName = ProcString.procProduct_Delete;
 
               using (SqlConnection connection = new SqlConnection(PathString.ConnectionString))
               {
@@ -459,7 +473,7 @@ namespace DAO.DataLayerBase
          /// <summary>
          /// Adds search parameters to the Command object
          /// </summary>
-         private static void AddSearchCommandParamsShared(SqlCommand command, int? id, string name, string description, int? manuId, int? productTypeId, DateTime? createdDate, DateTime? modifiedDate, int? createdUserId, int? modifiedUserId, bool? isDeleted, int? status)
+         private static void AddSearchCommandParamsShared(SqlCommand command, int? id, string name, string description, int? manuId, int? productTypeId, DateTime? createdDate, DateTime? modifiedDate, int? createdUserId, int? modifiedUserId, bool? isDeleted, int? status, string productCode, int? discount, decimal? price)
          {
               if(id != null)
                   command.Parameters.AddWithValue("@id", id);
@@ -516,7 +530,22 @@ namespace DAO.DataLayerBase
               else
                   command.Parameters.AddWithValue("@status", System.DBNull.Value);
 
-         }
+            if (discount != null)
+                command.Parameters.AddWithValue("@discount", discount);
+            else
+                command.Parameters.AddWithValue("@discount", System.DBNull.Value);
+
+            if (price != null)
+                command.Parameters.AddWithValue("@price", price);
+            else
+                command.Parameters.AddWithValue("@price", System.DBNull.Value);
+
+            if (productCode != null)
+                command.Parameters.AddWithValue("@productCode", productCode);
+            else
+                command.Parameters.AddWithValue("@productCode", System.DBNull.Value);
+
+        }
 
          /// <summary>
          /// Creates a PProduct object from the passed data row
@@ -576,7 +605,22 @@ namespace DAO.DataLayerBase
              else
                  objPProduct.Status = null;
 
-             return objPProduct;
+            if (dr["Discount"] != System.DBNull.Value)
+                objPProduct.Discount = (int)dr["Discount"];
+            else
+                objPProduct.Discount = null;
+
+            if (dr["ProductCode"] != System.DBNull.Value)
+                objPProduct.ProductCode = dr["ProductCode"].ToString();
+            else
+                objPProduct.ProductCode = null;
+
+            if (dr["Price"] != System.DBNull.Value)
+                objPProduct.Price = (decimal)dr["Price"];
+            else
+                objPProduct.Price = null;
+
+            return objPProduct;
          }
      }
 }

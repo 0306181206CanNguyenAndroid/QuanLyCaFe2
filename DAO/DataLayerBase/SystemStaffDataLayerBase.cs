@@ -58,10 +58,44 @@ namespace DAO.DataLayerBase
               return objSystemStaff;
          }
 
-         /// <summary>
-         /// Gets the total number of records in the SystemStaff table
-         /// </summary>
-         public static int GetRecordCount()
+        public static SystemStaffModel SelectByUserId(int id)
+        {
+            SystemStaffModel objSystemStaff = null;
+
+            using (SqlConnection connection = new SqlConnection(PathString.ConnectionString))
+            {
+                connection.Open();
+
+                using (SqlCommand command = new SqlCommand(ProcString.procNameStaff_SelectByUserId, connection))
+                {
+                    command.CommandType = CommandType.StoredProcedure;
+
+                    // parameters
+                    command.Parameters.AddWithValue("@id", id);
+
+                    using (SqlDataAdapter da = new SqlDataAdapter(command))
+                    {
+                        DataTable dt = new DataTable();
+                        da.Fill(dt);
+
+                        if (dt != null)
+                        {
+                            if (dt.Rows.Count > 0)
+                            {
+                                objSystemStaff = CreateSystemStaffFromDataRowShared(dt.Rows[0]);
+                            }
+                        }
+                    }
+                }
+            }
+
+            return objSystemStaff;
+        }
+
+        /// <summary>
+        /// Gets the total number of records in the SystemStaff table
+        /// </summary>
+        public static int GetRecordCount()
          {
              return GetRecordCountShared("[dbo].[SystemStaff_GetRecordCount]", null, null, true, null);
          }

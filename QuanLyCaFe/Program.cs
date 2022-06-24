@@ -20,8 +20,8 @@ namespace QuanLyCafe
             //Application.Run(new Order());
             //Application.Run(new Customers());
             //Application.Run(new QuanLyHoaDon());
-            Application.Run(new fLogin());
-            //Application.Run(new Home());
+            //Application.Run(new fLogin());
+            Application.Run(new Home());
         }
     }
 }

@@ -23,11 +23,6 @@ namespace DTO.ModelsBase
          public decimal? TotalPrice { get; set; } 
 
          /// <summary> 
-         /// Gets or Sets TotalPriceTotal
-         /// </summary> 
-         public decimal TotalPriceTotal { get; set; } 
-
-         /// <summary> 
          /// Gets or Sets CreatedDate 
          /// </summary> 
          public DateTime? CreatedDate { get; set; } 
@@ -55,17 +50,17 @@ namespace DTO.ModelsBase
          /// <summary> 
          /// Gets or Sets IsDeleted 
          /// </summary> 
-         public bool IsDeleted { get; set; } 
-
-         /// <summary> 
-         /// Gets or Sets BillDetailId 
-         /// </summary> 
-         public int? BillDetailId { get; set; } 
+         public bool IsDeleted { get; set; }
 
          /// <summary> 
          /// Gets or Sets Status 
          /// </summary> 
-         public int? Status { get; set; } 
+         public int? Status { get; set; }
 
-     }
+        /// <summary> 
+        /// Gets or Sets DeliveryAddress
+        /// </summary> 
+        public string DeliveryAddress { get; set; }
+
+    }
 }

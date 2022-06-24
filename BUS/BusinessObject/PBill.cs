@@ -26,5 +26,29 @@ namespace BUS.BusinessObject
                 return true;
             return false;
         }
-     } 
+        private static string CreateCode()
+        {
+            return "B" + GetRecordCount();
+
+
+        }
+        public static int InsertBill(PBillModel bill)
+        {
+            bill.Code = CreateCode();
+            var a = Insert(bill);
+            if (a == 1)
+            {
+                PBillModel billCode = SelectByCode(bill.Code);
+                foreach (PBilldetailModel b in bill.listBillDetail)
+                {
+                    b.BillId = billCode.Id;
+                    PBilldetail.Insert(b);
+                }
+                return 1;
+            }
+            else
+                return 0;
+        }
+
+    } 
 } 
