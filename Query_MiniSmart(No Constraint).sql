@@ -1,5 +1,5 @@
-create database [Cafe]
-go
+--Create database [Cafe]
+--go
 use Cafe
 go
 create table [P_Table]
@@ -17,7 +17,7 @@ create table [P_Table]
 	constraint pk_Table primary key(Id)
 )
 
-Create table P_Manufacturer
+Create table [P_Manufacturer]
 (
 	[Id] int not null IDENTITY(1,1),
 	[Name] nvarchar(100) null,
@@ -31,7 +31,7 @@ Create table P_Manufacturer
 	constraint pk_Manu primary key(Id)
 )
 
-Create table P_ManufacturerLog
+Create table [P_ManufacturerLog]
 (
 	[Id] int not null IDENTITY(1,1),
 	[Note] nvarchar(100) null,
@@ -43,7 +43,7 @@ Create table P_ManufacturerLog
 	constraint pk_ManufacturerLog primary key(Id),
 )
 
- Create table P_ProductType
+ Create table [P_ProductType]
 (
 	[Id] int not null IDENTITY(1,1),
 	[Name] nvarchar(100) null,
@@ -55,7 +55,7 @@ Create table P_ManufacturerLog
 	constraint pk_ProductType primary key(Id)
 )
 
-Create table P_Product
+Create table [P_Product]
 (
 	[Id] int not null IDENTITY(1,1),
 	[Name] nvarchar(100) null,
@@ -202,7 +202,7 @@ Create table [System_User]
 	[ModifiedDate] DateTime null,
 	[CreatedUserId] int null,
 	[ModifiedUserId] int null,
-	[IsDeleted] bit,
+	[IsDeleted] bit null,
 	[Status] int null,
 	constraint pk_User primary key(Id),
 )
@@ -259,7 +259,7 @@ Create table [System_Staff]
 	[CreatedUserId] int null,
 	[ModifiedUserId] int null,
 	[PositionId] int null,
-	[IsDeleted] bit,
+	[IsDeleted] bit null,
 	[Status] int null,
 	constraint pk_Staff primary key(Id),
 )
@@ -273,7 +273,7 @@ Create table [System_Decentralization]
 	[ModifiedDate] DateTime null,
 	[CreatedUserId] int null,
 	[ModifiedUserId] int null,
-	[IsDeleted] bit,
+	[IsDeleted] bit null,
 	constraint pk_Decentralization primary key(Id),
 )
 
@@ -310,12 +310,13 @@ Create table P_Customer
 Create table P_Bill
 (
 	[Id] int not null IDENTITY(1,1),
+	[Code] varchar(10) null, 
 	[TotalPrice] decimal(18,0) null,
 	[CreatedDate] DateTime null,
 	[ModifiedDate] DateTime null,
 	[CreatedUserId] int null,
 	[ModifiedUserId] int null,
-	[IsDeleted] bit,
+	[IsDeleted] bit null,
 	[CustomerId] int null,
 	[Status] int null,
 	[DeliveryAddress] nvarchar(50) null,
