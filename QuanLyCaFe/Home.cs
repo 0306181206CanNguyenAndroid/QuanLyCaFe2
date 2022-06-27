@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using BUS;
+using BUS.BusinessObject;
 using DTO;
 using DTO.Models;
 
@@ -27,6 +28,7 @@ namespace QuanLyCafe
         public Home()
         {
             InitializeComponent();
+            TKDN = UserBus.SelectByPrimaryKey(1);
             this.IsMdiContainer = true;
         }
 
@@ -77,7 +79,8 @@ namespace QuanLyCafe
 
         private void CustomerManage_Click(object sender, EventArgs e)
         {
-            Customers customerform = new Customers();
+            Customers customerform = new Customers(TKDN);
+            //customerform.MdiParent = this;
             customerform.Show();
         }
         private void AccountManage_Click(object sender, EventArgs e)
@@ -104,14 +107,14 @@ namespace QuanLyCafe
 
         private void CreateOrder_Click(object sender, EventArgs e)
         {
-            //Order bill = new Order(nvBUS.LayNV(TKDN.maTK));
-            //bill.ShowDialog();
+            Order bill = new Order(TKDN);
+            bill.ShowDialog();
             //foreach (Form fr in this.MdiChildren)
             //{
             //    if (fr.Name == "fAdmin" || fr.Name == "QuanLyHoaDon")
             //    {
             //        bill.actionBills += Bill_actionBills;
-            //    }                
+            //    }
             //}
         }
 

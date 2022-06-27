@@ -41,10 +41,18 @@ namespace BUS.BusinessObjectBase
              return SystemStaffDataLayer.SelectByPrimaryKey(id);
          }
 
-         /// <summary>
-         /// Gets the total number of records in the SystemStaff table
-         /// </summary>
-         public static int GetRecordCount()
+        /// <summary>
+        /// Selects a record by User Id(s)
+        /// </summary>
+        public static SystemStaffModel SelectByUserId(int id)
+        {
+            return SystemStaffDataLayer.SelectByUserId(id);
+        }
+
+        /// <summary>
+        /// Gets the total number of records in the SystemStaff table
+        /// </summary>
+        public static int GetRecordCount()
          {
              return SystemStaffDataLayer.GetRecordCount();
          }

@@ -41,9 +41,9 @@ namespace BUS.BusinessObjectBase
          /// <summary>
          /// Gets the total number of records in the PCustomer table based on search parameters
          /// </summary>
-         public static int GetRecordCountDynamicWhere(int? id, string name, string code, DateTime? birth, string address, string phone, string email, DateTime? createdDate, DateTime? modifiedDate, int? createdUserId, int? modifiedUserId, bool? isDeleted, int? status)
+         public static int GetRecordCountDynamicWhere(int? id, string name, string code, int? point, DateTime? birth, string address, string phone, string email, DateTime? createdDate, DateTime? modifiedDate, int? createdUserId, int? modifiedUserId, bool? isDeleted, int? status)
          {
-             return PCustomerDataLayer.GetRecordCountDynamicWhere(id, name, code, birth, address, phone, email, createdDate, modifiedDate, createdUserId, modifiedUserId, isDeleted, status);
+             return PCustomerDataLayer.GetRecordCountDynamicWhere(id, name, code, point, birth, address, phone, email, createdDate, modifiedDate, createdUserId, modifiedUserId, isDeleted, status);
          }
 
          /// <summary>
@@ -69,20 +69,20 @@ namespace BUS.BusinessObjectBase
          /// <summary>
          /// Selects records as a collection (List) of PCustomer sorted by the sortByExpression and returns the rows (# of records) starting from the startRowIndex, based on the search parameters
          /// </summary>
-         public static List<PCustomerModel> SelectSkipAndTakeDynamicWhere(int? id, string name, string code, DateTime? birth, string address, string phone, string email, DateTime? createdDate, DateTime? modifiedDate, int? createdUserId, int? modifiedUserId, bool? isDeleted, int? status, int rows, int startRowIndex, out int totalRowCount, string sortByExpression)
+         public static List<PCustomerModel> SelectSkipAndTakeDynamicWhere(int? id, string name, string code, int? point, DateTime? birth, string address, string phone, string email, DateTime? createdDate, DateTime? modifiedDate, int? createdUserId, int? modifiedUserId, bool? isDeleted, int? status, int rows, int startRowIndex, out int totalRowCount, string sortByExpression)
          {
-             totalRowCount = GetRecordCountDynamicWhere(id, name, code, birth, address, phone, email, createdDate, modifiedDate, createdUserId, modifiedUserId, isDeleted, status);
+             totalRowCount = GetRecordCountDynamicWhere(id, name, code,point, birth, address, phone, email, createdDate, modifiedDate, createdUserId, modifiedUserId, isDeleted, status);
              sortByExpression = GetSortExpression(sortByExpression);
-             return PCustomerDataLayer.SelectSkipAndTakeDynamicWhere(id, name, code, birth, address, phone, email, createdDate, modifiedDate, createdUserId, modifiedUserId, isDeleted, status, sortByExpression, startRowIndex, rows);
+             return PCustomerDataLayer.SelectSkipAndTakeDynamicWhere(id, name, code,point, birth, address, phone, email, createdDate, modifiedDate, createdUserId, modifiedUserId, isDeleted, status, sortByExpression, startRowIndex, rows);
          }
 
          /// <summary>
          /// Selects records as a collection (List) of PCustomer sorted by the sortByExpression starting from the startRowIndex, based on the search parameters
          /// </summary>
-         public static List<PCustomerModel> SelectSkipAndTakeDynamicWhere(int? id, string name, string code, DateTime? birth, string address, string phone, string email, DateTime? createdDate, DateTime? modifiedDate, int? createdUserId, int? modifiedUserId, bool? isDeleted, int? status, int rows, int startRowIndex, string sortByExpression)
+         public static List<PCustomerModel> SelectSkipAndTakeDynamicWhere(int? id, string name, string code,int? point, DateTime? birth, string address, string phone, string email, DateTime? createdDate, DateTime? modifiedDate, int? createdUserId, int? modifiedUserId, bool? isDeleted, int? status, int rows, int startRowIndex, string sortByExpression)
          {
              sortByExpression = GetSortExpression(sortByExpression);
-             return PCustomerDataLayer.SelectSkipAndTakeDynamicWhere(id, name, code, birth, address, phone, email, createdDate, modifiedDate, createdUserId, modifiedUserId, isDeleted, status, sortByExpression, startRowIndex, rows);
+             return PCustomerDataLayer.SelectSkipAndTakeDynamicWhere(id, name, code, point, birth, address, phone, email, createdDate, modifiedDate, createdUserId, modifiedUserId, isDeleted, status, sortByExpression, startRowIndex, rows);
          }
 
          /// <summary>
@@ -105,17 +105,17 @@ namespace BUS.BusinessObjectBase
          /// <summary>
          /// Selects records based on the passed filters as a collection (List) of PCustomer.
          /// </summary>
-         public static List<PCustomerModel> SelectAllDynamicWhere(int? id, string name, string code, DateTime? birth, string address, string phone, string email, DateTime? createdDate, DateTime? modifiedDate, int? createdUserId, int? modifiedUserId, bool? isDeleted, int? status)
+         public static List<PCustomerModel> SelectAllDynamicWhere(int? id, string name, string code, int? point, DateTime? birth, string address, string phone, string email, DateTime? createdDate, DateTime? modifiedDate, int? createdUserId, int? modifiedUserId, bool? isDeleted, int? status)
          {
-             return PCustomerDataLayer.SelectAllDynamicWhere(id, name, code, birth, address, phone, email, createdDate, modifiedDate, createdUserId, modifiedUserId, isDeleted, status);
+             return PCustomerDataLayer.SelectAllDynamicWhere(id, name, code,point, birth, address, phone, email, createdDate, modifiedDate, createdUserId, modifiedUserId, isDeleted, status);
          }
 
          /// <summary>
          /// Selects records based on the passed filters as a collection (List) of PCustomer sorted by the sort expression.
          /// </summary>
-         public static List<PCustomerModel> SelectAllDynamicWhere(int? id, string name, string code, DateTime? birth, string address, string phone, string email, DateTime? createdDate, DateTime? modifiedDate, int? createdUserId, int? modifiedUserId, bool? isDeleted, int? status, string sortExpression)
+         public static List<PCustomerModel> SelectAllDynamicWhere(int? id, string name, string code, int? point, DateTime? birth, string address, string phone, string email, DateTime? createdDate, DateTime? modifiedDate, int? createdUserId, int? modifiedUserId, bool? isDeleted, int? status, string sortExpression)
          {
-            List<PCustomerModel> objPCustomerCol = PCustomerDataLayer.SelectAllDynamicWhere(id, name, code, birth, address, phone, email, createdDate, modifiedDate, createdUserId, modifiedUserId, isDeleted, status);
+            List<PCustomerModel> objPCustomerCol = PCustomerDataLayer.SelectAllDynamicWhere(id, name, code,point, birth, address, phone, email, createdDate, modifiedDate, createdUserId, modifiedUserId, isDeleted, status);
              return SortByExpression(objPCustomerCol, sortExpression);
          }
 
@@ -199,19 +199,19 @@ namespace BUS.BusinessObjectBase
          /// <summary>
          /// Inserts a record
          /// </summary>
-         public int Insert()
+         public static int Insert(PCustomerModel kh)
          {
-            PCustomerModel objPCustomer = (PCustomerModel)this;
+            PCustomerModel objPCustomer = kh;
              return PCustomerDataLayer.Insert(objPCustomer);
          }
 
          /// <summary>
          /// Updates a record
          /// </summary>
-         public void Update()
+         public static void Update(PCustomerModel kh)
          {
-            PCustomerModel objPCustomer = (PCustomerModel)this;
-             PCustomerDataLayer.Update(objPCustomer);
+            PCustomerModel objPCustomer = kh;
+            PCustomerDataLayer.Update(objPCustomer);
          }
 
          /// <summary>

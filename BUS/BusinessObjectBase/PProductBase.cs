@@ -41,9 +41,9 @@ namespace BUS.BusinessObjectBase
          /// <summary>
          /// Gets the total number of records in the PProduct table based on search parameters
          /// </summary>
-         public static int GetRecordCountDynamicWhere(int? id, string name, string description, int? manuId, int? productTypeId, DateTime? createdDate, DateTime? modifiedDate, int? createdUserId, int? modifiedUserId, bool? isDeleted, int? status)
+         public static int GetRecordCountDynamicWhere(int? id, string name, string description, int? manuId, int? productTypeId, DateTime? createdDate, DateTime? modifiedDate, int? createdUserId, int? modifiedUserId, bool? isDeleted, int? status, string productCode, int? discount, decimal? price)
          {
-             return PProductDataLayer.GetRecordCountDynamicWhere(id, name, description, manuId, productTypeId, createdDate, modifiedDate, createdUserId, modifiedUserId, isDeleted, status);
+             return PProductDataLayer.GetRecordCountDynamicWhere(id, name, description, manuId, productTypeId, createdDate, modifiedDate, createdUserId, modifiedUserId, isDeleted, status, productCode, discount, price);
          }
 
          /// <summary>
@@ -69,20 +69,20 @@ namespace BUS.BusinessObjectBase
          /// <summary>
          /// Selects records as a collection (List) of PProduct sorted by the sortByExpression and returns the rows (# of records) starting from the startRowIndex, based on the search parameters
          /// </summary>
-         public static List<PProductModel> SelectSkipAndTakeDynamicWhere(int? id, string name, string description, int? manuId, int? productTypeId, DateTime? createdDate, DateTime? modifiedDate, int? createdUserId, int? modifiedUserId, bool? isDeleted, int? status, int rows, int startRowIndex, out int totalRowCount, string sortByExpression)
+         public static List<PProductModel> SelectSkipAndTakeDynamicWhere(int? id, string name, string description, int? manuId, int? productTypeId, DateTime? createdDate, DateTime? modifiedDate, int? createdUserId, int? modifiedUserId, bool? isDeleted, int? status, string productCode, int? discount, decimal? price, int rows, int startRowIndex, out int totalRowCount, string sortByExpression)
          {
-             totalRowCount = GetRecordCountDynamicWhere(id, name, description, manuId, productTypeId, createdDate, modifiedDate, createdUserId, modifiedUserId, isDeleted, status);
+             totalRowCount = GetRecordCountDynamicWhere(id, name, description, manuId, productTypeId, createdDate, modifiedDate, createdUserId, modifiedUserId, isDeleted, status, productCode, discount, price);
              sortByExpression = GetSortExpression(sortByExpression);
-             return PProductDataLayer.SelectSkipAndTakeDynamicWhere(id, name, description, manuId, productTypeId, createdDate, modifiedDate, createdUserId, modifiedUserId, isDeleted, status, sortByExpression, startRowIndex, rows);
+             return PProductDataLayer.SelectSkipAndTakeDynamicWhere(id, name, description, manuId, productTypeId, createdDate, modifiedDate, createdUserId, modifiedUserId, isDeleted, status, productCode, discount, price, sortByExpression, startRowIndex, rows);
          }
 
          /// <summary>
          /// Selects records as a collection (List) of PProduct sorted by the sortByExpression starting from the startRowIndex, based on the search parameters
          /// </summary>
-         public static List<PProductModel> SelectSkipAndTakeDynamicWhere(int? id, string name, string description, int? manuId, int? productTypeId, DateTime? createdDate, DateTime? modifiedDate, int? createdUserId, int? modifiedUserId, bool? isDeleted, int? status, int rows, int startRowIndex, string sortByExpression)
+         public static List<PProductModel> SelectSkipAndTakeDynamicWhere(int? id, string name, string description, int? manuId, int? productTypeId, DateTime? createdDate, DateTime? modifiedDate, int? createdUserId, int? modifiedUserId, bool? isDeleted, int? status, string productCode, int? discount, decimal? price, int rows, int startRowIndex, string sortByExpression)
          {
              sortByExpression = GetSortExpression(sortByExpression);
-             return PProductDataLayer.SelectSkipAndTakeDynamicWhere(id, name, description, manuId, productTypeId, createdDate, modifiedDate, createdUserId, modifiedUserId, isDeleted, status, sortByExpression, startRowIndex, rows);
+             return PProductDataLayer.SelectSkipAndTakeDynamicWhere(id, name, description, manuId, productTypeId, createdDate, modifiedDate, createdUserId, modifiedUserId, isDeleted, status, productCode, discount, price, sortByExpression, startRowIndex, rows);
          }
 
          /// <summary>
@@ -105,17 +105,17 @@ namespace BUS.BusinessObjectBase
          /// <summary>
          /// Selects records based on the passed filters as a collection (List) of PProduct.
          /// </summary>
-         public static List<PProductModel> SelectAllDynamicWhere(int? id, string name, string description, int? manuId, int? productTypeId, DateTime? createdDate, DateTime? modifiedDate, int? createdUserId, int? modifiedUserId, bool? isDeleted, int? status)
+         public static List<PProductModel> SelectAllDynamicWhere(int? id, string name, string description, int? manuId, int? productTypeId, DateTime? createdDate, DateTime? modifiedDate, int? createdUserId, int? modifiedUserId, bool? isDeleted, int? status, string productCode, int? discount, decimal? price)
          {
-             return PProductDataLayer.SelectAllDynamicWhere(id, name, description, manuId, productTypeId, createdDate, modifiedDate, createdUserId, modifiedUserId, isDeleted, status);
+             return PProductDataLayer.SelectAllDynamicWhere(id, name, description, manuId, productTypeId, createdDate, modifiedDate, createdUserId, modifiedUserId, isDeleted, status, productCode, discount, price);
          }
 
          /// <summary>
          /// Selects records based on the passed filters as a collection (List) of PProduct sorted by the sort expression.
          /// </summary>
-         public static List<PProductModel> SelectAllDynamicWhere(int? id, string name, string description, int? manuId, int? productTypeId, DateTime? createdDate, DateTime? modifiedDate, int? createdUserId, int? modifiedUserId, bool? isDeleted, int? status, string sortExpression)
+         public static List<PProductModel> SelectAllDynamicWhere(int? id, string name, string description, int? manuId, int? productTypeId, DateTime? createdDate, DateTime? modifiedDate, int? createdUserId, int? modifiedUserId, bool? isDeleted, int? status, string productCode, int? discount, decimal? price, string sortExpression)
          {
-            List<PProductModel> objPProductCol = PProductDataLayer.SelectAllDynamicWhere(id, name, description, manuId, productTypeId, createdDate, modifiedDate, createdUserId, modifiedUserId, isDeleted, status);
+            List<PProductModel> objPProductCol = PProductDataLayer.SelectAllDynamicWhere(id, name, description, manuId, productTypeId, createdDate, modifiedDate, createdUserId, modifiedUserId, isDeleted, status, productCode, discount, price);
              return SortByExpression(objPProductCol, sortExpression);
          }
 

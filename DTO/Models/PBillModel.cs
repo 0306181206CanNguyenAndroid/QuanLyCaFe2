@@ -16,5 +16,9 @@ namespace DTO.Models
         public string StaffName { get; set; }
         public string CustomerName { get; set; }
         public string TableCode { get; set; }
+        public string Code { get; set; }
+        public int DiscountVip { get; set; }
+
+        public List<PBilldetailModel> listBillDetail { get; set; }
     } 
 } 

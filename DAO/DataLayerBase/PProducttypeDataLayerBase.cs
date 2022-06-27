@@ -250,7 +250,7 @@ namespace DAO.DataLayerBase
          public static List<PProducttypeModel> SelectPProducttypeDropDownListData()
          {
             List<PProducttypeModel> objPProducttypeCol = null;
-              string storedProcName = "[dbo].[PProducttype_SelectDropDownListData]";
+              string storedProcName = ProcString.procNameProductType_SelectDropDownListData;
 
               using (SqlConnection connection = new SqlConnection(PathString.ConnectionString))
               {

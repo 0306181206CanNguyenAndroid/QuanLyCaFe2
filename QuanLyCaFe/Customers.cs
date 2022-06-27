@@ -17,6 +17,7 @@ namespace QuanLyCafe
     public partial class Customers : Form
     {
         public UserModel user;
+        public PCustomerModel customerFocus;
 
         List<PCustomerModel> listCustomer = null;
         BindingSource bs = new BindingSource();
@@ -29,6 +30,10 @@ namespace QuanLyCafe
         }
         public Customers(UserModel user)
         {
+            InitializeComponent();
+            this.user = user;
+            dtgv_listCustomer.AutoGenerateColumns = false;
+            Load_Form();
 
         }
 
@@ -36,12 +41,14 @@ namespace QuanLyCafe
 
         private void Load_Form()
         {
+            
             Load_DSKH();
         }
 
         private void Load_DSKH()
         {
-            listCustomer = PCustomer.SelectSkipAndTakeDynamicWhere(null, null, null, null, null, null, null, null, null, null, null, false, null, 10, 0, "Id desc");
+            customerFocus = null;
+            listCustomer = PCustomer.SelectSkipAndTakeDynamicWhere(null, null,null, null, null, null, null, null, null, null, null, null, false, null, 10, 0, "Id desc");
             if (listCustomer != null)
             {
 
@@ -51,6 +58,7 @@ namespace QuanLyCafe
 
             bs.DataSource = listCustomer.ToList();
             dtgv_listCustomer.DataSource = bs;
+            dtgv_listCustomer.Refresh();
 
         }
 
@@ -58,78 +66,128 @@ namespace QuanLyCafe
 
         #region Event
 
-        private void dtgv_ttkh_CellClick(object sender, DataGridViewCellEventArgs e)
-        {
-            //if (dtgv_ttkh.SelectedCells.Count > 0)
-            //{
-            //    if(dtgv_ttkh.SelectedCells[0].RowIndex < dskh.Count())
-            //    {
-            //        string sdt = dtgv_ttkh.SelectedCells[0].OwningRow.Cells["col_sdt"].Value.ToString();
-
-            //        foreach (KhachHangDTO kh in dskh)
-            //        {
-            //            if (kh.sdt == sdt)
-            //            {
-            //                tb_makh.Text = kh.maKH;
-            //                tb_tenkh.Text = kh.tenKH;
-            //                tb_sdt.Text = kh.sdt;
-            //                tb_point.Text = kh.point + "";
-            //                break;
-            //            }
-            //        }
-            //    }
-            //}
-        }
-
+        #region Get data from object
         private PCustomerModel layTTKH_moi()
         {
             PCustomerModel NewKH = new PCustomerModel();
-            //NewKH.maKH = string.IsNullOrEmpty(tb_makh.Text) ? "" : tb_makh.Text;
-            //NewKH.tenKH = string.IsNullOrEmpty(tb_tenkh.Text) ? "" : tb_tenkh.Text;
-            //NewKH.sdt = string.IsNullOrEmpty(tb_sdt.Text) ? "" : tb_sdt.Text;
-            //NewKH.xoaKH = 1;
+            NewKH.Code = "";
+            NewKH.Name = string.IsNullOrEmpty(tb_tenkh.Text) ? "" : tb_tenkh.Text;
+            NewKH.Birth = date_birth.Value.Date;
+            NewKH.Phone = string.IsNullOrEmpty(tb_sdt.Text) ? "" : tb_sdt.Text;
+            NewKH.Address = string.IsNullOrEmpty(txt_diachi.Text) ? "" : txt_diachi.Text;
+
+            NewKH.Point = 0;
+            NewKH.CreatedDate = DateTime.Now;
+            NewKH.ModifiedDate = DateTime.Now;
+            NewKH.CreatedUserId = user.Id;
+            NewKH.ModifiedUserId = user.Id;
+            NewKH.Status = 0;
+            NewKH.IsDeleted = false;
 
             return NewKH;
         }
 
+        private PCustomerModel layTTKH_change()
+        {
+            PCustomerModel NewKH = new PCustomerModel();
+            NewKH.Id = customerFocus.Id;
+            NewKH.Code = customerFocus.Code;
+            NewKH.Name = string.IsNullOrEmpty(tb_tenkh.Text) ? "" : tb_tenkh.Text;
+            NewKH.Birth = date_birth.Value.Date;
+            NewKH.Phone = string.IsNullOrEmpty(tb_sdt.Text) ? "" : tb_sdt.Text;
+            NewKH.Address = string.IsNullOrEmpty(txt_diachi.Text) ? "" : txt_diachi.Text;
+
+            NewKH.Point = (int) point.Value;
+            NewKH.CreatedDate = customerFocus.CreatedDate;
+            NewKH.ModifiedDate = DateTime.Now;
+            NewKH.CreatedUserId = customerFocus.CreatedUserId;
+            NewKH.ModifiedUserId = user.Id;
+            NewKH.Status = customerFocus.Status;
+            NewKH.IsDeleted = customerFocus.IsDeleted;
+
+            return NewKH;
+        }
+
+        private bool checkedData()
+        {
+            if (string.IsNullOrEmpty(tb_tenkh.Text))
+                return false;
+            if (string.IsNullOrEmpty(tb_sdt.Text))
+                return false;
+            
+            return true;
+        }
+        #endregion
+
         private void btn_dk_Click(object sender, EventArgs e)
         {
-            //KhachHangDTO khAdd = layTTKH_moi();
-            //if (khAdd.tenKH == "" || khAdd.sdt == "")
-            //{
-            //    constans.TB_ThieuTT();
-            //    return;
-            //}
-
-            //bool kq = customerBUS.DKKH(khAdd);
-
-            //constans.TB_KQ(kq);
-            Load_Form();
+            if(checkedData())
+            {
+                PCustomerModel kh = layTTKH_moi();
+                int a = PCustomer.Insert(kh);
+                Load_Form();
+            }
+            
         }
+
+        private void dtgv_ttkh_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (dtgv_listCustomer.SelectedCells.Count > 0)
+            {
+                if (dtgv_listCustomer.SelectedCells[0].RowIndex < listCustomer.Count())
+                {
+                    int Id = (int) dtgv_listCustomer.SelectedCells[0].OwningRow.Cells["Id"].Value;
+                    foreach (PCustomerModel kh in listCustomer)
+                    {
+                        if (kh.Id == Id)
+                        {
+                            customerFocus = kh;
+                            tb_tenkh.Text = kh.Name;
+                            tb_sdt.Text = kh.Phone;
+                            txt_diachi.Text = kh.Address;
+                            date_birth.Value = kh.Birth == null ? DateTime.Now : kh.Birth.Value.Date;
+                            point.Value = kh.Point == null ? 0 : kh.Point.Value;
+                            
+                            break;
+                        }
+                    }
+                }
+            }
+        }
+
+        
+
 
         private void btn_update_Click(object sender, EventArgs e)
         {
-            //KhachHangDTO khEdit = layTTKH_moi();
-            //khEdit.point = Convert.ToInt32(tb_point.Text);
-
-            //bool kq = customerBUS.UpdateKH(khEdit);
-            //constans.TB_KQ(kq);
-            Load_Form();
+            if (checkedData())
+            {
+                PCustomerModel kh = layTTKH_change();
+                PCustomer.Update(kh);
+                Load_Form();
+            }
         }
 
+        private bool checkDelete(int Id)
+        {
+            return PBill.checkExistCustomer(Id) ? false : true;
+        }
         private void btn_del_Click(object sender, EventArgs e)
         {
-            //if (string.IsNullOrEmpty(tb_makh.Text))
-            //{
-            //    return;
-            //}
-            //else
-            //{
-            //    string MAKH = tb_makh.Text;
-            //    int kq = customerBUS.DelKH(MAKH);
-            //    constans.TB_XoaKH(kq);
-            //    Load_Form();
-            //}
+            if (customerFocus == null)
+            {
+                return;
+            }
+            else
+            {
+                if(!checkDelete(customerFocus.Id))
+                {
+                    return;
+                }
+                customerFocus.IsDeleted = true;
+                PCustomer.Update(customerFocus);
+                Load_Form();
+            }
         }
         #endregion
 
