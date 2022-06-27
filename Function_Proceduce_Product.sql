@@ -18,14 +18,15 @@ GO
 --store procedure Product
 	create proc [dbo].[Product_SelectByPrimaryKey](@id int)
 	as 
-		begin
-		SET NOCOUNT ON;
-			select* from [dbo].[P_Product] 
-			where [Id] = @id and ISNULL([IsDeleted],0) = 0
-		end
+	begin
+	SET NOCOUNT ON;
+		select* from [dbo].[P_Product] 
+		where [Id] = @id
+	end
 	go
 
-	create proc [dbo].[Product_SelectAllWhereDynamic](
+	create proc [dbo].[Product_SelectAllWhereDynamic]
+	(
 	@id int = null,
 	@name nvarchar(100) = null,
 	@description nvarchar(100) = null,
@@ -63,13 +64,12 @@ as
 	end
 	go
 
-	create proc [dbo].[Product_GetRecordCount](@id int)
+	create proc [dbo].[Product_GetRecordCount]
 	as 
-		begin
-		SET NOCOUNT ON;
-			select count(*) from [dbo].[P_Product]
-			where ISNULL([IsDeleted],0) = 0
-		end
+	begin
+	SET NOCOUNT ON;
+		select count(*) [count] from [dbo].[P_Product]
+	end
 	go
 
 	create proc [dbo].[Product_SelectSkipAndTakeWhereDynamic](
@@ -110,9 +110,9 @@ as
 	order by 
 	case when (@sort is null or @sort = 'Id') then [Id] end,
 	case when (@sort = 'Id desc') then [Id] end desc,
-		case when @sort = 'Price' then [Price]
-		when @sort = 'CreatedDate' then [CreatedDate]
-		when @sort = 'ModifiedDate' then [ModifiedDate]
+	case when @sort = 'Price' then [Price] end,
+	case when @sort = 'Price desc' then [Price] end desc,
+	case when @sort = 'ModifiedDate' then [ModifiedDate]
 		when @sort = 'CreatedUserId' then [CreatedUserId]
 		when @sort = 'ManuId' then [ManuId]
 		when @sort = 'ModifiedUserId' then [ModifiedUserId]
@@ -124,8 +124,7 @@ as
 	end
 	go
 
-	create proc [dbo].[Product_GetRecordCountWhereDynamic]
-(
+	create proc [dbo].[Product_GetRecordCountWhereDynamic](
 @id int = null,
 @name nvarchar(100) = null,
 @description nvarchar(100) = null,
@@ -160,8 +159,7 @@ as
 	end
 	go
 
-	create proc [dbo].[Product_Insert]
-	(
+	create proc [dbo].[Product_Insert](
 	@name nvarchar(100) = null,
 	@description nvarchar(100) = null,
 	@manuId int = null,
@@ -231,15 +229,16 @@ as
 
 create proc [dbo].[ProductType_SelectByPrimaryKey](@id int)
 as
-	begin
-		select * from [dbo].[P_ProductType]
-		where [Id] = @id
-	end
+begin
+	select * from [dbo].[P_ProductType]
+	where [Id] = @id
+end
 go
 
 create proc [dbo].[ProductType_SelectDropDownListData]
 as
 	begin
 		select * from [dbo].[P_ProductType]
+		where ISNULL([IsDeleted],0) = 0
 	end
 go

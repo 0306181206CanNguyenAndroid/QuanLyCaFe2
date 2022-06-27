@@ -15,7 +15,7 @@ SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
---store procedure Bill
+--store procedure User
 	create proc [dbo].[System_SelectByPrimaryKey](@id int)
 	as 
 		begin
@@ -28,16 +28,15 @@ GO
 		end
 	go
 
-	create proc [dbo].[User_GetRecordCount](@id int)
+create proc [dbo].[User_GetRecordCount]
 	as 
 		begin
 		SET NOCOUNT ON;
 			select count(*) [count] from [dbo].[System_User]
-			where ISNULL([IsDeleted],0) = 0
 		end
 	go
 
-	create proc [dbo].[User_SelectSkipAndTakeWhereDynamic]
+create proc [dbo].[User_SelectSkipAndTakeWhereDynamic]
 (
 	@id int,
 	@userName varchar(50) = null,
@@ -95,9 +94,10 @@ as
 		offset     @start ROWS       -- skip s rows
 		FETCH NEXT @numberOfRows ROWS ONLY; -- take n rows
 	end
+
 	go
 
-	create proc [dbo].[User_GetRecordCountWhereDynamic]
+create proc [dbo].[User_GetRecordCountWhereDynamic]
 (
 	@id int,
 	@userName varchar(50) = null,
@@ -130,20 +130,17 @@ as
 	end
 	go
 
-	create proc [dbo].[SystemUser_Insert] 
-	(
-	@userName varchar(50) = null,
-	@pass varchar(100) = null,
-	@name nvarchar(100) = null,
-	@image nvarchar(200) = null,
-	@accessRightsGroup int = null,
-	@createdDate datetime = null,
-	@modifiedDate datetime = null,
-	@createdUserId int = null,
-	@modifiedUserId int = null,
-	@isDeleted bit = null, 
-	@status int = null
-	)
+create proc [dbo].[SystemUser_Insert] (@userName varchar(50) = null,
+@pass varchar(100) = null,
+@name nvarchar(100) = null,
+@image nvarchar(200) = null,
+@accessRightsGroup int = null,
+@createdDate datetime = null,
+@modifiedDate datetime = null,
+@createdUserId int = null,
+@modifiedUserId int = null,
+@isDeleted bit = null,
+@status int = null)
 as
 	begin
 	SET NOCOUNT ON;
@@ -157,21 +154,20 @@ as
 	end
 	go
 
-	create proc [dbo].[SystemUser_Update] 
-	(
-	@id int,
-	@userName varchar(50) = null,
-	@pass varchar(100) = null,
-	@name nvarchar(100) = null,
-	@image nvarchar(200) = null,
-	@accessRightsGroup int = null,
-	@createdDate datetime = null,
-	@modifiedDate datetime = null,
-	@createdUserId int = null,
-	@modifiedUserId int = null,
-	@isDeleted bit = null, 
-	@status int = null
-	)
+create proc [dbo].[SystemUser_Update] (
+@id int,
+@userName varchar(50) = null,
+@pass varchar(100) = null,
+@name nvarchar(100) = null,
+@image nvarchar(200) = null,
+@accessRightsGroup int = null,
+@createdDate datetime = null,
+@modifiedDate datetime = null,
+@createdUserId int = null,
+@modifiedUserId int = null,
+@isDeleted bit = null,
+@status int = null
+)
 as
 	begin
 	SET NOCOUNT ON;
@@ -195,7 +191,7 @@ as
 	end
 go
 
-create proc User_SelectByPrimaryKey (@Id int)
+create proc [dbo].[User_SelectByPrimaryKey] (@id int)
 as
 	begin
 	SET NOCOUNT ON;
@@ -214,7 +210,25 @@ as
 	end
 go
 
-create proc User_SelectAll
+create proc [dbo].[User_SelectAll]
+as
+begin
+	SET NOCOUNT ON;
+	Select [Id]
+      ,[UserName]
+      ,[Name]
+      ,[Image]
+      ,[AccessRightsGroup]
+      ,[CreatedDate]
+      ,[ModifiedDate]
+      ,[CreatedUserId]
+      ,[ModifiedUserId]
+      ,[IsDeleted]
+      ,[Status] from [System_User]
+end
+go
+
+create proc [dbo].[User_SelectAllUserNoUsing]
 as
 	begin
 	SET NOCOUNT ON;
@@ -229,10 +243,12 @@ as
       ,[ModifiedUserId]
       ,[IsDeleted]
       ,[Status] from [System_User]
+	  where ISNULL([IsDeleted],0) = 0 and [Status] != 1
 	end
 go
 
-create proc [dbo].[User_SelectAllDynamicWhere](
+create proc [dbo].[User_SelectAllDynamicWhere]
+(
 @Id int = null,
 @userName varchar(50) = null,
 @pass varchar(100) = null,
@@ -289,7 +305,8 @@ as
 	end
 go
 
-create proc [dbo].[User_SelectWithUsernameAndPass](
+create proc [dbo].[User_SelectWithUsernameAndPass]
+(
 @userName varchar(50) = null,
 @pass varchar(100) = null
 )

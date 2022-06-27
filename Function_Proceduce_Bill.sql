@@ -1,13 +1,3 @@
---create function selectGia(@tensp nvarchar(50))
---returns int
---as
---	begin
---	declare @gia int
---	Select @gia=don_gia
---	from sanpham
---	where tensp = @tensp
---	return @gia
---	end
 
 use Cafe
 go
@@ -16,34 +6,33 @@ GO
 SET QUOTED_IDENTIFIER ON
 GO
 --store procedure Bill
-	create proc [dbo].[PBill_SelectByPrimaryKey](@id int)
-	as 
-		begin
-		SET NOCOUNT ON;
-			select* from [dbo].[P_Bill] 
-			where [Id] = @id and ISNULL([IsDeleted],0) = 0
-		end
+create proc [dbo].[PBill_SelectByPrimaryKey](@id int)
+as 
+	begin
+	SET NOCOUNT ON;
+		select* from [dbo].[P_Bill] 
+		where [Id] = @id
+	end
 	go
 
-	create proc [dbo].[PBill_SelectByCode](@code varchar(10))
+create proc [dbo].[PBill_SelectByCode](@code varchar(10))
 	as 
-		begin
-		SET NOCOUNT ON;
-			select* from [dbo].[P_Bill] 
-			where [Code] = @code and ISNULL([IsDeleted],0) = 0
-		end
-	go
+	begin
+	SET NOCOUNT ON;
+		select* from [dbo].[P_Bill] 
+		where [Code] = @code and ISNULL([IsDeleted],0) = 0
+	end
+go
 
-	create proc [dbo].[PBill_GetRecordCount](@id int)
-	as 
-		begin
-		SET NOCOUNT ON;
-			select count(*) from [dbo].[P_Bill]
-			where ISNULL([IsDeleted],0) = 0
-		end
-	go
+create proc [dbo].[PBilldetail_GetRecordCount]
+as 
+begin
+SET NOCOUNT ON;
+	select count(*) [count] from [dbo].[P_BillDetail]
+end
+go
 
-	create proc [dbo].[PBill_SelectSkipAndTakeWhereDynamic](
+create proc [dbo].[PBill_SelectSkipAndTakeWhereDynamic](
 @id int = null,
 @totalPrice decimal(18,0) = null,
 @createdDate datetime = null,
@@ -53,6 +42,7 @@ GO
 @isDeleted bit = null,
 @status int = null,
 @deliveryAddress nvarchar(50) = null,
+@code varchar(10) = null,
 @customerId int = null,
 @sort varchar(50) = null,
 @numberOfRows int,
@@ -63,6 +53,7 @@ as
 	select * from [dbo].[P_Bill]
 	where (@id IS null or [Id] = @id) and
 	(@totalPrice is null or [TotalPrice] = @totalPrice) and
+	(@code is null or [Code] = @code) and
 	(@createdDate is null or [CreatedDate] = @createdDate) and
 	(@modifiedDate is null or [ModifiedDate] = @modifiedDate) and
 	(@createdUserId is null or [CreatedUserId] = @createdUserId) and
@@ -75,22 +66,21 @@ as
 	case when (@sort is null or @sort = 'Id') then [Id] end,
 	case when (@sort = 'Id desc') then [Id] end desc,
 		case when @sort = 'TotalPrice' then [TotalPrice]
-		when @sort = 'CreatedDate' then [CreatedDate]
 		when @sort = 'ModifiedDate' then [ModifiedDate]
 		when @sort = 'CreatedUserId' then [CreatedUserId]
+		when @sort = 'Code' then [Code]
 		when @sort = 'CustomerId' then [CustomerId]
 		when @sort = 'ModifiedUserId' then [ModifiedUserId]
 		when @sort = 'DeliveryAddress' then [DeliveryAddress]
 		when @sort = 'IsDeleted' then [IsDeleted]
 		when @sort = 'Status' then [Status]
 	end
-	offset     @start ROWS       -- skip s rows
+	offset  @start ROWS       -- skip s rows
 	FETCH NEXT @numberOfRows ROWS ONLY; -- take n rows
 	end
 	go
 
-	create proc [dbo].[PBill_GetRecordCountWhereDynamic]
-(
+create proc [dbo].[PBill_GetRecordCountWhereDynamic](
 @id int = null,
 @totalPrice decimal(18,0) = null,
 @createdDate datetime = null,
@@ -100,16 +90,16 @@ as
 @isDeleted bit = null,
 @status int = null,
 @deliveryAddress nvarchar(50) = null,
-@customerId int = null,
-@sort varchar(50) = null,
-@numberOfRows int,
-@start int)
+@code varchar(10) = null,
+@customerId int = null
+)
 as 
 	begin
 	SET NOCOUNT ON;
-	select count(*) from [dbo].[P_Bill]
+	select count(*) [count] from [dbo].[P_Bill]
 	where (@id IS null or [Id] = @id) and
 	(@totalPrice is null or [TotalPrice] = @totalPrice) and
+	(@code is null or [Code] = @code) and
 	(@createdDate is null or [CreatedDate] = @createdDate) and
 	(@modifiedDate is null or [ModifiedDate] = @modifiedDate) and
 	(@createdUserId is null or [CreatedUserId] = @createdUserId) and
@@ -122,6 +112,7 @@ as
 	go
 
 	create proc [dbo].[PBill_Insert](
+	@code varchar(10) = null,
 	@totalPrice decimal(18,0) = null,
 	@createdDate datetime = null,
 	@modifiedDate datetime = null,
@@ -137,8 +128,8 @@ as
 		SET NOCOUNT ON;
 		declare @id int;
 		Insert into [dbo].[P_Bill]
-		([TotalPrice],[CustomerId],[DeliveryAddress],[CreatedDate],[ModifiedDate],[CreatedUserId],[ModifiedUserId],[IsDeleted],[Status]) 
-		Values(@totalPrice,@customerId,@deliveryAddress,@createdDate,@modifiedDate,@createdUserId,@modifiedUserId,@isDeleted,@status)
+		([Code],[TotalPrice],[CustomerId],[DeliveryAddress],[CreatedDate],[ModifiedDate],[CreatedUserId],[ModifiedUserId],[IsDeleted],[Status]) 
+		Values(@code,@totalPrice,@customerId,@deliveryAddress,@createdDate,@modifiedDate,@createdUserId,@modifiedUserId,@isDeleted,@status)
 		set @id = SCOPE_IDENTITY()
 		return @id
 	end
@@ -165,9 +156,6 @@ as
 		,[CreatedDate]=@createdDate,[ModifiedDate]=@modifiedDate,
 		[CreatedUserId]=@createdUserId,[ModifiedUserId]=@modifiedUserId,
 		[IsDeleted]=@isDeleted,[Status]=@status 
-		
-		set @id = SCOPE_IDENTITY()
-		return @id
 	end
 	go
 
@@ -188,20 +176,20 @@ as
 		begin
 		SET NOCOUNT ON;
 			select* from [dbo].[P_Billdetail] 
-			where [Id] = @id and ISNULL([IsDeleted],0) = 0
+			where [Id] = @id
 		end
 	go
 
 	create proc [dbo].[PBilldetail_GetRecordCount]
 	as 
-		begin
-		SET NOCOUNT ON;
-			select count(*) from [dbo].[P_BillDetail]
-			where ISNULL([IsDeleted],0) = 0
-		end
+	begin
+	SET NOCOUNT ON;
+		select count(*) [count] from [dbo].[P_BillDetail]
+	end
 	go
 
-	create proc [dbo].[PBilldetail_SelectSkipAndTakeWhereDynamic](
+	create proc [dbo].[PBilldetail_SelectSkipAndTakeWhereDynamic]
+	(
 	@id int = null,
 	@billId int = null,
     @productId int = null,
@@ -249,7 +237,8 @@ as
 		end
 	go
 
-	create proc [dbo].[PBilldetail_GetRecordCountWhereDynamic](
+	create proc [dbo].[PBilldetail_GetRecordCountWhereDynamic]
+	(
 	@id int = null,
 	@billId int = null,
     @productId int = null,
@@ -262,7 +251,10 @@ as
 	@createdUserId int = null,
 	@modifiedUserId int = null,
 	@isDeleted bit = null,
-	@status int = null)
+	@status int = null,
+	@sort varchar(50) = null,
+	@numberOfRows int,
+	@start int)
 	as 
 		begin
 		SET NOCOUNT ON;
@@ -282,7 +274,8 @@ as
 		end
 	go
 
-	create proc [dbo].[PBilldetail_Insert](
+	create proc [dbo].[PBilldetail_Insert]
+	(
 	@billId int = null,
     @productId int = null,
 	@quantity int = null,
@@ -333,7 +326,6 @@ as
 		[CreatedUserId]=@createdUserId,[ModifiedUserId]=@modifiedUserId,
 		[IsDeleted]=@isDeleted,[Status]=@status
 		Where [Id] = @id
-		return @id
 	end
 	go
 
