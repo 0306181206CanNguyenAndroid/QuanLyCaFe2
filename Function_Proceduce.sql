@@ -251,26 +251,27 @@ begin
 end
 
 CREATE PROC S_Them_Nhanvien
-@Id int,
-@FirstName nvarchar(40),
-@LastName nvarchar(20),
-@FullName nvarchar(60),
-@Birth date,
-@Address nvarchar(200),
-@Image nvarchar(200),
-@Phone varchar(20),
-@Email varchar(50),
-@CreatedDate date,
-@ModifiedDate date,
-@CreateUserId int,
-@ModifiedUserId int,
-@PositionId int,
-@IsDeleted bit,
-@Status int
+(
+@FirstName nvarchar(40) = null,
+@LastName nvarchar(20) = null,
+@FullName nvarchar(60) =null,
+@Birth date =null,
+@Address nvarchar(200) =null,
+@Image nvarchar(200)=null,
+@Phone varchar(20)=null,
+@Email varchar(50)=null,
+@CreatedDate date=null,
+@ModifiedDate date=null,
+@CreateUserId int=null,
+@ModifiedUserId int=null,
+@PositionId int=null,
+@IsDeleted bit=null,
+@Status int=null)
 as
-insert into dbo.[System_Staff](Id,FirstName,LastName,FullName,Birth,Address,Image,Phone,Email,CreatedDate,ModifiedDate,CreatedUserId,ModifiedUserId,PositionId,IsDeleted,Status)
-values(@Id,@FirstName,@LastName,@FullName,@Birth,@Address,@Image,@Phone,@Email,@CreatedDate,@ModifiedDate,@CreateUserId,@ModifiedUserId,@PositionId,@IsDeleted,@Status)
-
+begin
+	insert into dbo.[System_Staff](FirstName,LastName,FullName,Birth,[Address],[Image],Phone,Email,CreatedDate,ModifiedDate,CreatedUserId,ModifiedUserId,PositionId,IsDeleted,[Status])
+	values(@FirstName,@LastName,@FullName,@Birth,@Address,@Image,@Phone,@Email,@CreatedDate,@ModifiedDate,@CreateUserId,@ModifiedUserId,@PositionId,@IsDeleted,@Status)
+end
 go
 
 create proc [dbo].[SystemStaff_SelectByUserId](@id int)
