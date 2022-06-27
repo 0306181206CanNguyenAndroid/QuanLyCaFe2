@@ -1,5 +1,5 @@
-Create database [Cafe]
-go
+--Create database [Cafe]
+--go
 use Cafe
 go
 create table [P_Table]

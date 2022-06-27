@@ -5,6 +5,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using DAO.DataLayerBase;
+using System.Data;
 
 namespace BUS.BusinessObjectBase
 {
@@ -14,7 +16,7 @@ namespace BUS.BusinessObjectBase
      /// </summary>
      public class SystemPositionBase : SystemPositionModel
      {
-
+       
          /// <summary>
          /// Constructor
          /// </summary>
@@ -22,10 +24,15 @@ namespace BUS.BusinessObjectBase
          {
          }
 
+        SystemPositionDataLayer sqd = new SystemPositionDataLayer();
+        public  DataTable LayDSCV()
+        {
+            return   sqd.LayDSCV();
+        }
          /// <summary>
          /// Selects a record by primary key(s)
          /// </summary>
-         public static SystemPositionModel SelectByPrimaryKey(int id)
+        public static SystemPositionModel SelectByPrimaryKey(int id)
          {
              return SystemPositionDataLayer.SelectByPrimaryKey(id);
          }
@@ -225,71 +232,70 @@ namespace BUS.BusinessObjectBase
              return sortByExpression;
          }
 
-         ///// <summary>
-         ///// Compares Id used for sorting
-         ///// </summary>
-         //public static Comparison<SystemPosition> ById = delegate(SystemPosition x, SystemPosition y)
-         //{
-         //    return x.Id.CompareTo(y.Id);
-         //};
+        ///// <summary>
+        ///// Compares Id used for sorting
+        ///// </summary>
+        //public static Comparison<SystemPosition> ById = delegate(SystemPosition x, SystemPosition y)
+        //{
+        //    return x.Id.CompareTo(y.Id);
+        //};
 
-         ///// <summary>
-         ///// Compares Name used for sorting
-         ///// </summary>
-         //public static Comparison<SystemPosition> ByName = delegate(SystemPosition x, SystemPosition y)
-         //{
-         //    string value1 = x.Name ?? String.Empty;
-         //    string value2 = y.Name ?? String.Empty;
-         //    return value1.CompareTo(value2);
-         //};
+        ///// <summary>
+        ///// Compares Name used for sorting
+        ///// </summary>
+        //public static Comparison<SystemPosition> ByName = delegate(SystemPosition x, SystemPosition y)
+        //{
+        //    string value1 = x.Name ?? String.Empty;
+        //    string value2 = y.Name ?? String.Empty;
+        //    return value1.CompareTo(value2);
+        //};
 
-         ///// <summary>
-         ///// Compares CreatedDate used for sorting
-         ///// </summary>
-         //public static Comparison<SystemPosition> ByCreatedDate = delegate(SystemPosition x, SystemPosition y)
-         //{
-         //    return Nullable.Compare(x.CreatedDate, y.CreatedDate);
-         //};
+        ///// <summary>
+        ///// Compares CreatedDate used for sorting
+        ///// </summary>
+        //public static Comparison<SystemPosition> ByCreatedDate = delegate(SystemPosition x, SystemPosition y)
+        //{
+        //    return Nullable.Compare(x.CreatedDate, y.CreatedDate);
+        //};
 
-         ///// <summary>
-         ///// Compares ModifiedDate used for sorting
-         ///// </summary>
-         //public static Comparison<SystemPosition> ByModifiedDate = delegate(SystemPosition x, SystemPosition y)
-         //{
-         //    return Nullable.Compare(x.ModifiedDate, y.ModifiedDate);
-         //};
+        ///// <summary>
+        ///// Compares ModifiedDate used for sorting
+        ///// </summary>
+        //public static Comparison<SystemPosition> ByModifiedDate = delegate(SystemPosition x, SystemPosition y)
+        //{
+        //    return Nullable.Compare(x.ModifiedDate, y.ModifiedDate);
+        //};
 
-         ///// <summary>
-         ///// Compares CreatedUserId used for sorting
-         ///// </summary>
-         //public static Comparison<SystemPosition> ByCreatedUserId = delegate(SystemPosition x, SystemPosition y)
-         //{
-         //    return Nullable.Compare(x.CreatedUserId, y.CreatedUserId);
-         //};
+        ///// <summary>
+        ///// Compares CreatedUserId used for sorting
+        ///// </summary>
+        //public static Comparison<SystemPosition> ByCreatedUserId = delegate(SystemPosition x, SystemPosition y)
+        //{
+        //    return Nullable.Compare(x.CreatedUserId, y.CreatedUserId);
+        //};
 
-         ///// <summary>
-         ///// Compares ModifiedUserId used for sorting
-         ///// </summary>
-         //public static Comparison<SystemPosition> ByModifiedUserId = delegate(SystemPosition x, SystemPosition y)
-         //{
-         //    return Nullable.Compare(x.ModifiedUserId, y.ModifiedUserId);
-         //};
+        ///// <summary>
+        ///// Compares ModifiedUserId used for sorting
+        ///// </summary>
+        //public static Comparison<SystemPosition> ByModifiedUserId = delegate(SystemPosition x, SystemPosition y)
+        //{
+        //    return Nullable.Compare(x.ModifiedUserId, y.ModifiedUserId);
+        //};
 
-         ///// <summary>
-         ///// Compares SalaryPerHour used for sorting
-         ///// </summary>
-         //public static Comparison<SystemPosition> BySalaryPerHour = delegate(SystemPosition x, SystemPosition y)
-         //{
-         //    return Nullable.Compare(x.SalaryPerHour, y.SalaryPerHour);
-         //};
+        ///// <summary>
+        ///// Compares SalaryPerHour used for sorting
+        ///// </summary>
+        //public static Comparison<SystemPosition> BySalaryPerHour = delegate(SystemPosition x, SystemPosition y)
+        //{
+        //    return Nullable.Compare(x.SalaryPerHour, y.SalaryPerHour);
+        //};
 
-         ///// <summary>
-         ///// Compares IsDeleted used for sorting
-         ///// </summary>
-         //public static Comparison<SystemPosition> ByIsDeleted = delegate(SystemPosition x, SystemPosition y)
-         //{
-         //    return x.IsDeleted.CompareTo(y.IsDeleted);
-         //};
-
+        ///// <summary>
+        ///// Compares IsDeleted used for sorting
+        ///// </summary>
+        //public static Comparison<SystemPosition> ByIsDeleted = delegate(SystemPosition x, SystemPosition y)
+        //{
+        //    return x.IsDeleted.CompareTo(y.IsDeleted);
+        //};
      }
 }

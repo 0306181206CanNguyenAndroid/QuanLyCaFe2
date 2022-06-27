@@ -11,6 +11,8 @@ using DTO;
 using BUS;
 using DTO.Models;
 using BUS.BusinessObject;
+using BUS.BusinessObjectBase;
+using DTO.ModelsBase;
 
 namespace QuanLyCafe
 {
@@ -21,6 +23,7 @@ namespace QuanLyCafe
             InitializeComponent();
             //Setting();
             //Load_DSNV();
+            
         }
        
         List<SystemStaffModel> dsnv = new List<SystemStaffModel>();
@@ -28,6 +31,11 @@ namespace QuanLyCafe
         //BanBUS banBUS = new BanBUS();
         BindingSource bs = new BindingSource();
 
+        SystemPositionBase pt = new SystemPositionBase();
+
+        SystemStaffBase ssb = new SystemStaffBase();
+
+        SystemStaffModel nhanvien;
         private void Setting()
         {
             dtgv_NV.AutoGenerateColumns = false;
@@ -56,26 +64,29 @@ namespace QuanLyCafe
 
         private void Load_Form()
         {
-            Load_DSNV();
+            
         }
-
+        
         private void QuanLyNhanVien_Load(object sender, EventArgs e)
         {
-            Load_Form();
+           cb_CV.DataSource = pt.LayDSCV();
+            cb_CV.DisplayMember = "Name";
+            cb_CV.ValueMember = "Id";
+
+            dtgv_NV.DataSource = ssb.LayDSNV();
+            dtgv_NV.Refresh();
         }
 
         private void btn_add_Click(object sender, EventArgs e)
         {
-            SystemStaffModel nv = LayTTNV();
-            //if (KTTT_NV(nv))
-            //{
-            //    bool kq = nvBUS.ThemNV(nv);
-            //    constans.TB_KQ(kq);
-            //    if (kq)
-            //    {
-            //        Load_DSNV();
-            //    }
-            //}
+            int id;string lastname;string image;string email; DateTime createDate;DateTime modifielDate;
+            int createUserID;int modifielUserId; bool iDeleted;int status;
+            string firstname = txtHonv.Text;
+            string fullname = txtTennv.Text;
+            DateTime ngaysinh = dtpNgaySinh.Value;
+            string diachi = txt_diachi.Text;
+            string sdt = txt_sdt.Text;
+            SystemStaffModel nv = new SystemStaffModel(id,);
         }
 
         private void btnXoaNV_Click(object sender, EventArgs e)
@@ -119,33 +130,16 @@ namespace QuanLyCafe
 
         private void dtgv_NV_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (dtgv_NV.SelectedCells.Count > 0 && dsnv.Count() > 0)
+            if (dtgv_NV.SelectedCells.Count > 0)
             {
-                if (dtgv_NV.SelectedCells[0].RowIndex < dsnv.Count())
-                {
-                    string manv = dtgv_NV.SelectedCells[0].OwningRow.Cells["col_manv"].Value.ToString();
-                    //foreach (NhanVienDTO nv in dsnv)
-                    //{
-                    //    if (nv.maNV == manv)
-                    //    {
-                    //        txtManv.Text = nv.maNV;
-                    //        txtHonv.Text = string.IsNullOrEmpty(nv.hoNV) ? "" : nv.hoNV;
-                    //        txtTennv.Text = string.IsNullOrEmpty(nv.tenNV) ? "" : nv.tenNV;
-                    //        cb_CV.Text = nv.MaCV;
-                    //        if (nv.GioiTinh == "Nữ")
-                    //            rdbNu.Checked = true;
-                    //        else
-                    //            rdbNam.Checked = true;
-                    //        txt_diachi.Text = string.IsNullOrEmpty(nv.diaChi) ? "" : nv.diaChi;
-                    //        if (nv.maTK != "tk_05")
-                    //            txt_sdt.Text = string.IsNullOrEmpty(nv.sdt) ? "" : nv.sdt;
-                    //        dtpNgaySinh.Value = nv.ngaySinh;
-                    //        dtpNgayVao.Value = nv.ngayBD;
-                    //        nudSoNgayNghi.Value = nv.soNgaynghi;
-                    //        break;
-                    //    }
-                    //}
-                }
+                this.txtManv.Text = dtgv_NV.Rows[e.RowIndex].Cells[0].Value.ToString();
+                this.txtHonv.Text = dtgv_NV.Rows[e.RowIndex].Cells[1].Value.ToString();
+                this.txtTennv.Text = dtgv_NV.Rows[e.RowIndex].Cells[2].Value.ToString();
+                this.dtpNgaySinh.Text = dtgv_NV.Rows[e.RowIndex].Cells[3].Value.ToString();
+                this.txt_diachi.Text = dtgv_NV.Rows[e.RowIndex].Cells[4].Value.ToString();
+                this.txt_sdt.Text = dtgv_NV.Rows[e.RowIndex].Cells[5].Value.ToString();
+               // this.dtpNgayVao.Text = dtgv_NV.Rows[e.RowIndex].Cells[6].Value.ToString();
+                this.cb_CV.Text = dtgv_NV.Rows[e.RowIndex].Cells[6].Value.ToString();
 
             }
         }
@@ -203,5 +197,7 @@ namespace QuanLyCafe
                 e.Cancel = true;
             }
         }
+
+        
     }
 }

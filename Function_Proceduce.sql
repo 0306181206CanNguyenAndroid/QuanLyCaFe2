@@ -249,4 +249,38 @@ begin
       ,[IsDeleted]
       ,[Status] from dbo.[System_User] where UserName =@user and Pass=@pass
 end
+
+CREATE PROC S_Them_Nhanvien
+@Id int,
+@FirstName nvarchar(40),
+@LastName nvarchar(20),
+@FullName nvarchar(60),
+@Birth date,
+@Address nvarchar(200),
+@Image nvarchar(200),
+@Phone varchar(20),
+@Email varchar(50),
+@CreatedDate date,
+@ModifiedDate date,
+@CreateUserId int,
+@ModifiedUserId int,
+@PositionId int,
+@IsDeleted bit,
+@Status int
+as
+insert into dbo.[System_Staff](Id,FirstName,LastName,FullName,Birth,Address,Image,Phone,Email,CreatedDate,ModifiedDate,CreatedUserId,ModifiedUserId,PositionId,IsDeleted,Status)
+values(@Id,@FirstName,@LastName,@FullName,@Birth,@Address,@Image,@Phone,@Email,@CreatedDate,@ModifiedDate,@CreateUserId,@ModifiedUserId,@PositionId,@IsDeleted,@Status)
+
+go
+
+create proc [dbo].[SystemStaff_SelectByUserId](@id int)
+as
+	begin
+	Select * from [dbo].[System_Staff]
+	where [Id] in
+	(
+		select [StaffId] from [dbo].[System_Decentralization]
+		where Isnull([IsDeleted],0) = 0 and [UserId] = @id
+	)
+	end
 go

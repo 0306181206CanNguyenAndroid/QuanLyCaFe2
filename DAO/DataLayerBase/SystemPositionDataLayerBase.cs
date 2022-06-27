@@ -569,5 +569,19 @@ namespace DAO.DataLayerBase
 
              return objSystemPosition;
          }
+
+         public DataTable LayDSCV()
+        {
+            string sql = "select * from dbo.[System_Position]";
+            SqlConnection conn = new SqlConnection(PathString.ConnectionString);
+            conn.Open();
+            SqlCommand cmd = new SqlCommand(sql,conn);
+            SqlDataAdapter da = new SqlDataAdapter(cmd);
+            cmd.ExecuteNonQuery();
+            DataTable tb = new DataTable();
+            da.Fill(tb);
+            conn.Close();
+            return tb;
+        }
      }
 }
